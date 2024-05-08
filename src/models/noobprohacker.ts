@@ -12,7 +12,7 @@ interface NoobProHackerModel extends Model<TNoobProHacker> {
   updateArchitectId: (
     episode: number,
     subject: string,
-    line: 'noob' | 'pro' | 'hacker',
+    before_minecraft_id: string,
     minecraft_id: string,
   ) => Promise<void>
 }
@@ -108,7 +108,7 @@ noobprohackerSchema.statics.updateNoobProHacker = function (payload: TNoobProHac
 noobprohackerSchema.statics.updateArchitectId = function (
   episode: number,
   subject: string,
-  tier: 'noob' | 'pro' | 'hacker',
+  before_minecraft_id: string,
   minecraft_id: string,
 ) {
   return this.updateOne(
@@ -117,13 +117,16 @@ noobprohackerSchema.statics.updateArchitectId = function (
     },
     {
       $set: {
-        [`lineInfo.$[line].line_details.${tier}.minecraft_id`]: minecraft_id,
+        [`lineInfo.$[line].line_details.$[detail].minecraft_id`]: minecraft_id,
       },
     },
     {
       arrayFilters: [
         {
           'line.subject': subject,
+        },
+        {
+          'detail.minecraft_id': before_minecraft_id,
         },
       ],
     },

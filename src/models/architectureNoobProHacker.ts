@@ -12,7 +12,7 @@ interface ArchitectureNoobProHackerModel extends Model<TArchitectureNoobProHacke
   updateArchitectId: (
     episode: number,
     subject: string,
-    line: 'noob' | 'pro' | 'hacker',
+    before_minecraft_id: string,
     minecraft_id: string,
   ) => Promise<void>
 }
@@ -28,26 +28,15 @@ const architectureNoobProHackerSchema = new Schema({
     {
       subject: { type: String, required: true },
       line_ranking: { type: Number, default: 0 },
-      line_details: {
-        noob: {
-          minecraft_id: { type: String, required: true },
-          image_url: { type: String, required: true },
-          youtube_url: { type: String, required: true },
-          ranking: { type: Number, default: 0 },
+      line_details: [
+        {
+          line: { type: String },
+          minecraft_id: { type: [String] },
+          image_url: { type: String },
+          youtube_url: { type: String },
+          ranking: { type: Number },
         },
-        pro: {
-          minecraft_id: { type: String, required: true },
-          image_url: { type: String, required: true },
-          youtube_url: { type: String, required: true },
-          ranking: { type: Number, required: true },
-        },
-        hacker: {
-          minecraft_id: { type: String, required: true },
-          image_url: { type: String, required: true },
-          youtube_url: { type: String, required: true },
-          ranking: { type: Number, required: true },
-        },
-      },
+      ],
     },
   ],
 })
@@ -121,7 +110,7 @@ architectureNoobProHackerSchema.statics.updateArchitectureNoobProHacker = functi
 architectureNoobProHackerSchema.statics.updateArchitectId = function (
   episode: number,
   subject: string,
-  tier: 'noob' | 'pro' | 'hacker',
+  before_minecraft_id: string,
   minecraft_id: string,
 ) {
   return this.updateOne(
@@ -130,13 +119,16 @@ architectureNoobProHackerSchema.statics.updateArchitectId = function (
     },
     {
       $set: {
-        [`lineInfo.$[line].line_details.${tier}.minecraft_id`]: minecraft_id,
+        [`lineInfo.$[line].line_details.$[detail].minecraft_id`]: minecraft_id,
       },
     },
     {
       arrayFilters: [
         {
           'line.subject': subject,
+        },
+        {
+          'detail.minecraft_id': before_minecraft_id,
         },
       ],
     },
