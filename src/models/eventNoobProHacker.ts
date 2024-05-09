@@ -11,7 +11,7 @@ interface EventNoobProHackerModel extends Model<TEventNoobProHacker> {
 
 const eventNoobProHackerSchema = new Schema({
   contentInfo: {
-    contentName: { type: String, required: true },
+    subject: { type: String, required: true },
     episode: { type: Number },
     date: { type: Date, default: Date.now },
     youtube_url: { type: String },

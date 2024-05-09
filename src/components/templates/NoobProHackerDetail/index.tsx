@@ -25,7 +25,7 @@ export default function NoobProHackerDetail({ noobprohacker }: Props) {
         </h2>
         <div className="mt-4 flex items-end gap-6 px-4 xl:px-0">
           <h1 className={`text-2xl text-text-primary md:text-4xl`}>
-            {'눕프로해커 : ' + noobprohacker.contentInfo.main_subject + '편'}
+            {'눕프로해커 : ' + noobprohacker.contentInfo.subject + '편'}
           </h1>
           {noobprohacker.contentInfo.youtube_url !== 'null' && (
             <Link href={noobprohacker.contentInfo.youtube_url}>

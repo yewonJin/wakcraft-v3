@@ -31,10 +31,7 @@ export default function HomeCarousel({ noobprohacker }: Props) {
         <Typography variants="h2" fontSize="28px" lineHeight="40px" color="tertiary">
           제 {noobprohacker.contentInfo.episode}회
         </Typography>
-        <Typography
-          variants="h1"
-          color="primary"
-        >{`눕프로해커 : ${noobprohacker.contentInfo.main_subject}편`}</Typography>
+        <Typography variants="h1" color="primary">{`눕프로해커 : ${noobprohacker.contentInfo.subject}편`}</Typography>
       </div>
       <div className={'overflow-y-hidden overflow-x-scrolls md:overflow-auto ' + 'category-scrollbar'}>
         <ul className="flex w-max flex-wrap gap-4 md:gap-6">

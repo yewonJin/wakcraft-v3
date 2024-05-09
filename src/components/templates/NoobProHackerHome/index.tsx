@@ -1,10 +1,10 @@
 import CardViewItem from '@/components/molecules/CardViewItem'
 import PageTitle from '@/components/organisms/Common/PageTitle'
-import { ArchitectureNoobProHacker, NoobProHacker } from '@/types/content'
+import { NoobProHacker } from '@/types/content'
 
 type Props = {
   noobprohackers: NoobProHacker[]
-  architectureNoobProHackers: ArchitectureNoobProHacker[]
+  architectureNoobProHackers: NoobProHacker[]
 }
 
 export default function NoobProHackerHome({ noobprohackers, architectureNoobProHackers }: Props) {
@@ -16,7 +16,7 @@ export default function NoobProHackerHome({ noobprohackers, architectureNoobProH
         key={noobprohacker.contentInfo.date}
         type="눕프로해커"
         episode={noobprohacker.contentInfo.episode}
-        subject={noobprohacker.contentInfo.main_subject}
+        subject={noobprohacker.contentInfo.subject}
         date={new Date(noobprohacker.contentInfo.date)}
         youtube_url={noobprohacker.contentInfo.youtube_url}
         linesSubject={noobprohacker.lineInfo.map((line) => line.subject)}
@@ -30,7 +30,7 @@ export default function NoobProHackerHome({ noobprohackers, architectureNoobProH
         key={architectureNoobProHacker.contentInfo.date}
         type="건축 눕프핵"
         episode={architectureNoobProHacker.contentInfo.episode}
-        subject={architectureNoobProHacker.contentInfo.main_subject}
+        subject={architectureNoobProHacker.contentInfo.subject}
         date={new Date(architectureNoobProHacker.contentInfo.date)}
         youtube_url={architectureNoobProHacker.contentInfo.youtube_url}
         linesSubject={architectureNoobProHacker.lineInfo.map((line) => line.subject)}

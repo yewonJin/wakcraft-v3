@@ -26,7 +26,7 @@ export default async function Page() {
         key={eventNoobProHacker.contentInfo.date}
         type="이벤트 눕프핵"
         episode={eventNoobProHacker.contentInfo.episode}
-        subject={eventNoobProHacker.contentInfo.contentName}
+        subject={eventNoobProHacker.contentInfo.subject}
         date={new Date(eventNoobProHacker.contentInfo.date)}
         youtube_url={eventNoobProHacker.contentInfo.youtube_url}
         linesSubject={eventNoobProHacker.lineInfo.map((line) => line.subject)}
@@ -40,7 +40,7 @@ export default async function Page() {
         key={matchYourTier.contentInfo.date}
         type="티어 맞추기"
         episode={matchYourTier.contentInfo.episode}
-        subject={matchYourTier.contentInfo.contentName}
+        subject={matchYourTier.contentInfo.subject}
         date={new Date(matchYourTier.contentInfo.date)}
         youtube_url={matchYourTier.contentInfo.youtube_url}
       />,
@@ -79,7 +79,7 @@ export default async function Page() {
         key={guessTime.contentInfo.date}
         type="시간 맞추기"
         episode={guessTime.contentInfo.episode}
-        subject={guessTime.contentInfo.contentName}
+        subject={guessTime.contentInfo.subject}
         date={new Date(guessTime.contentInfo.date)}
         youtube_url={guessTime.contentInfo.youtube_url}
       />,

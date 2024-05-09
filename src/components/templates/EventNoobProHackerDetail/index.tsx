@@ -13,14 +13,14 @@ type Props = {
 }
 
 export default async function EventNoobProHackerDetail({ eventNoobProHacker }: Props) {
-  const userAgent = headers().get('user-agent')
+  const userAgent = headers().get('user-agent') as string
 
   return (
     <Fragment>
-      <title>{`왁크래프트 | 이벤트 눕프핵 - ${eventNoobProHacker.contentInfo.contentName}`}</title>
+      <title>{`왁크래프트 | 이벤트 눕프핵 - ${eventNoobProHacker.contentInfo.subject}`}</title>
       <div className="mx-auto max-w-[1200px]">
         <div className="mt-4 flex items-end gap-6 px-4 xl:px-0">
-          <h1 className={`text-3xl text-text-primary md:text-4xl`}>{eventNoobProHacker.contentInfo.contentName}</h1>
+          <h1 className={`text-3xl text-text-primary md:text-4xl`}>{eventNoobProHacker.contentInfo.subject}</h1>
           {eventNoobProHacker.contentInfo.youtube_url !== 'null' && (
             <Link href={eventNoobProHacker.contentInfo.youtube_url}>
               <span className="[&>div>svg]:h-8 [&>div>svg]:w-8 [&>div>svg]:fill-text-tertiary hover:[&>div>svg]:fill-text-primary">

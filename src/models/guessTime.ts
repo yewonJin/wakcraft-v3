@@ -10,7 +10,7 @@ interface GuessTimeModel extends Model<TGuessTime> {
 
 const guessTimeSchema = new Schema({
   contentInfo: {
-    contentName: { type: String },
+    subject: { type: String },
     episode: { type: Number },
     date: { type: Date, default: Date.now },
     youtube_url: { type: String },

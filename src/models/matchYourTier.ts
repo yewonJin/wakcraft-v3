@@ -10,7 +10,7 @@ interface MatchYourTierModel extends Model<TMatchYourTier> {
 
 const matchYourTierSchema = new Schema({
   contentInfo: {
-    contentName: { type: String },
+    subject: { type: String },
     episode: { type: Number },
     date: { type: Date, default: Date.now },
     youtube_url: { type: String },

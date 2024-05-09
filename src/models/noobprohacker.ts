@@ -20,7 +20,7 @@ interface NoobProHackerModel extends Model<TNoobProHacker> {
 const noobprohackerSchema = new Schema({
   contentInfo: {
     episode: { type: Number, required: true, unique: true },
-    main_subject: { type: String },
+    subject: { type: String },
     date: { type: Date, default: Date.now },
     youtube_url: { type: String },
   },

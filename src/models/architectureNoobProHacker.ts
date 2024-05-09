@@ -1,14 +1,14 @@
 import { Schema, Model, model, models } from 'mongoose'
 
-import { ArchitectureNoobProHacker as TArchitectureNoobProHacker } from '@/types/content'
+import { NoobProHacker as TNoobProHacker } from '@/types/content'
 
-interface ArchitectureNoobProHackerModel extends Model<TArchitectureNoobProHacker[]> {
-  findAll: () => Promise<TArchitectureNoobProHacker[]>
-  findByEpisode: (episode: number) => Promise<TArchitectureNoobProHacker>
-  findAllWithSweepLine: () => Promise<TArchitectureNoobProHacker[]>
-  findLastestOne: () => Promise<TArchitectureNoobProHacker>
-  findOneThatHasNotURL: () => Promise<TArchitectureNoobProHacker[]>
-  updateArchitectureNoobProHacker: (payload: TArchitectureNoobProHacker) => Promise<TArchitectureNoobProHacker>
+interface ArchitectureNoobProHackerModel extends Model<TNoobProHacker[]> {
+  findAll: () => Promise<TNoobProHacker[]>
+  findByEpisode: (episode: number) => Promise<TNoobProHacker>
+  findAllWithSweepLine: () => Promise<TNoobProHacker[]>
+  findLastestOne: () => Promise<TNoobProHacker>
+  findOneThatHasNotURL: () => Promise<TNoobProHacker[]>
+  updateArchitectureNoobProHacker: (payload: TNoobProHacker) => Promise<TNoobProHacker>
   updateArchitectId: (
     episode: number,
     subject: string,
@@ -20,7 +20,7 @@ interface ArchitectureNoobProHackerModel extends Model<TArchitectureNoobProHacke
 const architectureNoobProHackerSchema = new Schema({
   contentInfo: {
     episode: { type: Number, required: true, unique: true },
-    main_subject: { type: String },
+    subject: { type: String },
     date: { type: Date, default: Date.now },
     youtube_url: { type: String },
   },
@@ -91,9 +91,7 @@ architectureNoobProHackerSchema.statics.findOneThatHasNotURL = function () {
   ])
 }
 
-architectureNoobProHackerSchema.statics.updateArchitectureNoobProHacker = function (
-  payload: TArchitectureNoobProHacker,
-) {
+architectureNoobProHackerSchema.statics.updateArchitectureNoobProHacker = function (payload: TNoobProHacker) {
   return this.updateOne(
     {
       'contentInfo.episode': payload.contentInfo.episode,
@@ -137,9 +135,6 @@ architectureNoobProHackerSchema.statics.updateArchitectId = function (
 
 const ArchitectureNoobProHacker =
   (models['ArchitectureNoobProHacker'] as ArchitectureNoobProHackerModel) ||
-  model<TArchitectureNoobProHacker, ArchitectureNoobProHackerModel>(
-    'ArchitectureNoobProHacker',
-    architectureNoobProHackerSchema,
-  )
+  model<TNoobProHacker, ArchitectureNoobProHackerModel>('ArchitectureNoobProHacker', architectureNoobProHackerSchema)
 
 export default ArchitectureNoobProHacker

@@ -3,13 +3,13 @@ import Link from 'next/link'
 import { headers } from 'next/headers'
 
 import { medium } from '@/app/layout'
-import { ArchitectureNoobProHacker } from '@/types/content'
 import ContentCarousel from '@/components/molecules/ContentCarousel'
 import { isMobile } from '@/utils/shared'
 import Icon from '@/components/atoms/Icon'
+import { NoobProHacker } from '@/types/content'
 
 type Props = {
-  architectureNoobProHacker: ArchitectureNoobProHacker
+  architectureNoobProHacker: NoobProHacker
 }
 
 export default async function ArchitectureNoobProHackerDetail({ architectureNoobProHacker }: Props) {
