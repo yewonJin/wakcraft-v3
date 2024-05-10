@@ -16,19 +16,21 @@ export type ContentInfo = {
   youtube_url: string
 }
 
+export type LineInfo = {
+  subject: string
+  line_ranking: number
+  line_details: {
+    line: string
+    minecraft_id: string
+    image_url: string
+    youtube_url: string
+    ranking: number
+  }[]
+}[]
+
 export type NoobProHacker = {
   contentInfo: ContentInfo
-  lineInfo: {
-    subject: string
-    line_ranking: number
-    line_details: {
-      line: string
-      minecraft_id: string
-      image_url: string
-      youtube_url: string
-      ranking: number
-    }[]
-  }[]
+  lineInfo: LineInfo
 }
 
 export type SweepLine = {

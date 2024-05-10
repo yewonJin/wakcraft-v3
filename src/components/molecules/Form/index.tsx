@@ -5,7 +5,7 @@ type InputFormProps = {
   placeholder?: string
   type?: string
   name: string
-  value: string
+  value: string | number
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 

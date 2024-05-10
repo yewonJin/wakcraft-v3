@@ -11,6 +11,12 @@ export default function Page() {
         <Link href={'/admin/architect'}>
           <Button text="건축가" />
         </Link>
+        <Link href={'/admin/noobprohacker'}>
+          <Button text="눕프로해커" />
+        </Link>
+        <Link href={'/admin/event_noobprohacker'}>
+          <Button text="이벤트 눕프로해커" />
+        </Link>
       </div>
     </div>
   )

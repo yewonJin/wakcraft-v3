@@ -1,3 +1,4 @@
+import { Architect } from '@/types/architect'
 import { NoobProHacker, SweepLine } from '@/types/content'
 
 export const getHackerWinnerLine = (noobprohacker: NoobProHacker) => {
@@ -30,4 +31,37 @@ export const convertToSweepLine = (arr: any[]): SweepLine[] => {
     })
 
   return sweepLineArr
+}
+
+type ArchitectsInfo = {
+  minecraft_id: string
+  portfolio: Architect['portfolio']['noobprohacker'][0]
+}
+
+/** 눕프로해커 정보를 건축가 포트폴리오로 변환하는 함수 */
+export const convertToNoobProHackerPortfolio = (noobprohacker: NoobProHacker) => {
+  const { contentInfo, lineInfo } = noobprohacker
+
+  const architectsInfo: ArchitectsInfo[] = []
+
+  lineInfo.forEach((line) => {
+    for (const key in line.line_details) {
+      const portfolioInfo: Architect['portfolio']['noobprohacker'][0] = {
+        episode: contentInfo.episode,
+        subject: line.subject,
+        line: line.line_details[key].line,
+        image_url: line.line_details[key].image_url,
+        youtube_url: line.line_details[key].youtube_url,
+        ranking: line.line_details[key].ranking,
+        date: new Date(contentInfo.date),
+      }
+
+      architectsInfo.push({
+        minecraft_id: line.line_details[key].minecraft_id,
+        portfolio: portfolioInfo,
+      })
+    }
+  })
+
+  return architectsInfo
 }
