@@ -14,6 +14,9 @@ export default function Page() {
         <Link href={'/admin/noobprohacker'}>
           <Button text="눕프로해커" />
         </Link>
+        <Link href={'/admin/architecture_noobprohacker'}>
+          <Button text="건축 눕프로해커" />
+        </Link>
         <Link href={'/admin/event_noobprohacker'}>
           <Button text="이벤트 눕프로해커" />
         </Link>

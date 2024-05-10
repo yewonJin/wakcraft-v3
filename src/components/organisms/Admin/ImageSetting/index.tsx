@@ -21,7 +21,7 @@ type EventNoobProHackerProps = {
 }
 
 type NoobProHackerProps = {
-  type: '눕프로해커'
+  type: '눕프로해커' | '건축 눕프핵'
   moveToNextPage: () => void
   lineInfo: LineInfo
   handleImageSelectClick: (e: React.ChangeEvent<HTMLSelectElement>, index: number) => void
@@ -46,6 +46,18 @@ export default function ImageSetting(props: Props) {
       return (
         <NoobProHackerImageSetting
           type="눕프로해커"
+          moveToNextPage={moveToNextPage}
+          lineInfo={lineInfo as LineInfo}
+          handleImageSelectClick={props.handleImageSelectClick}
+          handleImageSubmit={handleImageSubmit}
+          episode={episode}
+        />
+      )
+
+    case '건축 눕프핵':
+      return (
+        <NoobProHackerImageSetting
+          type="건축 눕프핵"
           moveToNextPage={moveToNextPage}
           lineInfo={lineInfo as LineInfo}
           handleImageSelectClick={props.handleImageSelectClick}
@@ -90,7 +102,7 @@ const NoobProHackerImageSetting = ({
   handleImageSubmit,
   episode,
 }: NoobProHackerProps) => {
-  const { subjects } = useImageSetting(type, episode - 1)
+  const { subjects } = useImageSetting(type, episode)
 
   return (
     <Fragment>
