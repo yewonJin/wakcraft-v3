@@ -17,7 +17,7 @@ interface ArchitectureNoobProHackerModel extends Model<TNoobProHacker[]> {
   ) => Promise<void>
 }
 
-const architectureNoobProHackerSchema = new Schema({
+const architectureNoobProHackerSchema = new Schema<TNoobProHacker>({
   contentInfo: {
     episode: { type: Number, required: true, unique: true },
     subject: { type: String },

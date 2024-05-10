@@ -9,7 +9,7 @@ interface PlacementTestModel extends Model<TPlacementTest> {
   updateArchitectId: (season: number, beforeId: string, afterId: string) => Promise<void>
 }
 
-const placementTestSchema = new Schema({
+const placementTestSchema = new Schema<TPlacementTest>({
   season: Number,
   date: Date,
   youtube_url: String,

@@ -8,7 +8,7 @@ interface MatchYourTierModel extends Model<TMatchYourTier> {
   updateArchitectId: (episode: number, beforeId: string, afterId: string) => Promise<void>
 }
 
-const matchYourTierSchema = new Schema({
+const matchYourTierSchema = new Schema<TMatchYourTier>({
   contentInfo: {
     subject: { type: String },
     episode: { type: Number },

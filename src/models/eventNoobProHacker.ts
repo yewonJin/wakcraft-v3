@@ -10,7 +10,7 @@ interface EventNoobProHackerModel extends Model<TEventNoobProHacker> {
   updateEventNoobProHacker: (payload: TEventNoobProHacker) => Promise<TEventNoobProHacker>
 }
 
-const eventNoobProHackerSchema = new Schema({
+const eventNoobProHackerSchema = new Schema<TEventNoobProHacker>({
   contentInfo: {
     subject: { type: String, required: true },
     episode: { type: Number },

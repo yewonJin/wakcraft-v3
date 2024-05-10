@@ -8,7 +8,7 @@ interface ArchitectureContestModel extends Model<TArchitectureContest> {
   updateArchitectId: (episode: number, line: string, beforeId: string, afterId: string) => Promise<void>
 }
 
-const architectureContestSchema = new Schema({
+const architectureContestSchema = new Schema<TArchitectureContest>({
   contentInfo: {
     subject: { type: String },
     episode: { type: Number },

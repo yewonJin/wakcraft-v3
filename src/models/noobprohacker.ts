@@ -17,7 +17,7 @@ interface NoobProHackerModel extends Model<TNoobProHacker> {
   ) => Promise<void>
 }
 
-const noobprohackerSchema = new Schema({
+const noobprohackerSchema = new Schema<TNoobProHacker>({
   contentInfo: {
     episode: { type: Number, required: true, unique: true },
     subject: { type: String },

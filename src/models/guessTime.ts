@@ -8,7 +8,7 @@ interface GuessTimeModel extends Model<TGuessTime> {
   updateArchitectId: (episode: number, beforeId: string, afterId: string) => Promise<void>
 }
 
-const guessTimeSchema = new Schema({
+const guessTimeSchema = new Schema<TGuessTime>({
   contentInfo: {
     subject: { type: String },
     episode: { type: Number },
