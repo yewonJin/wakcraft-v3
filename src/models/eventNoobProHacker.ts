@@ -7,6 +7,7 @@ interface EventNoobProHackerModel extends Model<TEventNoobProHacker> {
   findByEpisode: (episode: number) => Promise<TEventNoobProHacker>
   pullArchitectId: (episode: number, subject: string, line: string, beforeId: string) => Promise<void>
   pushArchitectId: (episode: number, subject: string, line: string, afterId: string) => Promise<void>
+  updateEventNoobProHacker: (payload: TEventNoobProHacker) => Promise<TEventNoobProHacker>
 }
 
 const eventNoobProHackerSchema = new Schema({
@@ -20,7 +21,6 @@ const eventNoobProHackerSchema = new Schema({
   lineInfo: [
     {
       subject: { type: String, required: true },
-      youtube_url: { type: String, required: true },
       line_ranking: { type: Number, default: 0 },
       line_details: [
         {
@@ -36,8 +36,8 @@ const eventNoobProHackerSchema = new Schema({
 })
 
 eventNoobProHackerSchema.statics.create = function (payload) {
-  const noobProHacker = new this(payload)
-  return noobProHacker.save()
+  const eventNoobProHacker = new this(payload)
+  return eventNoobProHacker.save()
 }
 
 eventNoobProHackerSchema.statics.findAll = function () {
@@ -100,6 +100,20 @@ eventNoobProHackerSchema.statics.pushArchitectId = function (
           'detail.line': line,
         },
       ],
+    },
+  )
+}
+
+eventNoobProHackerSchema.statics.updateEventNoobProHacker = function (payload: TEventNoobProHacker) {
+  return this.updateOne(
+    {
+      'contentInfo.episode': payload.contentInfo.episode,
+    },
+    {
+      $set: {
+        contentInfo: payload.contentInfo,
+        lineInfo: payload.lineInfo,
+      },
     },
   )
 }

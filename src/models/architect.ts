@@ -95,12 +95,21 @@ interface ArchitectModel extends Model<TArchitect> {
     minecraft_id: string,
     payload: TArchitect['portfolio']['architectureNoobProHacker'][0],
   ) => Promise<TArchitect>
+  pushEventNoobProHackerToPortfolio: (
+    minecraft_id: string,
+    payload: TArchitect['portfolio']['eventNoobProHacker'][0],
+  ) => Promise<TArchitect>
   pushPlacementTestToPortfolio: (
     minecraft_id: string,
     payload: TArchitect['portfolio']['placementTest'][0],
   ) => Promise<void>
   updateNoobProHackerYoutubeURL: (minecraft_id: string, episode: number, youtube_url: string) => Promise<TArchitect>
   updateArchitectureNoobProHackerYoutubeURL: (
+    minecraft_id: string,
+    episode: number,
+    youtube_url: string,
+  ) => Promise<TArchitect>
+  updateEventNoobProHackerYoutubeURL: (
     minecraft_id: string,
     episode: number,
     youtube_url: string,
@@ -170,7 +179,7 @@ architectSchema.statics.pushNoobProHackerToPortfolio = function (
   minecraft_id: string,
   payload: TArchitect['portfolio']['noobprohacker'][0],
 ) {
-  if (payload.ranking == 1 && payload.line === 'hacker') {
+  if (payload.ranking == 1 && payload.line === '해커') {
     return this.findOneAndUpdate(
       { minecraft_id },
       {
@@ -184,7 +193,7 @@ architectSchema.statics.pushNoobProHackerToPortfolio = function (
     )
   }
 
-  if (payload.ranking == 1 && payload.line === 'pro') {
+  if (payload.ranking == 1 && payload.line === '프로') {
     return this.findOneAndUpdate(
       { minecraft_id },
       {
@@ -246,6 +255,29 @@ architectSchema.statics.pushArchitectureNoobProHackerToPortfolio = function (
       $inc: { 'noobprohackerInfo.participation': 1 },
     },
   )
+}
+
+architectSchema.statics.pushEventNoobProHackerToPortfolio = function (
+  minecraft_id: string,
+  payload: TArchitect['portfolio']['eventNoobProHacker'][0],
+) {
+  if (payload.ranking == 1) {
+    return this.findOneAndUpdate(
+      { minecraft_id },
+      {
+        $push: { 'portfolio.eventNoobProHacker': payload },
+        $inc: { 'noobprohackerInfo.win': 1, 'noobprohackerInfo.participation': 1 },
+      },
+    )
+  } else {
+    return this.findOneAndUpdate(
+      { minecraft_id },
+      {
+        $push: { 'portfolio.eventNoobProHacker': payload },
+        $inc: { 'noobprohackerInfo.participation': 1 },
+      },
+    )
+  }
 }
 
 architectSchema.statics.pushPlacementTestToPortfolio = function (
@@ -316,6 +348,26 @@ architectSchema.statics.updateArchitectureNoobProHackerYoutubeURL = function (
       $set: {
         'portfolio.architectureNoobProHacker.$[elem].youtube_url': youtube_url,
       },
+    },
+    {
+      arrayFilters: [
+        {
+          'elem.episode': episode,
+        },
+      ],
+    },
+  )
+}
+
+architectSchema.statics.updateEventNoobProHackerYoutubeURL = function (
+  minecraft_id: string,
+  episode: number,
+  youtube_url: string,
+) {
+  return this.findOneAndUpdate(
+    { minecraft_id },
+    {
+      $set: { 'portfolio.eventNoobProHacker.$[elem].youtube_url': youtube_url },
     },
     {
       arrayFilters: [
