@@ -103,6 +103,10 @@ interface ArchitectModel extends Model<TArchitect> {
     minecraft_id: string,
     payload: TArchitect['portfolio']['placementTest'][0],
   ) => Promise<void>
+  pushArchitectureContestToPortfolio: (
+    minecraft_id: string,
+    payload: TArchitect['portfolio']['architectureContest'][0],
+  ) => Promise<void>
   updateNoobProHackerYoutubeURL: (minecraft_id: string, episode: number, youtube_url: string) => Promise<TArchitect>
   updateArchitectureNoobProHackerYoutubeURL: (
     minecraft_id: string,
@@ -110,6 +114,11 @@ interface ArchitectModel extends Model<TArchitect> {
     youtube_url: string,
   ) => Promise<TArchitect>
   updateEventNoobProHackerYoutubeURL: (
+    minecraft_id: string,
+    episode: number,
+    youtube_url: string,
+  ) => Promise<TArchitect>
+  updateArchitectureContestYoutubeURL: (
     minecraft_id: string,
     episode: number,
     youtube_url: string,
@@ -280,6 +289,29 @@ architectSchema.statics.pushEventNoobProHackerToPortfolio = function (
   }
 }
 
+architectSchema.statics.pushArchitectureContestToPortfolio = function (
+  minecraft_id: string,
+  payload: TArchitect['portfolio']['architectureContest'][0],
+) {
+  if (payload.ranking == 1) {
+    return this.findOneAndUpdate(
+      { minecraft_id },
+      {
+        $push: { 'portfolio.architectureContest': payload },
+        $inc: { 'noobprohackerInfo.win': 1, 'noobprohackerInfo.participation': 1 },
+      },
+    )
+  } else {
+    return this.findOneAndUpdate(
+      { minecraft_id },
+      {
+        $push: { 'portfolio.architectureContest': payload },
+        $inc: { 'noobprohackerInfo.participation': 1 },
+      },
+    )
+  }
+}
+
 architectSchema.statics.pushPlacementTestToPortfolio = function (
   minecraft_id: string,
   payload: TArchitect['portfolio']['placementTest'][0],
@@ -368,6 +400,26 @@ architectSchema.statics.updateEventNoobProHackerYoutubeURL = function (
     { minecraft_id },
     {
       $set: { 'portfolio.eventNoobProHacker.$[elem].youtube_url': youtube_url },
+    },
+    {
+      arrayFilters: [
+        {
+          'elem.episode': episode,
+        },
+      ],
+    },
+  )
+}
+
+architectSchema.statics.updateArchitectureContestYoutubeURL = function (
+  minecraft_id: string,
+  episode: number,
+  youtube_url: string,
+) {
+  return this.findOneAndUpdate(
+    { minecraft_id },
+    {
+      $set: { 'portfolio.architectureContest.$[elem].youtube_url': youtube_url },
     },
     {
       arrayFilters: [

@@ -18,7 +18,6 @@ const architectureContestSchema = new Schema({
   lineInfo: [
     {
       line: { type: String },
-      youtube_url: { type: String, required: true },
       line_details: [
         {
           topText: { type: String },

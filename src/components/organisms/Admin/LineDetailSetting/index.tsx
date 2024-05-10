@@ -33,12 +33,11 @@ type ArchitectureContestProps = {
   isEdit?: boolean
   lineInfo: ArchitectureContest['lineInfo']
   handleSubmit: () => void
-  handleLineInfoChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void
   handleLineDetailChange: (e: React.ChangeEvent<HTMLInputElement>, index: number, tier: number) => void
 }
 
 export default function LineDetailSetting(props: Props) {
-  const { type, isEdit, lineInfo, handleSubmit, handleLineInfoChange, handleLineDetailChange } = props
+  const { type, isEdit, lineInfo, handleSubmit, handleLineDetailChange } = props
 
   return (
     <Fragment>
@@ -50,7 +49,7 @@ export default function LineDetailSetting(props: Props) {
                 index={lineIndex}
                 subject={lineInfo[lineIndex].subject}
                 line_ranking={lineInfo[lineIndex].line_ranking}
-                handleLineInfoChange={handleLineInfoChange}
+                handleLineInfoChange={props.handleLineInfoChange}
               />
             )}
             <div className="mt-6 grid grid-cols-3 gap-8">

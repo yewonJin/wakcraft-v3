@@ -5,9 +5,10 @@ import Input from '@/components/atoms/Input'
 import SelectBox from '@/components/atoms/SelectBox'
 import { InputForm } from '@/components/molecules/Form'
 import SearchResult from '@/components/molecules/SearchResult'
-import { All_TIER_LIST } from '@/constants/architect'
+
 import { useAddArchitect } from '@/hooks/Admin/useAddArchitect'
 import { useEditArchitect } from '@/hooks/Admin/useEditArchitect'
+import { All_TIER_LIST } from '@/constants/architect'
 
 export default function Page() {
   return (
