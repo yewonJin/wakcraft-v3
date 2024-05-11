@@ -1,4 +1,4 @@
-import { schedulesContent } from '@/constants/schedule'
+import { SCHEDULES_CONTENT } from '@/constants/schedule'
 import { Schedule } from '@/types/schedule'
 
 export const getURL = (schedule: Schedule) => {
@@ -37,7 +37,7 @@ export const isEventNoobProHacker = (schedule: Schedule) => {
 /** 웹에 등록되어 있는 컨텐츠인가? */
 export const isPostedContent = (schedule: Schedule) => {
   return (
-    schedulesContent.slice(0, 7).includes(schedule.content) &&
+    SCHEDULES_CONTENT.slice(0, 7).includes(schedule.content) &&
     schedule.status === 'after_content' &&
     schedule.episode !== 0
   )

@@ -1,4 +1,4 @@
-export const schedulesContent = [
+export const SCHEDULES_CONTENT = [
   '눕프로해커',
   '건축 눕프핵',
   '건축 콘테스트',
