@@ -23,6 +23,9 @@ export default function Page() {
         <Link href={'/admin/architecture_contest'}>
           <Button text="건축 콘테스트" />
         </Link>
+        <Link href={'/admin/placement_test'}>
+          <Button text="배치고사" />
+        </Link>
       </div>
     </div>
   )
