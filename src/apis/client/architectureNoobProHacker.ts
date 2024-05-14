@@ -1,5 +1,11 @@
 import { NoobProHacker } from '@/types/content'
 
+export const getArchitectureNoobProHackersWithoutURL = async () => {
+  const result = await (await fetch(`/api/architecture_noobprohacker?withoutURL=${true}`)).json()
+
+  return result
+}
+
 export const addArchitectureNoobProHacker = async (body: NoobProHacker) => {
   var myHeaders = new Headers()
   myHeaders.append('Content-Type', 'application/json')

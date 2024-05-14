@@ -12,7 +12,7 @@ export default function Page() {
   const {
     page,
     moveToNextPage,
-    noobprohacker,
+    architectureNoobProHacker,
     handleContentInfoChange,
     architects,
     handleMinecraftIdChange,
@@ -37,7 +37,7 @@ export default function Page() {
         <ContentSetting
           type="기본"
           moveToNextPage={moveToNextPage}
-          contentInfo={noobprohacker.contentInfo}
+          contentInfo={architectureNoobProHacker.contentInfo}
           handleInputChange={handleContentInfoChange}
         />
       )
@@ -61,8 +61,8 @@ export default function Page() {
           moveToNextPage={moveToNextPage}
           handleImageSelectClick={handleImageSelectClick}
           handleImageSubmit={handleImageSubmit}
-          episode={noobprohacker.contentInfo.episode}
-          lineInfo={noobprohacker.lineInfo}
+          episode={architectureNoobProHacker.contentInfo.episode}
+          lineInfo={architectureNoobProHacker.lineInfo}
         />
       )
 
@@ -70,7 +70,7 @@ export default function Page() {
       return (
         <LineDetailSetting
           type="눕프로해커"
-          lineInfo={noobprohacker.lineInfo}
+          lineInfo={architectureNoobProHacker.lineInfo}
           handleLineInfoChange={handleLineInfoChange}
           handleLineDetailChange={handleLineDetailChange}
           handleSubmit={addSubmit}

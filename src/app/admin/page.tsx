@@ -26,7 +26,7 @@ export default function Page() {
           <Link href={'/admin/noobprohacker/add'}>
             <Button text="눕프로해커" />
           </Link>
-          <Link href={'/admin/architecture_noobprohacker'}>
+          <Link href={'/admin/architecture_noobprohacker/add'}>
             <Button text="건축 눕프로해커" />
           </Link>
           <Link href={'/admin/event_noobprohacker'}>
@@ -48,7 +48,7 @@ export default function Page() {
           <Link href={'/admin/noobprohacker/edit'}>
             <Button text="눕프로해커" />
           </Link>
-          <Link href={'/admin/architecture_noobprohacker'}>
+          <Link href={'/admin/architecture_noobprohacker/edit'}>
             <Button text="건축 눕프로해커" />
           </Link>
           <Link href={'/admin/event_noobprohacker'}>
