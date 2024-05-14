@@ -7,6 +7,20 @@ import { EventNoobProHacker as TEventNoobProHacker } from '@/types/content'
 import EventNoobProHacker from '@/models/eventNoobProHacker'
 import { convertToArchitectPortfolio } from '@/utils/eventNoobProHacker'
 
+export async function GET(req: NextRequest) {
+  try {
+    connectMongo()
+
+    const eventNoobProHackers = await EventNoobProHacker.findAll()
+
+    return NextResponse.json(eventNoobProHackers, {
+      status: 200,
+    })
+  } catch (e) {
+    return NextResponse.json('이벤트 눕프핵 fetch 실패', { status: 400 })
+  }
+}
+
 export async function POST(req: NextRequest) {
   const token = req.cookies.get('jwt')?.value
 

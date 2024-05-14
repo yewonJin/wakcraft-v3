@@ -1,5 +1,11 @@
 import { EventNoobProHacker } from '@/types/content'
 
+export const getAllEventNoobProHackers = async (): Promise<EventNoobProHacker[]> => {
+  const response = await (await fetch(`/api/event_noobprohacker`)).json()
+
+  return response
+}
+
 export const addEventNoobProHacker = async (body: EventNoobProHacker) => {
   var myHeaders = new Headers()
   myHeaders.append('Content-Type', 'application/json')

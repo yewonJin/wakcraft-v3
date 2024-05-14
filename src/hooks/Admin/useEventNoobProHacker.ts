@@ -8,7 +8,7 @@ import { EventNoobProHacker } from '@/types/content'
 import { Architect } from '@/types/architect'
 import { addEventNoobProHacker, editEventNoobProHacker } from '@/apis/client/eventNoobProHacker'
 
-export const useAddEventNoobProHacker = () => {
+export const useEventNoobProHacker = () => {
   const [page, setPage] = useState(0)
 
   const [eventNoobProHacker, setEventNoobProHacker] = useState<EventNoobProHacker>(initialEventNoobProHacker)
@@ -86,6 +86,17 @@ export const useAddEventNoobProHacker = () => {
 
   const moveToNextPage = () => {
     setPage((prev) => prev + 1)
+  }
+
+  const setEventNoobProhackerByFetchData = (eventNoobProHacker: EventNoobProHacker) => {
+    setEventNoobProHacker(
+      produce((draft) => {
+        draft['contentInfo'] = eventNoobProHacker['contentInfo']
+        draft['lineInfo'] = eventNoobProHacker['lineInfo']
+      }),
+    )
+
+    moveToNextPage()
   }
 
   const handleContentInfoChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -184,30 +195,12 @@ export const useAddEventNoobProHacker = () => {
       return
     }
 
-    if (!validateLineRanking(eventNoobProHacker.lineInfo)) {
-      toast.error('라인 랭킹을 모두 입력해주세요')
-    }
-
-    if (!validateRanking(eventNoobProHacker.lineInfo)) {
-      toast.error('랭킹 값을 모두 입력해주세요')
-      return
-    }
-
     addMutation.mutate()
   }
 
   const editSubmit = () => {
     if (!validateSubject(eventNoobProHacker.lineInfo)) {
       toast.error('주제를 모두 입력해주세요')
-      return
-    }
-
-    if (!validateLineRanking(eventNoobProHacker.lineInfo)) {
-      toast.error('라인 랭킹을 모두 입력해주세요')
-    }
-
-    if (!validateRanking(eventNoobProHacker.lineInfo)) {
-      toast.error('랭킹 값을 모두 입력해주세요')
       return
     }
 
@@ -228,6 +221,7 @@ export const useAddEventNoobProHacker = () => {
     handleImageSubmit,
     handleLineInfoChange,
     handleLineDetailChange,
+    setEventNoobProhackerByFetchData,
     addSubmit,
     editSubmit,
   }
@@ -294,20 +288,6 @@ const validateImage = (lineInfo: EventNoobProHacker['lineInfo']) => {
 const validateSubject = (lineInfo: EventNoobProHacker['lineInfo']) => {
   return lineInfo
     .map((line) => line.subject !== '')
-    .flat()
-    .every((item) => item)
-}
-
-const validateLineRanking = (lineInfo: EventNoobProHacker['lineInfo']) => {
-  return lineInfo
-    .map((line) => line.line_ranking !== 0)
-    .flat()
-    .every((item) => item)
-}
-
-const validateRanking = (lineInfo: EventNoobProHacker['lineInfo']) => {
-  return lineInfo
-    .map((line) => line.line_details[1].ranking !== 0 && line.line_details[2].ranking !== 0)
     .flat()
     .every((item) => item)
 }
