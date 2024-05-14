@@ -3,14 +3,13 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import { produce } from 'immer'
 import toast from 'react-hot-toast'
 
-import { addNoobProHacker, getLastestNoobProHacker } from '@/apis/client/noobprohacker'
+import { addNoobProHacker, editNoobProHacker, getLastestNoobProHacker } from '@/apis/client/noobprohacker'
 import { getAllArchitects } from '@/apis/client/architect'
 import { NoobProHacker } from '@/types/content'
 import { Architect } from '@/types/architect'
 
-export const useAddNoobProHacker = () => {
+export const useNoobProHacker = () => {
   const [page, setPage] = useState(0)
-
   const [noobprohacker, setNoobProHacker] = useState<NoobProHacker>(initialNoobProHacker)
 
   const { data: architects } = useQuery<Architect[]>({
@@ -24,10 +23,18 @@ export const useAddNoobProHacker = () => {
   })
 
   const addMutation = useMutation({
-    mutationKey: ['addMutation'],
+    mutationKey: ['addNoobProHacker'],
     mutationFn: () => addNoobProHacker(noobprohacker),
     onSuccess() {
       toast.success('눕프핵 추가 성공')
+    },
+  })
+
+  const editMutation = useMutation({
+    mutationKey: ['editNoobProHacker'],
+    mutationFn: () => editNoobProHacker(noobprohacker),
+    onSuccess() {
+      toast.success('눕프핵 수정 성공')
     },
   })
 
@@ -43,6 +50,17 @@ export const useAddNoobProHacker = () => {
 
   const moveToNextPage = () => {
     setPage((prev) => prev + 1)
+  }
+
+  const setNoobProhackerByFetchData = (noobprohacker: NoobProHacker) => {
+    setNoobProHacker(
+      produce((draft) => {
+        draft['contentInfo'] = noobprohacker['contentInfo']
+        draft['lineInfo'] = noobprohacker['lineInfo']
+      }),
+    )
+
+    moveToNextPage()
   }
 
   const handleContentInfoChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -158,6 +176,7 @@ export const useAddNoobProHacker = () => {
 
     if (!validateLineRanking(noobprohacker.lineInfo)) {
       toast.error('라인 랭킹을 모두 입력해주세요')
+      return
     }
 
     if (!validateRanking(noobprohacker.lineInfo)) {
@@ -166,6 +185,25 @@ export const useAddNoobProHacker = () => {
     }
 
     addMutation.mutate()
+  }
+
+  const editSubmit = () => {
+    if (!validateSubject(noobprohacker.lineInfo)) {
+      toast.error('주제를 모두 입력해주세요')
+      return
+    }
+
+    if (!validateLineRanking(noobprohacker.lineInfo)) {
+      toast.error('라인 랭킹을 모두 입력해주세요')
+      return
+    }
+
+    if (!validateRanking(noobprohacker.lineInfo)) {
+      toast.error('랭킹 값을 모두 입력해주세요')
+      return
+    }
+
+    editMutation.mutate()
   }
 
   return {
@@ -180,7 +218,9 @@ export const useAddNoobProHacker = () => {
     handleImageSubmit,
     handleLineInfoChange,
     handleLineDetailChange,
+    setNoobProhackerByFetchData,
     addSubmit,
+    editSubmit,
   }
 }
 

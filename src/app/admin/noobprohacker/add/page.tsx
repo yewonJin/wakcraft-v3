@@ -6,7 +6,7 @@ import ImageSetting from '@/components/organisms/Admin/ImageSetting'
 import LineDetailSetting from '@/components/organisms/Admin/LineDetailSetting'
 import Typography from '@/components/atoms/Typography'
 
-import { useAddNoobProHacker } from '@/hooks/Admin/useAddNoobProHacker'
+import { useNoobProHacker } from '@/hooks/Admin/useNoobProHacker'
 
 export default function Page() {
   const {
@@ -22,7 +22,7 @@ export default function Page() {
     handleLineInfoChange,
     handleLineDetailChange,
     addSubmit,
-  } = useAddNoobProHacker()
+  } = useNoobProHacker()
 
   if (!architects)
     return (
