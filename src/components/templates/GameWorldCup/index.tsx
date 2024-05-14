@@ -93,10 +93,10 @@ const InGame = ({ roundOfNumber, endGame }: InGameProps) => {
         >
           <Image
             alt="왼쪽 월드컵 이미지"
-            objectFit="cover"
             priority
             fill
             sizes="1400px"
+            style={{ objectFit: 'cover' }}
             src={renameTo1080Webp(curRoundQuestions[index].workInfo.image_url)}
           />
 
@@ -152,11 +152,11 @@ const InGame = ({ roundOfNumber, endGame }: InGameProps) => {
         >
           <Image
             alt="오른쪽 월드컵 이미지"
-            objectFit="cover"
             priority
             sizes="1400px"
             fill
             src={renameTo1080Webp(curRoundQuestions[index + 1].workInfo.image_url)}
+            style={{ objectFit: 'cover' }}
           />
 
           {curRoundQuestions[index + 3] && (

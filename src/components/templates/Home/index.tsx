@@ -43,7 +43,11 @@ export default async function Home() {
       <HomeDescription numberOfArchitectsByTier={JSON.parse(JSON.stringify(getNumberOfArchitectsByTier(architects)))} />
       <HomeRecentWinner noobprohackers={JSON.parse(JSON.stringify(contents.slice(0, 3)))} />
       <HomeSweepLine
-        sweepLines={convertToSweepLine([...noobprohackersWithSweepLine, ...architectureNoobProHackersWithSweepLine])}
+        sweepLines={JSON.parse(
+          JSON.stringify(
+            convertToSweepLine([...noobprohackersWithSweepLine, ...architectureNoobProHackersWithSweepLine]),
+          ),
+        )}
       />
     </main>
   )
