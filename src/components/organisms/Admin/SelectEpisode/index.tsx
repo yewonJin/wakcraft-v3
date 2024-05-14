@@ -1,9 +1,9 @@
 import Button from '@/components/atoms/Button'
 import Typography from '@/components/atoms/Typography'
 
-import { EventNoobProHacker, NoobProHacker } from '@/types/content'
+import { ArchitectureContest, EventNoobProHacker, NoobProHacker } from '@/types/content'
 
-type Props = NoobProHackerProps | EventNoobProHackerProps
+type Props = NoobProHackerProps | EventNoobProHackerProps | ArchitectureContestProps
 
 type NoobProHackerProps = {
   type: '눕프로해커'
@@ -17,6 +17,13 @@ type EventNoobProHackerProps = {
   content: EventNoobProHacker
   fetchedContent: EventNoobProHacker[]
   setContentByFetchData: (eventNoobProHacker: EventNoobProHacker) => void
+}
+
+type ArchitectureContestProps = {
+  type: '건축 콘테스트'
+  content: ArchitectureContest
+  fetchedContent: ArchitectureContest[]
+  setContentByFetchData: (architectureContest: ArchitectureContest) => void
 }
 
 export default function SelectEpisode({ type, fetchedContent, setContentByFetchData }: Props) {
@@ -38,6 +45,22 @@ export default function SelectEpisode({ type, fetchedContent, setContentByFetchD
       )
 
     case '이벤트 눕프핵':
+      return (
+        <div className="">
+          <Typography variants="h1">에피소드 선택</Typography>
+          <div className="flex gap-4 mt-4">
+            {fetchedContent.map((item) => (
+              <Button
+                key={item.contentInfo.episode}
+                text={item.contentInfo.episode + '화'}
+                handleButtonClick={() => setContentByFetchData(item)}
+              />
+            ))}
+          </div>
+        </div>
+      )
+
+    case '건축 콘테스트':
       return (
         <div className="">
           <Typography variants="h1">에피소드 선택</Typography>

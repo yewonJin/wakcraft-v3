@@ -32,7 +32,7 @@ export default function Page() {
           <Link href={'/admin/event_noobprohacker/add'}>
             <Button text="이벤트 눕프로해커" />
           </Link>
-          <Link href={'/admin/architecture_contest'}>
+          <Link href={'/admin/architecture_contest/add'}>
             <Button text="건축 콘테스트" />
           </Link>
           <Link href={'/admin/placement_test'}>
@@ -54,11 +54,8 @@ export default function Page() {
           <Link href={'/admin/event_noobprohacker/edit'}>
             <Button text="이벤트 눕프로해커" />
           </Link>
-          <Link href={'/admin/architecture_contest'}>
+          <Link href={'/admin/architecture_contest/edit'}>
             <Button text="건축 콘테스트" />
-          </Link>
-          <Link href={'/admin/placement_test'}>
-            <Button text="배치고사" />
           </Link>
         </div>
       </div>

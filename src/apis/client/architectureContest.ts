@@ -1,5 +1,11 @@
 import { ArchitectureContest } from '@/types/content'
 
+export const getAllArchitectureContests = async (): Promise<ArchitectureContest[]> => {
+  const response = await (await fetch(`/api/architecture_contest`)).json()
+
+  return response
+}
+
 export const addArchitectureContest = async (body: ArchitectureContest) => {
   var myHeaders = new Headers()
   myHeaders.append('Content-Type', 'application/json')

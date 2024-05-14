@@ -6,7 +6,7 @@ import toast from 'react-hot-toast'
 import { getAllArchitects } from '@/apis/client/architect'
 import { Architect } from '@/types/architect'
 import { ArchitectureContest } from '@/types/content'
-import { addArchitectureContest } from '@/apis/client/architectureContest'
+import { addArchitectureContest, editArchitectureContest } from '@/apis/client/architectureContest'
 
 export const useArchitectureContest = () => {
   const [page, setPage] = useState(0)
@@ -26,8 +26,27 @@ export const useArchitectureContest = () => {
     },
   })
 
+  const editMutation = useMutation({
+    mutationKey: ['editArchitectureContest'],
+    mutationFn: () => editArchitectureContest(architectureContest),
+    onSuccess() {
+      toast.success('건축 콘테스트 수정 성공')
+    },
+  })
+
   const moveToNextPage = () => {
     setPage((prev) => prev + 1)
+  }
+
+  const setArchitectureContestByFetchData = (architectureContest: ArchitectureContest) => {
+    setArchitectureContest(
+      produce((draft) => {
+        draft['contentInfo'] = architectureContest['contentInfo']
+        draft['lineInfo'] = architectureContest['lineInfo']
+      }),
+    )
+
+    moveToNextPage()
   }
 
   const handleContentInfoChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -103,6 +122,10 @@ export const useArchitectureContest = () => {
     addMutation.mutate()
   }
 
+  const editSubmit = () => {
+    editMutation.mutate()
+  }
+
   return {
     page,
     moveToNextPage,
@@ -114,7 +137,9 @@ export const useArchitectureContest = () => {
     handleImageChange,
     handleImageSubmit,
     handleLineDetailChange,
+    setArchitectureContestByFetchData,
     addSubmit,
+    editSubmit,
   }
 }
 

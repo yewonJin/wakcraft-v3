@@ -53,7 +53,7 @@ export default function LineDetailSetting(props: Props) {
               />
             )}
             <div className="mt-6 grid grid-cols-3 gap-8">
-              {new Array(lineInfo[0].line_details.length).fill(0).map((_, lineDetailIndex) => {
+              {new Array(lineInfo[lineIndex].line_details.length).fill(0).map((_, lineDetailIndex) => {
                 switch (type) {
                   case '눕프로해커':
                     return (

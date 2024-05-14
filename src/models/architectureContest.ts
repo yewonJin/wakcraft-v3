@@ -6,6 +6,7 @@ interface ArchitectureContestModel extends Model<TArchitectureContest> {
   findAll: () => Promise<TArchitectureContest[]>
   findByEpisode: (episode: number) => Promise<TArchitectureContest>
   updateArchitectId: (episode: number, line: string, beforeId: string, afterId: string) => Promise<void>
+  updateArchitectureContest: (payload: TArchitectureContest) => Promise<TArchitectureContest>
 }
 
 const architectureContestSchema = new Schema<TArchitectureContest>({
@@ -67,6 +68,20 @@ architectureContestSchema.statics.updateArchitectId = function (
         },
         { 'detail.minecraft_id': beforeId },
       ],
+    },
+  )
+}
+
+architectureContestSchema.statics.updateArchitectureContest = function (payload: TArchitectureContest) {
+  return this.updateOne(
+    {
+      'contentInfo.episode': payload.contentInfo.episode,
+    },
+    {
+      $set: {
+        contentInfo: payload.contentInfo,
+        lineInfo: payload.lineInfo,
+      },
     },
   )
 }
