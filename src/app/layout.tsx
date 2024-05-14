@@ -1,6 +1,7 @@
 import { Noto_Sans_KR } from 'next/font/google'
 import { Toaster } from 'react-hot-toast'
 import Script from 'next/script'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 import './globals.css'
 import TopNav from '@/components/organisms/TopNav'
@@ -56,6 +57,7 @@ export default function RootLayout({
       <body className={medium.className}>
         <QueryProvider>
           <TopNav />
+          <SpeedInsights />
           {children}
           <Toaster />
         </QueryProvider>
