@@ -45,5 +45,5 @@ const colorVariants: { [key in TierColor]: string } = {
   cyan: 'bg-cyan-500',
   amber: 'bg-amber-500',
   slate: 'bg-slate-500',
-  yellow: 'bg-yellow-500',
+  yellow: 'bg-yellow-700',
 }
