@@ -4,31 +4,17 @@ import Architect from '@/models/architect'
 import WhoseWork from '@/models/whoseWork'
 import connectMongo from '@/utils/connectMongo'
 import { Architect as TArchitect } from '@/types/architect'
-import { Difficulty, NumberOfArchitecture } from '@/types/whoseWork'
 
-export async function GET(req: NextRequest, res: NextResponse) {
+export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url)
 
     const difficulty = searchParams.get('difficulty')
-    const numberOfArchitecture = searchParams.get('numberOfArchitecture')
 
     connectMongo()
 
-    if (difficulty && numberOfArchitecture) {
-      const whoseWork = await WhoseWork.findByDifficultyAndNumberOfArchitecture(
-        difficulty as Difficulty,
-        parseInt(numberOfArchitecture) as NumberOfArchitecture,
-      )
-
-      return NextResponse.json(
-        {
-          serviceCode: 200101,
-          data: whoseWork,
-          message: '누구의 작품 찾기 성공',
-        },
-        { status: 200 },
-      )
+    if (!difficulty) {
+      return NextResponse.json({ serviceCode: 400200, message: '난이도를 입력하지 않았습니다' }, { status: 400 })
     }
 
     if (difficulty === 'LOW') {
@@ -42,9 +28,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
         },
         { status: 200 },
       )
-    }
-
-    if (difficulty === 'MEDIUM') {
+    } else if (difficulty === 'MEDIUM') {
       const res = [
         ...(await Architect.findByTier('gukbap')),
         ...(await Architect.findByTier('pro')),
@@ -59,9 +43,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
         },
         { status: 200 },
       )
-    }
-
-    if (difficulty === 'HIGH') {
+    } else if (difficulty === 'HIGH') {
       const res = await Architect.findAll()
       return NextResponse.json(
         {
@@ -73,13 +55,13 @@ export async function GET(req: NextRequest, res: NextResponse) {
       )
     }
 
-    return NextResponse.json({ serviceCode: 400200, message: '난이도를 입력하지 않았습니다' }, { status: 400 })
+    return NextResponse.json({ serviceCode: 400201, message: '난이도를 잘못 입력했습니다.' }, { status: 400 })
   } catch (e) {
     return NextResponse.json({ serviceCode: 400100, message: '누구의 작품 찾기 실패', error: e }, { status: 400 })
   }
 }
 
-export async function PATCH(req: NextRequest, res: NextResponse) {
+export async function PATCH(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url)
 
@@ -87,11 +69,9 @@ export async function PATCH(req: NextRequest, res: NextResponse) {
     const numberOfArchitecture = searchParams.get('numberOfArchitecture')
     const correctCount = searchParams.get('correctCount')
 
-    if (!difficulty) return
-
-    if (!numberOfArchitecture) return
-
-    if (!correctCount) return
+    if (!difficulty || !numberOfArchitecture || !correctCount) {
+      return NextResponse.json({ serviceCode: 400200, message: '파라미터를 다 입력하지 않았습니다.' }, { status: 400 })
+    }
 
     connectMongo()
 

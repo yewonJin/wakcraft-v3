@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import connectMongo from '@/utils/connectMongo'
 import Worldcup from '@/models/worldCup'
 
-export async function GET(req: NextRequest, res: NextResponse) {
+export async function GET() {
   try {
     await connectMongo()
 
@@ -22,7 +22,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
   }
 }
 
-export async function PATCH(req: NextRequest, res: NextResponse) {
+export async function PATCH(req: NextRequest) {
   const { searchParams } = new URL(req.url)
 
   const winner = searchParams.get('winner')
