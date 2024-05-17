@@ -4,7 +4,6 @@ import { TIER_LIST } from '@/constants/architect'
 import { DetailedTier, Architect as TArchitect } from '@/types/architect'
 import { getKORTierName } from '@/utils/architect'
 
-// Define Schemes
 const architectSchema = new Schema<TArchitect>({
   minecraft_id: {
     type: String,
@@ -14,8 +13,8 @@ const architectSchema = new Schema<TArchitect>({
   wakzoo_id: { type: String, unique: true },
   tier: { type: [String] },
   curTier: { type: String },
-  placementTest_link: { type: String },
-  noobprohackerInfo: {
+  wakzoo_link: { type: String },
+  statistics: {
     win: { type: Number, default: 0 },
     hackerWin: { type: Number, default: 0 },
     proWin: { type: Number, default: 0 },
@@ -344,7 +343,7 @@ architectSchema.statics.updatePlacementTestLink = function (minecraft_id: string
   return this.findOneAndUpdate(
     { minecraft_id },
     {
-      $set: { placementTest_link: placementTest_link },
+      $set: { wakzoo_link: placementTest_link },
     },
   )
 }

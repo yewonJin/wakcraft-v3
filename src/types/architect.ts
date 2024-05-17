@@ -1,12 +1,10 @@
-// TODO: noobprohackerInfo 이름 변경해야 할듯?
-
 export type Architect = {
   minecraft_id: string
   wakzoo_id: string
   tier: DetailedTier[]
   curTier: DetailedTier
-  placementTest_link: string
-  noobprohackerInfo: {
+  wakzoo_link: string
+  statistics: {
     win: number
     hackerWin: number
     proWin: number

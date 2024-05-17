@@ -41,9 +41,9 @@ export default function ArchitectInfo(props: Props) {
         )}
       </div>
       {type === 'home' && props.input === props.debouncedSearchText && (
-        <Statistics noobprohackerInfo={architect.noobprohackerInfo} />
+        <Statistics noobprohackerInfo={architect.statistics} />
       )}
-      {type === 'detail' && <Statistics noobprohackerInfo={architect.noobprohackerInfo} />}
+      {type === 'detail' && <Statistics noobprohackerInfo={architect.statistics} />}
     </div>
   )
 }
@@ -91,7 +91,7 @@ const Highlighting = ({ architect, input }: HighlightingProps) => {
 }
 
 type StatisticsProps = {
-  noobprohackerInfo: Architect['noobprohackerInfo']
+  noobprohackerInfo: Architect['statistics']
 }
 
 const Statistics = ({ noobprohackerInfo }: StatisticsProps) => {
