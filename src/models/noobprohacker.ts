@@ -78,7 +78,7 @@ noobprohackerSchema.statics.findAllWithSweepLine = function () {
 }
 
 noobprohackerSchema.statics.findLastestOne = function () {
-  return this.find({}).sort({ 'contentInfo.episode': -1 }).limit(1)
+  return this.findOne().sort({ 'contentInfo.episode': -1 })
 }
 
 noobprohackerSchema.statics.findOneThatHasNotURL = function () {
