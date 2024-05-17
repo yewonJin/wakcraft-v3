@@ -1,37 +1,22 @@
-import { DetailedTier } from '@/types/architect'
+import { Get, Patch, Post } from '@/apis/shared/api'
+import { Architect, DetailedTier } from '@/types/architect'
 
 export const getAllArchitects = async () => {
-  const result = await (await fetch(`/api/architect`)).json()
+  const { data } = await Get<Architect[]>('architect')
 
-  return result
+  return data.data
 }
 
 export const getArchitectByMinecraftId = async (id: string) => {
-  const result = await (await fetch(`/api/architect?minecraftId=${id}`)).json()
+  const { data } = await Get<Architect>(`architect?minecraftId=${id}`)
 
-  return result
+  return data.data
 }
 
 export const addArchitect = async (body: AddArchitectBody) => {
-  var myHeaders = new Headers()
-  myHeaders.append('Content-Type', 'application/json')
+  const { data } = await Post('architect', body)
 
-  console.log(body)
-
-  const response = await fetch(`/api/architect`, {
-    method: 'POST',
-    body: JSON.stringify(body),
-    credentials: 'include',
-    headers: myHeaders,
-  })
-
-  if (!response.ok) {
-    const { serviceCode } = await response.json()
-
-    throw serviceCode
-  }
-
-  return await response.json()
+  return data
 }
 
 export type AddArchitectBody = {
@@ -40,23 +25,9 @@ export type AddArchitectBody = {
 }
 
 export const updateArchitect = async (body: UpdateArchitectBody) => {
-  var myHeaders = new Headers()
-  myHeaders.append('Content-Type', 'application/json')
+  const { data } = await Patch('architect', body)
 
-  const response = await fetch(`/api/architect`, {
-    method: 'PATCH',
-    body: JSON.stringify(body),
-    credentials: 'include',
-    headers: myHeaders,
-  })
-
-  if (!response.ok) {
-    const { serviceCode } = await response.json()
-
-    throw serviceCode
-  }
-
-  return await response.json()
+  return data
 }
 
 export type UpdateArchitectBody = {

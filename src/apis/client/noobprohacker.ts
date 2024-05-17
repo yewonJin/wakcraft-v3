@@ -1,53 +1,26 @@
+import { Get, Post, Put } from '@/apis/shared/api'
 import { NoobProHacker } from '@/types/content'
 
 export const getLastestNoobProHacker = async () => {
-  const result = await (await fetch(`/api/noobprohacker`)).json()
+  const { data } = await Get<NoobProHacker>('noobprohacker')
 
-  return result
+  return data.data
 }
 
 export const getNoobProHackersWithoutURL = async () => {
-  const result = await (await fetch(`/api/noobprohacker?withoutURL=${true}`)).json()
+  const { data } = await Get<NoobProHacker[]>(`noobprohacker?withoutURL=${true}`)
 
-  return result
+  return data.data
 }
 
 export const addNoobProHacker = async (body: NoobProHacker) => {
-  var myHeaders = new Headers()
-  myHeaders.append('Content-Type', 'application/json')
+  const { data } = await Post('noobprohacker', body)
 
-  const response = await fetch(`/api/noobprohacker`, {
-    method: 'POST',
-    body: JSON.stringify(body),
-    credentials: 'include',
-    headers: myHeaders,
-  })
-
-  if (!response.ok) {
-    const { serviceCode } = await response.json()
-
-    throw serviceCode
-  }
-
-  return await response.json()
+  return data
 }
 
 export const editNoobProHacker = async (body: NoobProHacker) => {
-  var myHeaders = new Headers()
-  myHeaders.append('Content-Type', 'application/json')
+  const { data } = await Put('noobprohacker', body)
 
-  const response = await fetch(`/api/noobprohacker`, {
-    method: 'PUT',
-    body: JSON.stringify(body),
-    credentials: 'include',
-    headers: myHeaders,
-  })
-
-  if (!response.ok) {
-    const { serviceCode } = await response.json()
-
-    throw serviceCode
-  }
-
-  return await response.json()
+  return data
 }

@@ -1,47 +1,20 @@
+import { Get, Post, Put } from '@/apis/shared/api'
 import { Schedule } from '@/types/schedule'
 
 export const getAllSchedules = async () => {
-  const result = await (await fetch('/api/schedule')).json()
+  const { data } = await Get<Schedule[]>(`schedule`)
 
-  return result
+  return data.data
 }
 
 export const addSchedule = async (body: Schedule) => {
-  var myHeaders = new Headers()
-  myHeaders.append('Content-Type', 'application/json')
+  const { data } = await Post('schedule', body)
 
-  const response = await fetch(`/api/schedule`, {
-    method: 'POST',
-    body: JSON.stringify(body),
-    credentials: 'include',
-    headers: myHeaders,
-  })
-
-  if (!response.ok) {
-    const { serviceCode } = await response.json()
-
-    throw serviceCode
-  }
-
-  return await response.json()
+  return data
 }
 
 export const editSchedule = async (body: Schedule) => {
-  var myHeaders = new Headers()
-  myHeaders.append('Content-Type', 'application/json')
+  const { data } = await Put('schedule', body)
 
-  const response = await fetch(`/api/schedule`, {
-    method: 'PUT',
-    body: JSON.stringify(body),
-    credentials: 'include',
-    headers: myHeaders,
-  })
-
-  if (!response.ok) {
-    const { serviceCode } = await response.json()
-
-    throw serviceCode
-  }
-
-  return await response.json()
+  return data
 }

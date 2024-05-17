@@ -1,9 +1,10 @@
-import { Difficulty, NumberOfArchitecture } from '@/types/whoseWork'
+import { Get, Patch } from '@/apis/shared/api'
+import { Difficulty, NumberOfArchitecture, Question } from '@/types/whoseWork'
 
 export const getArchitectures = async (difficulty: Difficulty) => {
-  const result = await (await fetch(`/api/game/whose_work?difficulty=${difficulty}`)).json()
+  const { data } = await Get<Question[]>(`game/whose_work?difficulty=${difficulty}`)
 
-  return result
+  return data.data
 }
 
 export const increaseCorrectAnswerCount = async (
@@ -11,14 +12,8 @@ export const increaseCorrectAnswerCount = async (
   numberOfArchitecture: NumberOfArchitecture,
   correctCount: number,
 ) => {
-  const res = await (
-    await fetch(
-      `/api/game/whose_work?difficulty=${difficulty}&numberOfArchitecture=${numberOfArchitecture}&correctCount=${correctCount}`,
-      {
-        method: 'PATCH',
-      },
-    )
-  ).json()
-
-  return res
+  const { data } = await Patch(
+    `game/whose_work?difficulty=${difficulty}&numberOfArchitecture=${numberOfArchitecture}&correctCount=${correctCount}`,
+  )
+  return data
 }

@@ -1,47 +1,20 @@
+import { Get, Post, Put } from '@/apis/shared/api'
 import { NoobProHacker } from '@/types/content'
 
 export const getArchitectureNoobProHackersWithoutURL = async () => {
-  const result = await (await fetch(`/api/architecture_noobprohacker?withoutURL=${true}`)).json()
+  const { data } = await Get<NoobProHacker[]>(`architecture_noobprohacker?withoutURL=${true}`)
 
-  return result
+  return data.data
 }
 
 export const addArchitectureNoobProHacker = async (body: NoobProHacker) => {
-  var myHeaders = new Headers()
-  myHeaders.append('Content-Type', 'application/json')
+  const { data } = await Post('architecture_noobprohacker', body)
 
-  const response = await fetch(`/api/architecture_noobprohacker`, {
-    method: 'POST',
-    body: JSON.stringify(body),
-    credentials: 'include',
-    headers: myHeaders,
-  })
-
-  if (!response.ok) {
-    const { serviceCode } = await response.json()
-
-    throw serviceCode
-  }
-
-  return await response.json()
+  return data
 }
 
 export const editArchitectureNoobProHacker = async (body: NoobProHacker) => {
-  var myHeaders = new Headers()
-  myHeaders.append('Content-Type', 'application/json')
+  const { data } = await Put('architecture_noobprohacker', body)
 
-  const response = await fetch(`/api/architecture_noobprohacker`, {
-    method: 'PUT',
-    body: JSON.stringify(body),
-    credentials: 'include',
-    headers: myHeaders,
-  })
-
-  if (!response.ok) {
-    const { serviceCode } = await response.json()
-
-    throw serviceCode
-  }
-
-  return await response.json()
+  return data
 }

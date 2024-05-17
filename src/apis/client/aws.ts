@@ -1,7 +1,8 @@
+import { Get } from '@/apis/shared/api'
 import { Content } from '@/utils/aws'
 
 export const getImagesName = async (content: Content, episode: number) => {
-  const result = await (await fetch(`/api/aws?content=${content}&episode=${episode}`)).json()
+  const { data } = await Get<string[]>(`aws?content=${content}&episode=${episode}`)
 
-  return result
+  return data.data
 }

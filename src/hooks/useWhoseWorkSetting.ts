@@ -27,7 +27,7 @@ const useWhoseWorkSetting = () => {
     toast.loading('게임을 만드는 중입니다...', { id: 'whoseWork_loading' })
 
     await refetch().then((res) => {
-      setQuestions(shuffle(res.data).slice(0, numberOfArchitecture))
+      setQuestions(shuffle(res.data!).slice(0, numberOfArchitecture))
       toast.remove('whoseWork_loading')
     })
 
@@ -37,7 +37,9 @@ const useWhoseWorkSetting = () => {
   }
 
   const endGame = async () => {
-    await increaseCorrectAnswerCount(difficulty, numberOfArchitecture, correctCount).then((res) => setWhoseWork(res))
+    await increaseCorrectAnswerCount(difficulty, numberOfArchitecture, correctCount).then((res: any) =>
+      setWhoseWork(res.data as WhoseWork),
+    )
 
     setPage(2)
   }

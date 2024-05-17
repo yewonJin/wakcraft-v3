@@ -1,35 +1,20 @@
+import { Get, Post, Put } from '@/apis/shared/api'
 import { ArchitectureContest } from '@/types/content'
 
-export const getAllArchitectureContests = async (): Promise<ArchitectureContest[]> => {
-  const response = await (await fetch(`/api/architecture_contest`)).json()
+export const getAllArchitectureContests = async () => {
+  const { data } = await Get<ArchitectureContest[]>('architecture_contest')
 
-  return response
+  return data.data
 }
 
 export const addArchitectureContest = async (body: ArchitectureContest) => {
-  var myHeaders = new Headers()
-  myHeaders.append('Content-Type', 'application/json')
+  const { data } = await Post('architecture_contest', body)
 
-  const response = await fetch(`/api/architecture_contest`, {
-    method: 'POST',
-    body: JSON.stringify(body),
-    credentials: 'include',
-    headers: myHeaders,
-  })
-
-  return await response.json()
+  return data
 }
 
 export const editArchitectureContest = async (body: ArchitectureContest) => {
-  var myHeaders = new Headers()
-  myHeaders.append('Content-Type', 'application/json')
+  const { data } = await Put('architecture_contest', body)
 
-  const response = await fetch(`/api/architecture_contest`, {
-    method: 'PUT',
-    body: JSON.stringify(body),
-    credentials: 'include',
-    headers: myHeaders,
-  })
-
-  return await response.json()
+  return data
 }

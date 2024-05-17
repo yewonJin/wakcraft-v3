@@ -1,35 +1,20 @@
+import { Get, Post, Put } from '@/apis/shared/api'
 import { EventNoobProHacker } from '@/types/content'
 
-export const getAllEventNoobProHackers = async (): Promise<EventNoobProHacker[]> => {
-  const response = await (await fetch(`/api/event_noobprohacker`)).json()
+export const getAllEventNoobProHackers = async () => {
+  const { data } = await Get<EventNoobProHacker[]>(`event_noobprohacker`)
 
-  return response
+  return data.data
 }
 
 export const addEventNoobProHacker = async (body: EventNoobProHacker) => {
-  var myHeaders = new Headers()
-  myHeaders.append('Content-Type', 'application/json')
+  const { data } = await Post('event_noobprohacker', body)
 
-  const response = await fetch(`/api/event_noobprohacker`, {
-    method: 'POST',
-    body: JSON.stringify(body),
-    credentials: 'include',
-    headers: myHeaders,
-  })
-
-  return await response.json()
+  return data
 }
 
 export const editEventNoobProHacker = async (body: EventNoobProHacker) => {
-  var myHeaders = new Headers()
-  myHeaders.append('Content-Type', 'application/json')
+  const { data } = await Put('event_noobprohacker', body)
 
-  const response = await fetch(`/api/event_noobprohacker`, {
-    method: 'PUT',
-    body: JSON.stringify(body),
-    credentials: 'include',
-    headers: myHeaders,
-  })
-
-  return await response.json()
+  return data
 }

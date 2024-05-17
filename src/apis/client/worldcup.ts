@@ -1,14 +1,14 @@
+import { Get, Patch } from '@/apis/shared/api'
+import { Worldcup } from '@/types/worldcup'
+
 export const getWorldCups = async () => {
-  const result = await (await fetch(`/api/game/worldcup`)).json()
-  return result
+  const { data } = await Get<Worldcup[]>(`game/worldcup`)
+
+  return data.data
 }
 
 export const setWinner = async (subject: string) => {
-  const result = await (
-    await fetch(`/api/game/worldcup?winner=${subject}`, {
-      method: 'PATCH',
-    })
-  ).json()
+  const { data } = await Patch(`game/worldcup?winner=${subject}`)
 
-  return result
+  return data
 }
