@@ -10,19 +10,28 @@ export async function GET(req: NextRequest) {
   const content = searchParams.get('content')
 
   if (!content || !episode) {
-    return NextResponse.json('query parameter error', { status: 400 })
+    return NextResponse.json(
+      { serviceCode: 400200, message: '에피소드 혹은 컨텐츠명을 입력하지 않았습니다.' },
+      { status: 400 },
+    )
   }
 
   try {
     const data = await s3.send(new ListObjectsCommand(listObjectsBucketParams(content as Content, episode as string)))
 
-    if (!data.Contents) return NextResponse.json('해당 오브젝트가 없습니다', { status: 400 })
+    if (!data.Contents) {
+      return NextResponse.json({ serviceCode: 400100, message: 'S3 오브젝트가 존재하지 않습니다' }, { status: 400 })
+    }
 
     return NextResponse.json(
-      hideWebp(hideFolder(data.Contents)).map((item) => item.Key),
+      {
+        serviceCode: 200101,
+        data: hideWebp(hideFolder(data.Contents)).map((item) => item.Key),
+        message: '건축 이미지 찾기 성공',
+      },
       { status: 200 },
     )
   } catch (e) {
-    console.log(e)
+    return NextResponse.json({ serviceCode: 400100, message: 'S3 오브젝트 찾기 실패', error: e }, { status: 400 })
   }
 }

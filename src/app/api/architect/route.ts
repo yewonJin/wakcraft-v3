@@ -23,16 +23,20 @@ export async function GET(req: NextRequest, res: NextResponse) {
     if (minecraftId) {
       const architect = await Architect.findByMinecraftId(minecraftId)
 
-      return NextResponse.json(architect, { status: 200 })
+      return NextResponse.json(
+        { serviceCode: 200101, data: architect, message: '해당 건축가 찾기 성공' },
+        { status: 200 },
+      )
     }
 
     const architects = await Architect.findAll()
 
-    return NextResponse.json(architects, { status: 200 })
+    return NextResponse.json(
+      { serviceCode: 200101, data: architects, message: '건축가 모두 찾기 성공' },
+      { status: 200 },
+    )
   } catch (e) {
-    return NextResponse.json(JSON.stringify({ message: 'error' }), {
-      status: 400,
-    })
+    return NextResponse.json({ serviceCode: 400100, message: '건축가 찾기 실패', error: e }, { status: 400 })
   }
 }
 
@@ -40,13 +44,13 @@ export async function POST(req: NextRequest) {
   const token = req.cookies.get('jwt')?.value
 
   if (!token) {
-    return NextResponse.json('토큰이 없습니다', { status: 400 })
+    return NextResponse.json({ serviceCode: 403100 }, { status: 403 })
   }
 
   const isValidatedToken = jwt.verify(token, process.env.JWT_SECRET as string)
 
   if (!isValidatedToken) {
-    return NextResponse.json('토큰이 유효하지 않습니다.', { status: 400 })
+    return NextResponse.json({ serviceCode: 403101 }, { status: 400 })
   }
 
   try {
@@ -56,18 +60,16 @@ export async function POST(req: NextRequest) {
 
     const currentSeason = (await PlacementTest.findAll()).length
 
-    const architect = await Architect.create({
+    await Architect.create({
       minecraft_id,
       wakzoo_id,
       curTier: '언랭',
       tier: new Array(currentSeason).fill('언랭'),
     })
 
-    return NextResponse.json(architect, { status: 200 })
+    return NextResponse.json({ serviceCode: 201100, message: '건축가 추가 성공' }, { status: 200 })
   } catch (e) {
-    return NextResponse.json(JSON.stringify({ message: 'error' }), {
-      status: 400,
-    })
+    return NextResponse.json({ serviceCode: 400101, message: '건축가 추가 실패', error: e }, { status: 400 })
   }
 }
 
@@ -75,13 +77,13 @@ export async function PATCH(req: NextRequest) {
   const token = req.cookies.get('jwt')?.value
 
   if (!token) {
-    return NextResponse.json('토큰이 없습니다', { status: 400 })
+    return NextResponse.json({ serviceCode: 403100 }, { status: 403 })
   }
 
   const isValidatedToken = jwt.verify(token, process.env.JWT_SECRET as string)
 
   if (!isValidatedToken) {
-    return NextResponse.json('토큰이 유효하지 않습니다.', { status: 400 })
+    return NextResponse.json({ serviceCode: 403101 }, { status: 403 })
   }
 
   try {
@@ -132,13 +134,11 @@ export async function PATCH(req: NextRequest) {
       await Architect.updateMinecraftId(beforeId, afterId)
     }
 
-    return NextResponse.json({ message: '정보 변경 성공' }, { status: 200 })
+    return NextResponse.json({ serviceCode: 201101, message: '건축가 수정 성공' }, { status: 201 })
   } catch (e) {
     return NextResponse.json(
-      { serviceCode: 2001 },
-      {
-        status: 400,
-      },
+      { serviceCode: 400102, message: '컨텐츠에서 마인크래프트 아이디 수정 실패', error: e },
+      { status: 400 },
     )
   }
 }

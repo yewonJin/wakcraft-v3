@@ -6,18 +6,18 @@ export async function POST(req: NextRequest) {
     const { id, password } = await req.json()
 
     if (!id || !password) {
-      return NextResponse.json({ serviceCode: 1001 }, { status: 400 })
+      return NextResponse.json({ serviceCode: 401100 }, { status: 401 })
     }
 
     if (id !== process.env.ADMIN_ID || password !== process.env.ADMIN_PASSWORD) {
-      return NextResponse.json({ serviceCode: 1002 }, { status: 400 })
+      return NextResponse.json({ serviceCode: 401101 }, { status: 401 })
     }
 
     const token = jwt.sign({ user: id }, process.env.JWT_SECRET as string, {
       expiresIn: process.env.JWT_EXPIRES_IN,
     })
 
-    const response = NextResponse.json({ message: '로그인 성공' }, { status: 200 })
+    const response = NextResponse.json({ serviceCode: 200100, message: '로그인 성공' }, { status: 200 })
 
     response.cookies.set({
       name: 'jwt',
@@ -28,6 +28,6 @@ export async function POST(req: NextRequest) {
 
     return response
   } catch (e) {
-    return NextResponse.json({ message: '로그인 실패' }, { status: 400 })
+    return NextResponse.json({ serviceCode: 401102, error: e }, { status: 401 })
   }
 }

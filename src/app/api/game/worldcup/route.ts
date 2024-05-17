@@ -9,9 +9,16 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
     const worldCup = await Worldcup.findAllByGameName('HackerWorldCup')
 
-    return NextResponse.json(worldCup, { status: 200 })
-  } catch {
-    return NextResponse.json('fetch error', { status: 200 })
+    return NextResponse.json(
+      {
+        serviceCode: 200101,
+        data: worldCup,
+        message: '월드컵 찾기 성공',
+      },
+      { status: 200 },
+    )
+  } catch (e) {
+    return NextResponse.json({ serviceCode: 400100, message: '월드컵 찾기 실패', error: e }, { status: 400 })
   }
 }
 
@@ -20,10 +27,9 @@ export async function PATCH(req: NextRequest, res: NextResponse) {
 
   const winner = searchParams.get('winner')
 
-  if (!winner)
-    return NextResponse.json('winner가 query string에 없습니다', {
-      status: 400,
-    })
+  if (!winner) {
+    return NextResponse.json({ serviceCode: 400200, message: 'winner 파라미터를 입력하지 않았습니다' }, { status: 400 })
+  }
 
   try {
     await connectMongo()
@@ -32,8 +38,14 @@ export async function PATCH(req: NextRequest, res: NextResponse) {
 
     await Worldcup.increaseNumberOfWin(winner)
 
-    return NextResponse.json('성공', { status: 200 })
-  } catch {
-    return NextResponse.json('fetch error', { status: 200 })
+    return NextResponse.json(
+      {
+        serviceCode: 201101,
+        message: '월드컵 수정 성공',
+      },
+      { status: 201 },
+    )
+  } catch (e) {
+    return NextResponse.json({ serviceCode: 400102, message: '월드컵 수정 실패', error: e }, { status: 400 })
   }
 }

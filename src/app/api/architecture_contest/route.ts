@@ -13,9 +13,12 @@ export async function GET() {
   try {
     const architectureContests = await ArchitectureContest.findAll()
 
-    return NextResponse.json(architectureContests, { status: 200 })
+    return NextResponse.json(
+      { serviceCode: 200101, data: architectureContests, message: '건축가 찾기 성공' },
+      { status: 200 },
+    )
   } catch (e) {
-    return NextResponse.json('건축 콘테스트 찾기 실패', { status: 400 })
+    return NextResponse.json({ serviceCode: 400100, msg: e }, { status: 400 })
   }
 }
 
@@ -23,13 +26,13 @@ export async function POST(req: NextRequest) {
   const token = req.cookies.get('jwt')?.value
 
   if (!token) {
-    return NextResponse.json('토큰이 없습니다', { status: 400 })
+    return NextResponse.json({ serviceCode: 403100 }, { status: 403 })
   }
 
   const isValidatedToken = jwt.verify(token, process.env.JWT_SECRET as string)
 
   if (!isValidatedToken) {
-    return NextResponse.json('토큰이 유효하지 않습니다.', { status: 400 })
+    return NextResponse.json({ serviceCode: 403101 }, { status: 403 })
   }
 
   const body: TArchitectureContest = await req.json()
@@ -39,7 +42,7 @@ export async function POST(req: NextRequest) {
   try {
     await ArchitectureContest.create(body)
   } catch (e) {
-    return NextResponse.json(e, { status: 400 })
+    return NextResponse.json({ serviceCode: 400101 }, { status: 400 })
   }
 
   try {
@@ -49,9 +52,12 @@ export async function POST(req: NextRequest) {
       await Architect.pushArchitectureContestToPortfolio(architect.minecraft_id, architect.portfolio)
     })
 
-    return NextResponse.json('성공', { status: 200 })
+    return NextResponse.json({ serviceCode: 201100, message: '건축 콘테스트 추가 성공' }, { status: 201 })
   } catch (e) {
-    return NextResponse.json('건축가 포트폴리오에 추가 실패', { status: 400 })
+    return NextResponse.json(
+      { serviceCode: 400101, message: '건축가 포트폴리오에 추가 실패', error: e },
+      { status: 400 },
+    )
   }
 }
 
@@ -59,13 +65,13 @@ export async function PUT(req: NextRequest) {
   const token = req.cookies.get('jwt')?.value
 
   if (!token) {
-    return NextResponse.json('토큰이 없습니다', { status: 400 })
+    return NextResponse.json({ serviceCode: 403100 }, { status: 403 })
   }
 
   const isValidatedToken = jwt.verify(token, process.env.JWT_SECRET as string)
 
   if (!isValidatedToken) {
-    return NextResponse.json('토큰이 유효하지 않습니다.', { status: 400 })
+    return NextResponse.json({ serviceCode: 403101 }, { status: 403 })
   }
 
   const body: TArchitectureContest = await req.json()
@@ -75,7 +81,7 @@ export async function PUT(req: NextRequest) {
   try {
     await ArchitectureContest.updateArchitectureContest(body)
   } catch (e) {
-    return NextResponse.json(e, { status: 400 })
+    return NextResponse.json({ serviceCode: 400102, message: '건축 콘테스트 수정 실패', error: e })
   }
 
   try {
@@ -89,8 +95,8 @@ export async function PUT(req: NextRequest) {
       )
     })
 
-    return NextResponse.json('성공', { status: 200 })
+    return NextResponse.json({ serviceCode: 201101, message: '건축 콘테스트 추가 성공' }, { status: 201 })
   } catch (e) {
-    return NextResponse.json('건축가 포트폴리오 수정 실패', { status: 400 })
+    return NextResponse.json({ serviceCode: 400102, message: '건축가 포트폴리오 수정 실패', error: e }, { status: 400 })
   }
 }

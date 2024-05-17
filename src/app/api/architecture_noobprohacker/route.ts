@@ -19,9 +19,12 @@ export async function GET(req: NextRequest) {
 
       const architectureNoobProHacker = await ArchitectureNoobProHacker.findOneThatHasNotURL()
 
-      return NextResponse.json(architectureNoobProHacker, { status: 200 })
+      return NextResponse.json(
+        { serviceCode: 200101, data: architectureNoobProHacker, message: '건축 눕프핵 찾기 성공' },
+        { status: 200 },
+      )
     } catch (e) {
-      return NextResponse.json('유튜브 링크 없는 눕프핵 fetch 실패')
+      return NextResponse.json({ serviceCode: 400100, message: '건축가 눕프핵 찾기 실패', error: e }, { status: 400 })
     }
   }
 
@@ -34,7 +37,7 @@ export async function GET(req: NextRequest) {
       status: 200,
     })
   } catch (e) {
-    return NextResponse.json('눕프핵 fetch 실패', { status: 400 })
+    return NextResponse.json({ serviceCode: 400100, msg: e })
   }
 }
 
@@ -42,13 +45,13 @@ export async function POST(req: NextRequest) {
   const token = req.cookies.get('jwt')?.value
 
   if (!token) {
-    return NextResponse.json('토큰이 없습니다', { status: 400 })
+    return NextResponse.json({ serviceCode: 403100 }, { status: 403 })
   }
 
   const isValidatedToken = jwt.verify(token, process.env.JWT_SECRET as string)
 
   if (!isValidatedToken) {
-    return NextResponse.json('토큰이 유효하지 않습니다.', { status: 400 })
+    return NextResponse.json({ serviceCode: 403101 }, { status: 403 })
   }
 
   const body: TNoobProHacker = await req.json()
@@ -58,7 +61,7 @@ export async function POST(req: NextRequest) {
   try {
     await ArchitectureNoobProHacker.create(body)
   } catch (e) {
-    return NextResponse.json('건축 눕프핵 추가 실패', { status: 400 })
+    return NextResponse.json({ serviceCode: 400101, message: '건축 눕프핵 추가 실패', error: e }, { status: 400 })
   }
 
   try {
@@ -68,9 +71,9 @@ export async function POST(req: NextRequest) {
       await Architect.pushArchitectureNoobProHackerToPortfolio(architect.minecraft_id, architect.portfolio)
     })
 
-    return NextResponse.json('성공', { status: 200 })
+    return NextResponse.json({ serviceCode: 201100, message: '건축 눕프핵 추가 성공' }, { status: 201 })
   } catch (e) {
-    return NextResponse.json('건축가 포트폴리오에 추가 실패', { status: 400 })
+    return NextResponse.json({ serviceCode: 400101, message: '건축가 포트폴리오 추가 실패', error: e }, { status: 400 })
   }
 }
 
@@ -78,13 +81,13 @@ export async function PUT(req: NextRequest) {
   const token = req.cookies.get('jwt')?.value
 
   if (!token) {
-    return NextResponse.json('토큰이 없습니다', { status: 400 })
+    return NextResponse.json({ serviceCode: 403100 }, { status: 403 })
   }
 
   const isValidatedToken = jwt.verify(token, process.env.JWT_SECRET as string)
 
   if (!isValidatedToken) {
-    return NextResponse.json('토큰이 유효하지 않습니다.', { status: 400 })
+    return NextResponse.json({ serviceCode: 403101 }, { status: 403 })
   }
 
   const body: TArchitectureNoobProHacker = await req.json()
@@ -94,7 +97,7 @@ export async function PUT(req: NextRequest) {
   try {
     await ArchitectureNoobProHacker.updateArchitectureNoobProHacker(body)
   } catch (e) {
-    return NextResponse.json('건축 눕프핵 수정 실패', { status: 400 })
+    return NextResponse.json({ serviceCode: 400102, message: '건축 눕프핵 수정 실패', error: e }, { status: 400 })
   }
 
   try {
@@ -108,8 +111,8 @@ export async function PUT(req: NextRequest) {
       )
     })
 
-    return NextResponse.json('성공', { status: 200 })
+    return NextResponse.json({ serviceCode: 201101, message: '건축 눕프핵 추가 성공' }, { status: 201 })
   } catch (e) {
-    return NextResponse.json('건축가 유튜브 링크 수정 실패', { status: 400 })
+    return NextResponse.json({ serviceCode: 400102, message: '건축가 포트폴리오 수정 실패', error: e }, { status: 400 })
   }
 }

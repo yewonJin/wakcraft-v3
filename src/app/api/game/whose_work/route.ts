@@ -21,13 +21,27 @@ export async function GET(req: NextRequest, res: NextResponse) {
         parseInt(numberOfArchitecture) as NumberOfArchitecture,
       )
 
-      return NextResponse.json(whoseWork, { status: 200 })
+      return NextResponse.json(
+        {
+          serviceCode: 200101,
+          data: whoseWork,
+          message: '누구의 작품 찾기 성공',
+        },
+        { status: 200 },
+      )
     }
 
     if (difficulty === 'LOW') {
       const res = [...(await Architect.findByTier('hacker')), ...(await Architect.findByTier('gukbap'))]
 
-      return NextResponse.json(convertToGameObject(res), { status: 200 })
+      return NextResponse.json(
+        {
+          serviceCode: 200101,
+          data: convertToGameObject(res),
+          message: '난이도 낮음 찾기 성공',
+        },
+        { status: 200 },
+      )
     }
 
     if (difficulty === 'MEDIUM') {
@@ -37,21 +51,31 @@ export async function GET(req: NextRequest, res: NextResponse) {
         ...(await Architect.findByTier('gyeruik')),
       ]
 
-      return NextResponse.json(convertToGameObject(res), { status: 200 })
+      return NextResponse.json(
+        {
+          serviceCode: 200101,
+          data: convertToGameObject(res),
+          message: '난이도 중간 찾기 성공',
+        },
+        { status: 200 },
+      )
     }
 
     if (difficulty === 'HIGH') {
       const res = await Architect.findAll()
-      return NextResponse.json(convertToGameObject(res), { status: 200 })
+      return NextResponse.json(
+        {
+          serviceCode: 200101,
+          data: convertToGameObject(res),
+          message: '난이도 어려움 찾기 성공',
+        },
+        { status: 200 },
+      )
     }
 
-    return NextResponse.json(JSON.stringify({ message: 'query를 입력해주세요' }), {
-      status: 400,
-    })
+    return NextResponse.json({ serviceCode: 400200, message: '난이도를 입력하지 않았습니다' }, { status: 400 })
   } catch (e) {
-    return NextResponse.json(JSON.stringify({ message: 'error' }), {
-      status: 400,
-    })
+    return NextResponse.json({ serviceCode: 400100, message: '누구의 작품 찾기 실패', error: e }, { status: 400 })
   }
 }
 
@@ -77,9 +101,16 @@ export async function PATCH(req: NextRequest, res: NextResponse) {
       parseInt(correctCount),
     )
 
-    return NextResponse.json(res, { status: 200 })
+    return NextResponse.json(
+      {
+        serviceCode: 201101,
+        data: res,
+        message: '누구의 작품 수정 완료',
+      },
+      { status: 200 },
+    )
   } catch (e) {
-    return NextResponse.json('error', { status: 400 })
+    return NextResponse.json({ serviceCode: 400102, message: '누구의 작품 수정 실패', error: e }, { status: 400 })
   }
 }
 
