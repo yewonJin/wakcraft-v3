@@ -1,10 +1,10 @@
 import { ChangeEvent, useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 
 import { Architect, DetailedTier } from '@/types/architect'
 import useSearch from '@/hooks/useSearch'
 import { getAllArchitects, getArchitectByMinecraftId, updateArchitect } from '@/apis/client/architect'
+import { defaultQueryClient } from '@/providers/QueryClientProvider'
 
 type Input = {
   minecraft_id: string
@@ -13,7 +13,7 @@ type Input = {
 }
 
 export const useEditArchitect = () => {
-  const { data: architects } = useQuery<Architect[]>({
+  const { data: architects } = useQuery({
     queryKey: ['getAllArchitects'],
     queryFn: getAllArchitects,
   })
@@ -25,31 +25,14 @@ export const useEditArchitect = () => {
     (searchInput === highlightedArchitects[0]?.wakzoo_id || searchInput === highlightedArchitects[0]?.minecraft_id)
 
   const { data: architect } = useQuery<Architect>({
-    queryKey: ['getArchitect', highlightedArchitects[0]?.minecraft_id],
+    queryKey: ['getArchitectById', highlightedArchitects[0]?.minecraft_id],
     queryFn: () => getArchitectByMinecraftId(highlightedArchitects[0]?.minecraft_id),
     enabled: !!isExistedArchitect,
   })
 
-  const queryClient = useQueryClient()
-
   const mutation = useMutation({
     mutationKey: ['updateArchitect'],
-    mutationFn: () =>
-      updateArchitect({
-        beforeId: architect?.minecraft_id || '',
-        afterId: input.minecraft_id,
-        wakzoo_id: input.wakzoo_id,
-        curTier: input.tier,
-      }),
-    onSuccess() {
-      toast.success('변경 성공')
-      queryClient.invalidateQueries({
-        queryKey: ['getArchitect'],
-      })
-      queryClient.invalidateQueries({
-        queryKey: ['getAllArchitects'],
-      })
-    },
+    mutationFn: updateArchitect,
   })
 
   const [input, setInput] = useState<Input>({
@@ -88,6 +71,27 @@ export const useEditArchitect = () => {
     setInput((prev) => ({ ...prev, tier: e.target.value as DetailedTier }))
   }
 
+  const handleButtonClick = () => {
+    mutation.mutate(
+      {
+        beforeId: architect!.minecraft_id,
+        afterId: input.minecraft_id,
+        wakzoo_id: input.wakzoo_id,
+        curTier: input.tier,
+      },
+      {
+        onSuccess: () => {
+          defaultQueryClient.invalidateQueries({
+            queryKey: ['getArchitectById'],
+          })
+          defaultQueryClient.invalidateQueries({
+            queryKey: ['getAllArchitects'],
+          })
+        },
+      },
+    )
+  }
+
   return {
     searchInput,
     setSearchInput,
@@ -96,6 +100,6 @@ export const useEditArchitect = () => {
     input,
     handleInputChange,
     handleSelectChange,
-    mutation,
+    handleButtonClick,
   }
 }

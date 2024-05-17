@@ -5,7 +5,6 @@ import toast from 'react-hot-toast'
 
 import { getAllArchitects } from '@/apis/client/architect'
 import { NoobProHacker } from '@/types/content'
-import { Architect } from '@/types/architect'
 import { addArchitectureNoobProHacker, editArchitectureNoobProHacker } from '@/apis/client/architectureNoobProHacker'
 
 export const useArchitectureNoobProHacker = () => {
@@ -13,25 +12,19 @@ export const useArchitectureNoobProHacker = () => {
 
   const [architectureNoobProHacker, setArchitectureNoobProHacker] = useState<NoobProHacker>(initialNoobProHacker)
 
-  const { data: architects } = useQuery<Architect[]>({
+  const { data: architects } = useQuery({
     queryKey: ['getAllArchitects'],
     queryFn: getAllArchitects,
   })
 
   const addMutation = useMutation({
     mutationKey: ['addArchitectureNoobProHacker'],
-    mutationFn: () => addArchitectureNoobProHacker(architectureNoobProHacker),
-    onSuccess() {
-      toast.success('건축 눕프핵 추가 성공')
-    },
+    mutationFn: addArchitectureNoobProHacker,
   })
 
   const editMutation = useMutation({
     mutationKey: ['editArchitectureNoobProHacker'],
-    mutationFn: () => editArchitectureNoobProHacker(architectureNoobProHacker),
-    onSuccess() {
-      toast.success('건축 눕프핵 수정 성공')
-    },
+    mutationFn: editArchitectureNoobProHacker,
   })
 
   const setArchitectureNoobProhackerByFetchData = (noobprohacker: NoobProHacker) => {
@@ -170,7 +163,7 @@ export const useArchitectureNoobProHacker = () => {
       return
     }
 
-    addMutation.mutate()
+    addMutation.mutate(architectureNoobProHacker)
   }
 
   const editSubmit = () => {
@@ -188,7 +181,7 @@ export const useArchitectureNoobProHacker = () => {
       return
     }
 
-    editMutation.mutate()
+    editMutation.mutate(architectureNoobProHacker)
   }
 
   return {

@@ -53,7 +53,7 @@ const EditArchitect = () => {
     architect,
     handleInputChange,
     handleSelectChange,
-    mutation,
+    handleButtonClick,
   } = useEditArchitect()
 
   if (!highlightedArchitects) return <div>loading...</div>
@@ -109,14 +109,7 @@ const EditArchitect = () => {
                 height="40px"
               ></SelectBox>
             </div>
-            <Button
-              handleButtonClick={() => {
-                if (!architect) return
-
-                mutation.mutate()
-              }}
-              text="변경"
-            />
+            <Button handleButtonClick={handleButtonClick} text="변경" />
           </div>
         )}
       </div>

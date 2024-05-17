@@ -15,18 +15,12 @@ export const useEventNoobProHacker = () => {
 
   const addMutation = useMutation({
     mutationKey: ['addEventNoobProHacker'],
-    mutationFn: () => addEventNoobProHacker(eventNoobProHacker),
-    onSuccess: () => {
-      toast.success('이벤트 눕프핵 추가')
-    },
+    mutationFn: addEventNoobProHacker,
   })
 
   const editMutation = useMutation({
     mutationKey: ['editEventNoobProHacker'],
-    mutationFn: () => editEventNoobProHacker(eventNoobProHacker),
-    onSuccess: () => {
-      toast.success('이벤트 눕프핵 수정')
-    },
+    mutationFn: editEventNoobProHacker,
   })
 
   const { data: architects } = useQuery<Architect[]>({
@@ -195,7 +189,7 @@ export const useEventNoobProHacker = () => {
       return
     }
 
-    addMutation.mutate()
+    addMutation.mutate(eventNoobProHacker)
   }
 
   const editSubmit = () => {
@@ -204,7 +198,7 @@ export const useEventNoobProHacker = () => {
       return
     }
 
-    editMutation.mutate()
+    editMutation.mutate(eventNoobProHacker)
   }
 
   return {

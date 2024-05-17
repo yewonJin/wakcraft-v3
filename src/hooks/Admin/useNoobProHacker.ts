@@ -17,36 +17,30 @@ export const useNoobProHacker = () => {
     queryFn: getAllArchitects,
   })
 
-  const { data: lastestEpisode } = useQuery<NoobProHacker[]>({
+  const { data: lastestNoobProHacker } = useQuery({
     queryKey: ['getLastestNoobProHacker'],
     queryFn: getLastestNoobProHacker,
   })
 
   const addMutation = useMutation({
     mutationKey: ['addNoobProHacker'],
-    mutationFn: () => addNoobProHacker(noobprohacker),
-    onSuccess() {
-      toast.success('눕프핵 추가 성공')
-    },
+    mutationFn: addNoobProHacker,
   })
 
   const editMutation = useMutation({
     mutationKey: ['editNoobProHacker'],
-    mutationFn: () => editNoobProHacker(noobprohacker),
-    onSuccess() {
-      toast.success('눕프핵 수정 성공')
-    },
+    mutationFn: editNoobProHacker,
   })
 
   useEffect(() => {
-    if (!lastestEpisode) return
+    if (!lastestNoobProHacker) return
 
     setNoobProHacker(
       produce((draft) => {
-        draft['contentInfo']['episode'] = lastestEpisode[0].contentInfo.episode + 1
+        draft['contentInfo']['episode'] = lastestNoobProHacker.contentInfo.episode + 1
       }),
     )
-  }, [lastestEpisode])
+  }, [lastestNoobProHacker])
 
   const moveToNextPage = () => {
     setPage((prev) => prev + 1)
@@ -184,7 +178,7 @@ export const useNoobProHacker = () => {
       return
     }
 
-    addMutation.mutate()
+    addMutation.mutate(noobprohacker)
   }
 
   const editSubmit = () => {
@@ -203,7 +197,7 @@ export const useNoobProHacker = () => {
       return
     }
 
-    editMutation.mutate()
+    editMutation.mutate(noobprohacker)
   }
 
   return {

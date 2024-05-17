@@ -1,8 +1,9 @@
 import { ChangeEvent, MouseEvent, useState } from 'react'
 import toast from 'react-hot-toast'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 
 import { addArchitect } from '@/apis/client/architect'
+import { defaultQueryClient } from '@/providers/QueryClientProvider'
 
 type Input = {
   minecraft_id: string
@@ -15,16 +16,9 @@ export const useAddArchitect = () => {
     wakzoo_id: '',
   })
 
-  const queryClient = useQueryClient()
-
   const mutation = useMutation({
     mutationKey: ['addArchitect'],
-    mutationFn: () => addArchitect(input),
-    onSuccess() {
-      toast.success('추가 성공')
-      queryClient.invalidateQueries({ queryKey: ['getAllArchitects'] })
-      setInput({ minecraft_id: '', wakzoo_id: '' })
-    },
+    mutationFn: addArchitect,
   })
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -37,7 +31,12 @@ export const useAddArchitect = () => {
       return
     }
 
-    mutation.mutate()
+    mutation.mutate(input, {
+      onSuccess: () => {
+        defaultQueryClient.invalidateQueries({ queryKey: ['getAllArchitects'] })
+        setInput({ minecraft_id: '', wakzoo_id: '' })
+      },
+    })
   }
 
   return { input, handleInputChange, handleButtonClick }

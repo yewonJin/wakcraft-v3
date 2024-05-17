@@ -2,7 +2,6 @@ import { useRouter } from 'next/navigation'
 import { produce } from 'immer'
 import { useState, ChangeEvent } from 'react'
 import { useMutation } from '@tanstack/react-query'
-import toast from 'react-hot-toast'
 
 import { login } from '@/apis/client/login'
 
@@ -16,15 +15,7 @@ const useLogin = () => {
 
   const mutation = useMutation({
     mutationKey: ['login'],
-    mutationFn: () => login(input.id, input.password),
-    onSuccess() {
-      toast.success('로그인 성공')
-
-      router.push('/admin')
-    },
-    onError() {
-      toast.error('로그인 실패')
-    },
+    mutationFn: login,
   })
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -37,7 +28,17 @@ const useLogin = () => {
     )
   }
 
-  return { input, mutation, handleInputChange }
+  const handleButtonClick = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    mutation.mutate(input, {
+      onSuccess: () => {
+        router.push('/admin')
+      },
+    })
+  }
+
+  return { input, handleButtonClick, handleInputChange }
 }
 
 export default useLogin

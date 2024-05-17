@@ -5,6 +5,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Schedule } from '@/types/schedule'
 import { getDateString } from '@/utils/shared'
 import { addSchedule, editSchedule, getAllSchedules } from '@/apis/client/schedule'
+import { defaultQueryClient } from '@/providers/QueryClientProvider'
 
 const initialSchedule: Schedule = {
   status: 'before_announcement',
@@ -23,28 +24,16 @@ export const useSchedule = () => {
 
   const [isEdit, setIsEdit] = useState(false)
 
-  const { data: schedules } = useQuery<Schedule[]>({ queryKey: ['getAllSchedules'], queryFn: getAllSchedules })
-
-  const queryClient = useQueryClient()
+  const { data: schedules } = useQuery({ queryKey: ['getAllSchedules'], queryFn: getAllSchedules })
 
   const addMutation = useMutation({
     mutationKey: ['addSchedule'],
-    mutationFn: () => addSchedule(schedule),
-    onSuccess() {
-      toast.success('추가 성공')
-      queryClient.invalidateQueries({ queryKey: ['getAllSchedules'] })
-      setSchedule(initialSchedule)
-    },
+    mutationFn: addSchedule,
   })
 
   const editMutation = useMutation({
     mutationKey: ['editSchedule'],
-    mutationFn: () => editSchedule(schedule),
-    onSuccess() {
-      toast.success('수정 성공')
-      queryClient.invalidateQueries({ queryKey: ['getAllSchedules'] })
-      setSchedule(initialSchedule)
-    },
+    mutationFn: editSchedule,
   })
 
   const handleEditClick = (index: number) => {
@@ -57,12 +46,24 @@ export const useSchedule = () => {
 
   const handleSubmit = () => {
     if (isEdit) {
-      editMutation.mutate()
+      editMutation.mutate(schedule, {
+        onSuccess: (data) => {
+          toast.success(data.message)
+          defaultQueryClient.invalidateQueries({ queryKey: ['getAllSchedules'] })
+          setSchedule(initialSchedule)
+        },
+      })
       setIsEdit(false)
       return
     }
 
-    addMutation.mutate()
+    addMutation.mutate(schedule, {
+      onSuccess: (data) => {
+        toast.success(data.message)
+        defaultQueryClient.invalidateQueries({ queryKey: ['getAllSchedules'] })
+        setSchedule(initialSchedule)
+      },
+    })
   }
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {

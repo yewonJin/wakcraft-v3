@@ -4,7 +4,6 @@ import { produce } from 'immer'
 import toast from 'react-hot-toast'
 
 import { getAllArchitects } from '@/apis/client/architect'
-import { Architect } from '@/types/architect'
 import { ArchitectureContest } from '@/types/content'
 import { addArchitectureContest, editArchitectureContest } from '@/apis/client/architectureContest'
 
@@ -13,25 +12,19 @@ export const useArchitectureContest = () => {
 
   const [architectureContest, setArchitectureContest] = useState<ArchitectureContest>(initialArchitectureContest)
 
-  const { data: architects } = useQuery<Architect[]>({
+  const { data: architects } = useQuery({
     queryKey: ['getAllArchitects'],
     queryFn: getAllArchitects,
   })
 
   const addMutation = useMutation({
     mutationKey: ['addArchitectureContest'],
-    mutationFn: () => addArchitectureContest(architectureContest),
-    onSuccess() {
-      toast.success('건축 콘테스트 추가 성공')
-    },
+    mutationFn: addArchitectureContest,
   })
 
   const editMutation = useMutation({
     mutationKey: ['editArchitectureContest'],
-    mutationFn: () => editArchitectureContest(architectureContest),
-    onSuccess() {
-      toast.success('건축 콘테스트 수정 성공')
-    },
+    mutationFn: editArchitectureContest,
   })
 
   const moveToNextPage = () => {
@@ -119,11 +112,11 @@ export const useArchitectureContest = () => {
   }
 
   const addSubmit = () => {
-    addMutation.mutate()
+    addMutation.mutate(architectureContest)
   }
 
   const editSubmit = () => {
-    editMutation.mutate()
+    editMutation.mutate(architectureContest)
   }
 
   return {

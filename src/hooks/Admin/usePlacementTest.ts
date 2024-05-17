@@ -21,13 +21,15 @@ export const usePlacementTest = () => {
 
   const { data: curSeason } = useQuery({ queryKey: ['getCurSeason'], queryFn: getCurSeason })
 
-  const { data: imagesName } = useQuery<string[] | string>({
-    queryKey: ['getAllImages'],
-    queryFn: () => getImagesName('placementTest', curSeason + 1),
+  const { data: imagesName } = useQuery({
+    queryKey: ['getAllImages', curSeason],
+    queryFn: () => getImagesName('placementTest', curSeason! + 1),
     enabled: !!curSeason,
   })
 
   useEffect(() => {
+    if (!curSeason) return
+
     setPlacementTest(
       produce((draft) => {
         draft['season'] = curSeason + 1
@@ -57,10 +59,7 @@ export const usePlacementTest = () => {
 
   const addMutation = useMutation({
     mutationKey: ['addPlacementTest'],
-    mutationFn: () => addPlacementTest(placementTest),
-    onSuccess() {
-      toast.success('배치고사 추가 성공')
-    },
+    mutationFn: addPlacementTest,
   })
 
   const handleContentInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -103,7 +102,7 @@ export const usePlacementTest = () => {
       return
     }
 
-    addMutation.mutate()
+    addMutation.mutate(placementTest)
   }
 
   return {

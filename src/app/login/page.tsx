@@ -6,7 +6,7 @@ import Input from '@/components/atoms/Input'
 import Button from '@/components/atoms/Button'
 
 export default function Page() {
-  const { input, mutation, handleInputChange } = useLogin()
+  const { input, handleButtonClick, handleInputChange } = useLogin()
 
   return (
     <div className="mx-auto flex max-w-[1200px] justify-center pt-40">
@@ -15,10 +15,7 @@ export default function Page() {
         <h2 className={`text-3xl text-text-primary ${medium.className}`}>로그인</h2>
         <form
           className="mt-8 flex w-[300px] flex-col gap-6 [&>input]:h-[48px] [&>button]:bg-background-primary"
-          onSubmit={(e) => {
-            e.preventDefault()
-            mutation.mutate()
-          }}
+          onSubmit={handleButtonClick}
         >
           <Input
             autoComplete="on"
