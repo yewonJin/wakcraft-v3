@@ -1,8 +1,14 @@
 import { Get, Post, Put } from '@/apis/shared/api'
 import { NoobProHacker } from '@/types/content'
 
+export const getLastestArchitectureNoobProHacker = async () => {
+  const { data } = await Get<NoobProHacker>(`architecture_noobprohacker?lastestOne=true`)
+
+  return data.data
+}
+
 export const getArchitectureNoobProHackersWithoutURL = async () => {
-  const { data } = await Get<NoobProHacker[]>(`architecture_noobprohacker?withoutURL=${true}`)
+  const { data } = await Get<NoobProHacker[]>(`architecture_noobprohacker?withoutYoutubeLink=true`)
 
   return data.data
 }

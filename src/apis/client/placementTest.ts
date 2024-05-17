@@ -1,8 +1,8 @@
 import { Get, Post } from '@/apis/shared/api'
 import { PlacementTest } from '@/types/content'
 
-export const getCurSeason = async () => {
-  const { data } = await Get<number>('placement_test?curSeason=true')
+export const getLastestPlacementTest = async () => {
+  const { data } = await Get<PlacementTest>('placement_test?lastestOne=true')
 
   return data.data
 }

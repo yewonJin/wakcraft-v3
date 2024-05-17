@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { produce } from 'immer'
 import toast from 'react-hot-toast'
@@ -6,12 +6,25 @@ import toast from 'react-hot-toast'
 import { getAllArchitects } from '@/apis/client/architect'
 import { EventNoobProHacker } from '@/types/content'
 import { Architect } from '@/types/architect'
-import { addEventNoobProHacker, editEventNoobProHacker } from '@/apis/client/eventNoobProHacker'
+import {
+  addEventNoobProHacker,
+  editEventNoobProHacker,
+  getLastestEventNoobProHacker,
+} from '@/apis/client/eventNoobProHacker'
 
 export const useEventNoobProHacker = () => {
   const [page, setPage] = useState(0)
-
   const [eventNoobProHacker, setEventNoobProHacker] = useState<EventNoobProHacker>(initialEventNoobProHacker)
+
+  const { data: architects } = useQuery<Architect[]>({
+    queryKey: ['getAllArchitects'],
+    queryFn: getAllArchitects,
+  })
+
+  const { data: lastestEventNoobProHacker } = useQuery({
+    queryKey: ['getLastestEventNoobProHacker'],
+    queryFn: getLastestEventNoobProHacker,
+  })
 
   const addMutation = useMutation({
     mutationKey: ['addEventNoobProHacker'],
@@ -23,10 +36,15 @@ export const useEventNoobProHacker = () => {
     mutationFn: editEventNoobProHacker,
   })
 
-  const { data: architects } = useQuery<Architect[]>({
-    queryKey: ['getAllArchitects'],
-    queryFn: getAllArchitects,
-  })
+  useEffect(() => {
+    if (!lastestEventNoobProHacker) return
+
+    setEventNoobProHacker(
+      produce((draft) => {
+        draft['contentInfo']['episode'] = lastestEventNoobProHacker.contentInfo.episode + 1
+      }),
+    )
+  }, [lastestEventNoobProHacker])
 
   const incNumberOfLines = () => {
     setEventNoobProHacker(

@@ -5,7 +5,7 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 
 import { PlacementTest } from '@/types/content'
 import { getImagesName } from '@/apis/client/aws'
-import { addPlacementTest, getCurSeason } from '@/apis/client/placementTest'
+import { addPlacementTest, getLastestPlacementTest } from '@/apis/client/placementTest'
 import { DetailedTier } from '@/types/architect'
 import { getDateString } from '@/utils/shared'
 
@@ -19,23 +19,26 @@ const initialPlacementTest: PlacementTest = {
 export const usePlacementTest = () => {
   const [placementTest, setPlacementTest] = useState<PlacementTest>(initialPlacementTest)
 
-  const { data: curSeason } = useQuery({ queryKey: ['getCurSeason'], queryFn: getCurSeason })
+  const { data: lastestPlacementTest } = useQuery({
+    queryKey: ['getLastestPlacementTest'],
+    queryFn: getLastestPlacementTest,
+  })
 
   const { data: imagesName } = useQuery({
-    queryKey: ['getAllImages', curSeason],
-    queryFn: () => getImagesName('placementTest', curSeason! + 1),
-    enabled: !!curSeason,
+    queryKey: ['getAllImages', lastestPlacementTest?.season],
+    queryFn: () => getImagesName('placementTest', lastestPlacementTest?.season! + 1),
+    enabled: !!lastestPlacementTest,
   })
 
   useEffect(() => {
-    if (!curSeason) return
+    if (!lastestPlacementTest) return
 
     setPlacementTest(
       produce((draft) => {
-        draft['season'] = curSeason + 1
+        draft['season'] = lastestPlacementTest.season + 1
       }),
     )
-  }, [curSeason])
+  }, [lastestPlacementTest])
 
   useEffect(() => {
     if (!imagesName) return

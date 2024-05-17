@@ -7,10 +7,34 @@ import connectMongo from '@/utils/connectMongo'
 import { convertToArchitectPortfolio } from '@/utils/architectureContest'
 import { ArchitectureContest as TArchitectureContest } from '@/types/content'
 
-export async function GET() {
-  connectMongo()
+export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url)
+
+  const lastestOne = searchParams.get('lastestOne')
+
+  if (lastestOne === 'true') {
+    try {
+      connectMongo()
+
+      const architectureContest = await ArchitectureContest.findLastestOne()
+
+      return NextResponse.json(
+        { serviceCode: 200101, data: architectureContest, message: '최근 건축 콘테스트 찾기 성공' },
+        {
+          status: 200,
+        },
+      )
+    } catch (e) {
+      return NextResponse.json(
+        { serviceCode: 400100, message: '최근 건축 콘테스트 찾기 실패', error: e },
+        { status: 400 },
+      )
+    }
+  }
 
   try {
+    connectMongo()
+
     const architectureContests = await ArchitectureContest.findAll()
 
     return NextResponse.json(

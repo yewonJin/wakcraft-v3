@@ -12,13 +12,13 @@ import { NoobProHacker as TNoobProHacker } from '@/types/content'
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
 
-  const isRequestTheOnesWithoutURL = searchParams.get('withoutURL')
+  const withoutYoutubeLink = searchParams.get('withoutYoutubeLink')
 
-  if (isRequestTheOnesWithoutURL === 'true') {
+  if (withoutYoutubeLink === 'true') {
     try {
       connectMongo()
 
-      const noobprohackers = await NoobProHacker.findOneThatHasNotURL()
+      const noobprohackers = await NoobProHacker.findAllWithoutYoutubeLink()
 
       return NextResponse.json(
         {
@@ -36,21 +36,25 @@ export async function GET(req: NextRequest) {
     }
   }
 
-  try {
-    connectMongo()
+  const lastestOne = searchParams.get('lastestOne')
 
-    const noobprohacker = await NoobProHacker.findLastestOne()
+  if (lastestOne === 'true') {
+    try {
+      connectMongo()
 
-    return NextResponse.json(
-      {
-        serviceCode: 200101,
-        data: noobprohacker,
-        message: '최근 눕프로해커 찾기 성공',
-      },
-      { status: 200 },
-    )
-  } catch (e) {
-    return NextResponse.json({ serviceCode: 400100, message: '눕프핵 찾기 실패', error: e }, { status: 400 })
+      const noobprohacker = await NoobProHacker.findLastestOne()
+
+      return NextResponse.json(
+        {
+          serviceCode: 200101,
+          data: noobprohacker,
+          message: '최근 눕프로해커 찾기 성공',
+        },
+        { status: 200 },
+      )
+    } catch (e) {
+      return NextResponse.json({ serviceCode: 400100, message: '눕프핵 찾기 실패', error: e }, { status: 400 })
+    }
   }
 }
 

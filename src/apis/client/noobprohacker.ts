@@ -2,13 +2,13 @@ import { Get, Post, Put } from '@/apis/shared/api'
 import { NoobProHacker } from '@/types/content'
 
 export const getLastestNoobProHacker = async () => {
-  const { data } = await Get<NoobProHacker>('noobprohacker')
+  const { data } = await Get<NoobProHacker>('noobprohacker?lastestOne=true')
 
   return data.data
 }
 
 export const getNoobProHackersWithoutURL = async () => {
-  const { data } = await Get<NoobProHacker[]>(`noobprohacker?withoutURL=${true}`)
+  const { data } = await Get<NoobProHacker[]>(`noobprohacker?withoutYoutubeLink=true`)
 
   return data.data
 }

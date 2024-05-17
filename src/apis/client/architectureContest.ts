@@ -1,6 +1,12 @@
 import { Get, Post, Put } from '@/apis/shared/api'
 import { ArchitectureContest } from '@/types/content'
 
+export const getLastestArchitectureContest = async () => {
+  const { data } = await Get<ArchitectureContest>(`architecture_contest?lastestOne=true`)
+
+  return data.data
+}
+
 export const getAllArchitectureContests = async () => {
   const { data } = await Get<ArchitectureContest[]>('architecture_contest')
 

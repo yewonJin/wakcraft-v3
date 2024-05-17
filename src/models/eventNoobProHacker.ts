@@ -5,6 +5,7 @@ import { EventNoobProHacker as TEventNoobProHacker } from '@/types/content'
 interface EventNoobProHackerModel extends Model<TEventNoobProHacker> {
   findAll: () => Promise<TEventNoobProHacker[]>
   findByEpisode: (episode: number) => Promise<TEventNoobProHacker>
+  findLastestOne: () => Promise<TEventNoobProHacker>
   pullArchitectId: (episode: number, subject: string, line: string, beforeId: string) => Promise<void>
   pushArchitectId: (episode: number, subject: string, line: string, afterId: string) => Promise<void>
   updateEventNoobProHacker: (payload: TEventNoobProHacker) => Promise<TEventNoobProHacker>
@@ -48,6 +49,9 @@ eventNoobProHackerSchema.statics.findByEpisode = function (episode: number) {
   return this.findOne({ 'contentInfo.episode': episode })
 }
 
+eventNoobProHackerSchema.statics.findLastestOne = function () {
+  return this.findOne().sort({ 'contentInfo.episode': -1 })
+}
 eventNoobProHackerSchema.statics.pullArchitectId = function (
   episode: number,
   subject: string,

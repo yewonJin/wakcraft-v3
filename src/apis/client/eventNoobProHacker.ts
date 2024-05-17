@@ -1,6 +1,12 @@
 import { Get, Post, Put } from '@/apis/shared/api'
 import { EventNoobProHacker } from '@/types/content'
 
+export const getLastestEventNoobProHacker = async () => {
+  const { data } = await Get<EventNoobProHacker>(`event_noobprohacker?lastestOne=true`)
+
+  return data.data
+}
+
 export const getAllEventNoobProHackers = async () => {
   const { data } = await Get<EventNoobProHacker[]>(`event_noobprohacker`)
 

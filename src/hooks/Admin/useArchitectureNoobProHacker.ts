@@ -1,20 +1,28 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { produce } from 'immer'
 import toast from 'react-hot-toast'
 
 import { getAllArchitects } from '@/apis/client/architect'
 import { NoobProHacker } from '@/types/content'
-import { addArchitectureNoobProHacker, editArchitectureNoobProHacker } from '@/apis/client/architectureNoobProHacker'
+import {
+  addArchitectureNoobProHacker,
+  editArchitectureNoobProHacker,
+  getLastestArchitectureNoobProHacker,
+} from '@/apis/client/architectureNoobProHacker'
 
 export const useArchitectureNoobProHacker = () => {
   const [page, setPage] = useState(0)
-
   const [architectureNoobProHacker, setArchitectureNoobProHacker] = useState<NoobProHacker>(initialNoobProHacker)
 
   const { data: architects } = useQuery({
     queryKey: ['getAllArchitects'],
     queryFn: getAllArchitects,
+  })
+
+  const { data: lastestArchitectureNoobProHacker } = useQuery({
+    queryKey: ['getLastestArchitectureNoobProHacker'],
+    queryFn: getLastestArchitectureNoobProHacker,
   })
 
   const addMutation = useMutation({
@@ -26,6 +34,16 @@ export const useArchitectureNoobProHacker = () => {
     mutationKey: ['editArchitectureNoobProHacker'],
     mutationFn: editArchitectureNoobProHacker,
   })
+
+  useEffect(() => {
+    if (!lastestArchitectureNoobProHacker) return
+
+    setArchitectureNoobProHacker(
+      produce((draft) => {
+        draft['contentInfo'].episode = lastestArchitectureNoobProHacker.contentInfo.episode + 1
+      }),
+    )
+  }, [lastestArchitectureNoobProHacker])
 
   const setArchitectureNoobProhackerByFetchData = (noobprohacker: NoobProHacker) => {
     setArchitectureNoobProHacker(

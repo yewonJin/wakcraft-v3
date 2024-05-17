@@ -10,9 +10,9 @@ import { convertToArchitectPortfolio } from '@/utils/placementTest'
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
 
-  const isRequestCurSeason = searchParams.get('curSeason')
+  const lastestOne = searchParams.get('lastestOne')
 
-  if (isRequestCurSeason === 'true') {
+  if (lastestOne === 'true') {
     try {
       connectMongo()
 
@@ -21,7 +21,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json(
         {
           serviceCode: 200101,
-          data: placementTest[0].season,
+          data: placementTest,
           message: '현재 시즌 찾기 성공',
         },
         { status: 200 },

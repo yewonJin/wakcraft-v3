@@ -8,6 +8,30 @@ import EventNoobProHacker from '@/models/eventNoobProHacker'
 import { convertToArchitectPortfolio } from '@/utils/eventNoobProHacker'
 
 export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url)
+
+  const lastestOne = searchParams.get('lastestOne')
+
+  if (lastestOne === 'true') {
+    try {
+      connectMongo()
+
+      const eventNoobProHacker = await EventNoobProHacker.findLastestOne()
+
+      return NextResponse.json(
+        { serviceCode: 200101, data: eventNoobProHacker, message: '최근 이벤트 눕프핵 찾기 성공' },
+        {
+          status: 200,
+        },
+      )
+    } catch (e) {
+      return NextResponse.json(
+        { serviceCode: 400100, message: '최근 이벤트 눕프핵 찾기 실패', error: e },
+        { status: 400 },
+      )
+    }
+  }
+
   try {
     connectMongo()
 

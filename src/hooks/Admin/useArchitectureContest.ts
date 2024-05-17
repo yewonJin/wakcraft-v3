@@ -1,16 +1,25 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { produce } from 'immer'
 import toast from 'react-hot-toast'
 
 import { getAllArchitects } from '@/apis/client/architect'
 import { ArchitectureContest } from '@/types/content'
-import { addArchitectureContest, editArchitectureContest } from '@/apis/client/architectureContest'
+import {
+  addArchitectureContest,
+  editArchitectureContest,
+  getLastestArchitectureContest,
+} from '@/apis/client/architectureContest'
 
 export const useArchitectureContest = () => {
   const [page, setPage] = useState(0)
 
   const [architectureContest, setArchitectureContest] = useState<ArchitectureContest>(initialArchitectureContest)
+
+  const { data: lastestArchitectureContest } = useQuery({
+    queryKey: ['getLastestArchitectureContest'],
+    queryFn: getLastestArchitectureContest,
+  })
 
   const { data: architects } = useQuery({
     queryKey: ['getAllArchitects'],
@@ -26,6 +35,16 @@ export const useArchitectureContest = () => {
     mutationKey: ['editArchitectureContest'],
     mutationFn: editArchitectureContest,
   })
+
+  useEffect(() => {
+    if (!lastestArchitectureContest) return
+
+    setArchitectureContest(
+      produce((draft) => {
+        draft['contentInfo'].episode = lastestArchitectureContest.contentInfo.episode + 1
+      }),
+    )
+  }, [lastestArchitectureContest])
 
   const moveToNextPage = () => {
     setPage((prev) => prev + 1)

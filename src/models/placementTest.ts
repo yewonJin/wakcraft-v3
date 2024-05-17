@@ -5,7 +5,7 @@ import { PlacementTest as TPlacementTest } from '@/types/content'
 interface PlacementTestModel extends Model<TPlacementTest> {
   findAll: () => Promise<TPlacementTest[]>
   findBySeason: (season: number) => Promise<TPlacementTest>
-  findLastestOne: () => Promise<TPlacementTest[]>
+  findLastestOne: () => Promise<TPlacementTest>
   updateArchitectId: (season: number, beforeId: string, afterId: string) => Promise<void>
 }
 
@@ -34,7 +34,7 @@ placementTestSchema.statics.findAll = function () {
 }
 
 placementTestSchema.statics.findLastestOne = function () {
-  return this.find({}).sort({ season: -1 }).limit(1)
+  return this.findOne().sort({ 'contentInfo.episode': -1 })
 }
 
 placementTestSchema.statics.findBySeason = function (season: number) {

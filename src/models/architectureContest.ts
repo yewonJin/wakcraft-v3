@@ -5,6 +5,7 @@ import { Schema, Model, model, models } from 'mongoose'
 interface ArchitectureContestModel extends Model<TArchitectureContest> {
   findAll: () => Promise<TArchitectureContest[]>
   findByEpisode: (episode: number) => Promise<TArchitectureContest>
+  findLastestOne: () => Promise<TArchitectureContest>
   updateArchitectId: (episode: number, line: string, beforeId: string, afterId: string) => Promise<void>
   updateArchitectureContest: (payload: TArchitectureContest) => Promise<TArchitectureContest>
 }
@@ -45,6 +46,10 @@ architectureContestSchema.statics.findAll = function () {
 
 architectureContestSchema.statics.findByEpisode = function (episode: number) {
   return this.findOne({ 'contentInfo.episode': episode })
+}
+
+architectureContestSchema.statics.findLastestOne = function () {
+  return this.findOne().sort({ 'contentInfo.episode': -1 })
 }
 
 architectureContestSchema.statics.updateArchitectId = function (

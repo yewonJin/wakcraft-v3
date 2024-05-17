@@ -11,13 +11,13 @@ import { NoobProHacker as TArchitectureNoobProHacker } from '@/types/content'
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
 
-  const isRequestTheOnesWithoutURL = searchParams.get('withoutURL')
+  const withoutYoutubeLink = searchParams.get('withoutYoutubeLink')
 
-  if (isRequestTheOnesWithoutURL === 'true') {
+  if (withoutYoutubeLink === 'true') {
     try {
       connectMongo()
 
-      const architectureNoobProHacker = await ArchitectureNoobProHacker.findOneThatHasNotURL()
+      const architectureNoobProHacker = await ArchitectureNoobProHacker.findAllWithoutYoutubeLink()
 
       return NextResponse.json(
         { serviceCode: 200101, data: architectureNoobProHacker, message: '건축 눕프핵 찾기 성공' },
@@ -28,16 +28,26 @@ export async function GET(req: NextRequest) {
     }
   }
 
-  try {
-    connectMongo()
+  const lastestOne = searchParams.get('lastestOne')
 
-    const architectureNoobProHacker = await ArchitectureNoobProHacker.findLastestOne()
+  if (lastestOne === 'true') {
+    try {
+      connectMongo()
 
-    return NextResponse.json(architectureNoobProHacker, {
-      status: 200,
-    })
-  } catch (e) {
-    return NextResponse.json({ serviceCode: 400100, msg: e })
+      const architectureNoobProHacker = await ArchitectureNoobProHacker.findLastestOne()
+
+      return NextResponse.json(
+        { serviceCode: 200101, data: architectureNoobProHacker, message: '최근 건축 눕프핵 찾기 성공' },
+        {
+          status: 200,
+        },
+      )
+    } catch (e) {
+      return NextResponse.json(
+        { serviceCode: 400100, message: '최근 건축 눕프핵 찾기 실패', error: e },
+        { status: 400 },
+      )
+    }
   }
 }
 
