@@ -1,6 +1,6 @@
-import { ArchitectureContest as TArchitectureContest } from '@/types/content'
-
 import { Schema, Model, model, models } from 'mongoose'
+
+import { ArchitectureContest as TArchitectureContest } from '@/types/content'
 
 interface ArchitectureContestModel extends Model<TArchitectureContest> {
   findAll: () => Promise<TArchitectureContest[]>

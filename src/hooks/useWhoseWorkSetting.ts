@@ -3,9 +3,9 @@ import toast from 'react-hot-toast'
 import { useQuery } from '@tanstack/react-query'
 
 import { getArchitectures, increaseCorrectAnswerCount } from '@/apis/client/whoseWork'
+import { useWhoseWorkStore } from '@/store/whoseWork'
 import { Question, WhoseWork } from '@/types/whoseWork'
 import { shuffle } from '@/utils/shared'
-import { useWhoseWorkStore } from '@/store/whoseWork'
 
 const useWhoseWorkSetting = () => {
   const [page, setPage] = useState(0)

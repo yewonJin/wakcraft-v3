@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 
 import { getWorldCups } from '@/apis/client/worldcup'
-import { shuffle } from '@/utils/shared'
 import { useWorldCupStore } from '@/store/worldcup'
 import { RoundOfNumber, Worldcup } from '@/types/worldcup'
+import { shuffle } from '@/utils/shared'
 
 const useWorldCupGame = (roundOfNumber: RoundOfNumber, endGame: () => void) => {
   const [isMounted, setisMoundted] = useState<boolean>(false)

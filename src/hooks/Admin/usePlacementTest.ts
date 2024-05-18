@@ -1,11 +1,11 @@
-import { ChangeEvent, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { produce } from 'immer'
 import toast from 'react-hot-toast'
 import { useMutation, useQuery } from '@tanstack/react-query'
 
-import { PlacementTest } from '@/types/content'
 import { getImagesName } from '@/apis/client/aws'
 import { addPlacementTest, getLastestPlacementTest } from '@/apis/client/placementTest'
+import { PlacementTest } from '@/types/content'
 import { DetailedTier } from '@/types/architect'
 import { getDateString } from '@/utils/shared'
 
@@ -65,7 +65,7 @@ export const usePlacementTest = () => {
     mutationFn: addPlacementTest,
   })
 
-  const handleContentInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleContentInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPlacementTest(
       produce((draft) => {
         draft[e.target.name as 'date' | 'youtube_url'] = e.target.value
@@ -73,7 +73,7 @@ export const usePlacementTest = () => {
     )
   }
 
-  const handleParticipantInputChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
+  const handleParticipantInputChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     setPlacementTest(
       produce((draft) => {
         draft.participants[index][e.target.name as 'ranking' | 'order'] = parseInt(e.target.value)
@@ -81,7 +81,7 @@ export const usePlacementTest = () => {
     )
   }
 
-  const handleParticipantSelectChange = (e: ChangeEvent<HTMLSelectElement>, index: number) => {
+  const handleParticipantSelectChange = (e: React.ChangeEvent<HTMLSelectElement>, index: number) => {
     setPlacementTest(
       produce((draft) => {
         draft.participants[index].placement_result = e.target.value as DetailedTier

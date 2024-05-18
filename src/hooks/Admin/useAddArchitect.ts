@@ -1,4 +1,4 @@
-import { ChangeEvent, MouseEvent, useState } from 'react'
+import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { useMutation } from '@tanstack/react-query'
 
@@ -21,11 +21,11 @@ export const useAddArchitect = () => {
     mutationFn: addArchitect,
   })
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  const handleButtonClick = (e: MouseEvent<HTMLButtonElement>) => {
+  const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (input.minecraft_id === '' || input.wakzoo_id === '') {
       toast.error('아이디를 입력해주세요')
       return

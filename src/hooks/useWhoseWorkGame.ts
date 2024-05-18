@@ -1,9 +1,9 @@
 import { KeyboardEvent, useEffect, useRef, useState } from 'react'
 
-import useSearch from './useSearch'
+import useSearch from '@/hooks/useSearch'
+import { useWhoseWorkStore } from '@/store/whoseWork'
 import { Architect } from '@/types/architect'
 import { Question } from '@/types/whoseWork'
-import { useWhoseWorkStore } from '@/store/whoseWork'
 
 const useWhoseWorkGame = (architects: Architect[], architectureArr: Question[], endGame: () => void) => {
   const { input, setInput, handleInputChange, highlightedArchitects } = useSearch(architects)

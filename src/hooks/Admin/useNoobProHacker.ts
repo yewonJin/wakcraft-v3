@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { produce } from 'immer'
 import toast from 'react-hot-toast'
@@ -57,7 +57,7 @@ export const useNoobProHacker = () => {
     moveToNextPage()
   }
 
-  const handleContentInfoChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleContentInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const key = e.target.name as 'subject' | 'date' | 'youtube_url' | 'episode'
 
     if (key === 'episode') {
@@ -97,7 +97,7 @@ export const useNoobProHacker = () => {
     moveToNextPage()
   }
 
-  const handleImageSelectClick = (e: ChangeEvent<HTMLSelectElement>, index: number) => {
+  const handleImageSelectClick = (e: React.ChangeEvent<HTMLSelectElement>, index: number) => {
     const BaseURL = `https://wakcraft.s3.ap-northeast-2.amazonaws.com/noobProHacker/episode ${
       noobprohacker.contentInfo.episode - 1
     }/`
@@ -130,7 +130,7 @@ export const useNoobProHacker = () => {
     moveToNextPage()
   }
 
-  const handleLineInfoChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
+  const handleLineInfoChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     if (e.target.name === 'line_ranking') {
       setNoobProHacker(
         produce((draft) => {
@@ -146,7 +146,7 @@ export const useNoobProHacker = () => {
     }
   }
 
-  const handleLineDetailChange = (e: ChangeEvent<HTMLInputElement>, index: number, tier: number) => {
+  const handleLineDetailChange = (e: React.ChangeEvent<HTMLInputElement>, index: number, tier: number) => {
     if (e.target.name === 'ranking') {
       setNoobProHacker(
         produce((draft) => {

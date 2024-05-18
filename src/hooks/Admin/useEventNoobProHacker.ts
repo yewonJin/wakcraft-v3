@@ -1,16 +1,16 @@
-import { ChangeEvent, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { produce } from 'immer'
 import toast from 'react-hot-toast'
 
 import { getAllArchitects } from '@/apis/client/architect'
-import { EventNoobProHacker } from '@/types/content'
-import { Architect } from '@/types/architect'
 import {
   addEventNoobProHacker,
   editEventNoobProHacker,
   getLastestEventNoobProHacker,
 } from '@/apis/client/eventNoobProHacker'
+import { EventNoobProHacker } from '@/types/content'
+import { Architect } from '@/types/architect'
 
 export const useEventNoobProHacker = () => {
   const [page, setPage] = useState(0)
@@ -111,7 +111,7 @@ export const useEventNoobProHacker = () => {
     moveToNextPage()
   }
 
-  const handleContentInfoChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleContentInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const key = e.target.name as 'subject' | 'date' | 'youtube_url' | 'episode'
 
     if (key === 'episode') {
@@ -151,7 +151,7 @@ export const useEventNoobProHacker = () => {
     moveToNextPage()
   }
 
-  const handleImageChange = (e: ChangeEvent<HTMLInputElement>, lineIndex: number, lineDetailIndex: number) => {
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>, lineIndex: number, lineDetailIndex: number) => {
     setEventNoobProHacker(
       produce((draft) => {
         draft['lineInfo'][lineIndex].line_details[lineDetailIndex].image_url = e.target.value
@@ -168,7 +168,7 @@ export const useEventNoobProHacker = () => {
     moveToNextPage()
   }
 
-  const handleLineInfoChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
+  const handleLineInfoChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     if (e.target.name === 'line_ranking') {
       setEventNoobProHacker(
         produce((draft) => {
@@ -184,7 +184,11 @@ export const useEventNoobProHacker = () => {
     }
   }
 
-  const handleLineDetailChange = (e: ChangeEvent<HTMLInputElement>, lineIndex: number, lineDetailIndex: number) => {
+  const handleLineDetailChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    lineIndex: number,
+    lineDetailIndex: number,
+  ) => {
     if (e.target.name === 'ranking') {
       setEventNoobProHacker(
         produce((draft) => {

@@ -1,11 +1,11 @@
-import { ChangeEvent, KeyboardEvent, useState } from 'react'
+import { useState } from 'react'
 import toast from 'react-hot-toast'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 
-import { Schedule } from '@/types/schedule'
-import { getDateString } from '@/utils/shared'
 import { addSchedule, editSchedule, getAllSchedules } from '@/apis/client/schedule'
 import { defaultQueryClient } from '@/providers/QueryClientProvider'
+import { Schedule } from '@/types/schedule'
+import { getDateString } from '@/utils/shared'
 
 const initialSchedule: Schedule = {
   status: 'before_announcement',
@@ -66,13 +66,13 @@ export const useSchedule = () => {
     })
   }
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.name === 'episode' ? parseInt(e.target.value) : e.target.value
 
     setSchedule((prev) => ({ ...prev, [e.target.name]: value }))
   }
 
-  const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (e.target.name === 'isTributeContent') {
       setSchedule((prev) => ({
         ...prev,

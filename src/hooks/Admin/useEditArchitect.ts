@@ -1,10 +1,10 @@
-import { ChangeEvent, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useMutation, useQuery } from '@tanstack/react-query'
 
-import { Architect, DetailedTier } from '@/types/architect'
-import useSearch from '@/hooks/useSearch'
 import { getAllArchitects, getArchitectByMinecraftId, updateArchitect } from '@/apis/client/architect'
+import useSearch from '@/hooks/useSearch'
 import { defaultQueryClient } from '@/providers/QueryClientProvider'
+import { Architect, DetailedTier } from '@/types/architect'
 
 type Input = {
   minecraft_id: string
@@ -63,11 +63,11 @@ export const useEditArchitect = () => {
     }))
   }, [searchInput])
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setInput((prev) => ({ ...prev, tier: e.target.value as DetailedTier }))
   }
 

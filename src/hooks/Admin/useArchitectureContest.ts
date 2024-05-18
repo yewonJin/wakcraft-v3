@@ -1,15 +1,15 @@
-import { ChangeEvent, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { produce } from 'immer'
 import toast from 'react-hot-toast'
 
 import { getAllArchitects } from '@/apis/client/architect'
-import { ArchitectureContest } from '@/types/content'
 import {
   addArchitectureContest,
   editArchitectureContest,
   getLastestArchitectureContest,
 } from '@/apis/client/architectureContest'
+import { ArchitectureContest } from '@/types/content'
 
 export const useArchitectureContest = () => {
   const [page, setPage] = useState(0)
@@ -61,7 +61,7 @@ export const useArchitectureContest = () => {
     moveToNextPage()
   }
 
-  const handleContentInfoChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleContentInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const key = e.target.name as 'subject' | 'date' | 'youtube_url' | 'episode'
 
     if (key === 'episode') {
@@ -101,7 +101,7 @@ export const useArchitectureContest = () => {
     moveToNextPage()
   }
 
-  const handleImageChange = (e: ChangeEvent<HTMLInputElement>, lineIndex: number, lineDetailIndex: number) => {
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>, lineIndex: number, lineDetailIndex: number) => {
     setArchitectureContest(
       produce((draft) => {
         draft['lineInfo'][lineIndex].line_details[lineDetailIndex].image_url = e.target.value
@@ -113,7 +113,7 @@ export const useArchitectureContest = () => {
     moveToNextPage()
   }
 
-  const handleLineDetailChange = (e: ChangeEvent<HTMLInputElement>, index: number, tier: number) => {
+  const handleLineDetailChange = (e: React.ChangeEvent<HTMLInputElement>, index: number, tier: number) => {
     if (e.target.name === 'ranking') {
       setArchitectureContest(
         produce((draft) => {

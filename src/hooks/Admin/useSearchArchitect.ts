@@ -1,4 +1,4 @@
-import { ChangeEvent, KeyboardEvent, useEffect } from 'react'
+import { useEffect } from 'react'
 
 import useSearch from '@/hooks/useSearch'
 import { Architect } from '@/types/architect'
@@ -21,7 +21,7 @@ export const useSearchArchitect = (props: Props) => {
     }
   }, [input])
 
-  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (input === '') return
 
     if (e.key === 'Tab') {
@@ -33,7 +33,7 @@ export const useSearchArchitect = (props: Props) => {
     }
   }
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value)
 
     if (!highlightedArchitects[0]) return

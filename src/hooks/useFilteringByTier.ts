@@ -1,5 +1,5 @@
-import { Architect } from '@/types/architect'
 import { useQueryString } from '@/hooks/useQueryString'
+import { Architect } from '@/types/architect'
 
 const useFilteringByTier = () => {
   const { queryString, setQueryString, resetQueryString } = useQueryString('tier')
