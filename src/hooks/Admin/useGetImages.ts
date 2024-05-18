@@ -1,8 +1,9 @@
 import { useMemo } from 'react'
 import { useQuery } from '@tanstack/react-query'
+
 import { getImagesName } from '@/apis/client/aws'
 
-export const useImageSetting = (
+export const useGetImages = (
   type: '눕프로해커' | '이벤트 눕프핵' | '건축 눕프핵' | '건축 콘테스트',
   episode: number,
 ) => {

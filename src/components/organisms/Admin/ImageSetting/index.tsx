@@ -5,7 +5,7 @@ import Button from '@/components/atoms/Button'
 import Typography from '@/components/atoms/Typography'
 import { InputForm } from '@/components/molecules/Form'
 
-import { useImageSetting } from '@/hooks/Admin/useImageSetting'
+import { useGetImages } from '@/hooks/Admin/useGetImages'
 import { ArchitectureContest, EventNoobProHacker, LineInfo } from '@/types/content'
 import { renameToWebp } from '@/utils/shared'
 
@@ -102,7 +102,7 @@ const NoobProHackerImageSetting = ({
   handleImageSubmit,
   episode,
 }: NoobProHackerProps) => {
-  const { subjects } = useImageSetting(type, episode)
+  const { subjects } = useGetImages(type, episode)
 
   return (
     <Fragment>
