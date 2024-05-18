@@ -183,9 +183,9 @@ architectSchema.statics.pushNoobProHackerToPortfolio = function (
       {
         $push: { 'portfolio.noobprohacker': payload },
         $inc: {
-          'noobprohackerInfo.win': 1,
-          'noobprohackerInfo.hackerWin': 1,
-          'noobprohackerInfo.participation': 1,
+          'statistics.win': 1,
+          'statistics.hackerWin': 1,
+          'statistics.participation': 1,
         },
       },
     )
@@ -197,9 +197,9 @@ architectSchema.statics.pushNoobProHackerToPortfolio = function (
       {
         $push: { 'portfolio.noobprohacker': payload },
         $inc: {
-          'noobprohackerInfo.win': 1,
-          'noobprohackerInfo.proWin': 1,
-          'noobprohackerInfo.participation': 1,
+          'statistics.win': 1,
+          'statistics.proWin': 1,
+          'statistics.participation': 1,
         },
       },
     )
@@ -209,7 +209,7 @@ architectSchema.statics.pushNoobProHackerToPortfolio = function (
     { minecraft_id },
     {
       $push: { 'portfolio.noobprohacker': payload },
-      $inc: { 'noobprohackerInfo.participation': 1 },
+      $inc: { 'statistics.participation': 1 },
     },
   )
 }
@@ -218,29 +218,29 @@ architectSchema.statics.pushArchitectureNoobProHackerToPortfolio = function (
   minecraft_id: string,
   payload: TArchitect['portfolio']['architectureNoobProHacker'][0],
 ) {
-  if (payload.ranking == 1 && payload.line === 'hacker') {
+  if (payload.ranking == 1 && payload.line === '해커') {
     return this.findOneAndUpdate(
       { minecraft_id },
       {
         $push: { 'portfolio.architectureNoobProHacker': payload },
         $inc: {
-          'noobprohackerInfo.win': 1,
-          'noobprohackerInfo.hackerWin': 1,
-          'noobprohackerInfo.participation': 1,
+          'statistics.win': 1,
+          'statistics.hackerWin': 1,
+          'statistics.participation': 1,
         },
       },
     )
   }
 
-  if (payload.ranking == 1 && payload.line === 'pro') {
+  if (payload.ranking == 1 && payload.line === '프로') {
     return this.findOneAndUpdate(
       { minecraft_id },
       {
         $push: { 'portfolio.architectureNoobProHacker': payload },
         $inc: {
-          'noobprohackerInfo.win': 1,
-          'noobprohackerInfo.proWin': 1,
-          'noobprohackerInfo.participation': 1,
+          'statistics.win': 1,
+          'statistics.proWin': 1,
+          'statistics.participation': 1,
         },
       },
     )
@@ -250,7 +250,7 @@ architectSchema.statics.pushArchitectureNoobProHackerToPortfolio = function (
     { minecraft_id },
     {
       $push: { 'portfolio.architectureNoobProHacker': payload },
-      $inc: { 'noobprohackerInfo.participation': 1 },
+      $inc: { 'statistics.participation': 1 },
     },
   )
 }
@@ -264,7 +264,7 @@ architectSchema.statics.pushEventNoobProHackerToPortfolio = function (
       { minecraft_id },
       {
         $push: { 'portfolio.eventNoobProHacker': payload },
-        $inc: { 'noobprohackerInfo.win': 1, 'noobprohackerInfo.participation': 1 },
+        $inc: { 'statistics.win': 1, 'statistics.participation': 1 },
       },
     )
   } else {
@@ -272,7 +272,7 @@ architectSchema.statics.pushEventNoobProHackerToPortfolio = function (
       { minecraft_id },
       {
         $push: { 'portfolio.eventNoobProHacker': payload },
-        $inc: { 'noobprohackerInfo.participation': 1 },
+        $inc: { 'statistics.participation': 1 },
       },
     )
   }
@@ -287,7 +287,7 @@ architectSchema.statics.pushArchitectureContestToPortfolio = function (
       { minecraft_id },
       {
         $push: { 'portfolio.architectureContest': payload },
-        $inc: { 'noobprohackerInfo.win': 1, 'noobprohackerInfo.participation': 1 },
+        $inc: { 'statistics.win': 1, 'statistics.participation': 1 },
       },
     )
   } else {
@@ -295,7 +295,7 @@ architectSchema.statics.pushArchitectureContestToPortfolio = function (
       { minecraft_id },
       {
         $push: { 'portfolio.architectureContest': payload },
-        $inc: { 'noobprohackerInfo.participation': 1 },
+        $inc: { 'statistics.participation': 1 },
       },
     )
   }
@@ -311,8 +311,8 @@ architectSchema.statics.pushPlacementTestToPortfolio = function (
       {
         $push: { 'portfolio.placementTest': payload },
         $inc: {
-          'noobprohackerInfo.win': 1,
-          'noobprohackerInfo.participation': 1,
+          'statistics.win': 1,
+          'statistics.participation': 1,
         },
       },
     )
@@ -323,7 +323,7 @@ architectSchema.statics.pushPlacementTestToPortfolio = function (
     {
       $push: { 'portfolio.placementTest': payload },
       $inc: {
-        'noobprohackerInfo.participation': 1,
+        'statistics.participation': 1,
       },
     },
   )
