@@ -106,25 +106,15 @@ interface ArchitectModel extends Model<TArchitect> {
     minecraft_id: string,
     payload: TArchitect['portfolio']['architectureContest'][0],
   ) => Promise<void>
-  updateNoobProHackerYoutubeURL: (minecraft_id: string, episode: number, youtube_url: string) => Promise<TArchitect>
-  updateArchitectureNoobProHackerYoutubeURL: (
+  updateContentYoutubeUrl: (
     minecraft_id: string,
     episode: number,
+    contentName: keyof TArchitect['portfolio'],
     youtube_url: string,
-  ) => Promise<TArchitect>
-  updateEventNoobProHackerYoutubeURL: (
-    minecraft_id: string,
-    episode: number,
-    youtube_url: string,
-  ) => Promise<TArchitect>
-  updateArchitectureContestYoutubeURL: (
-    minecraft_id: string,
-    episode: number,
-    youtube_url: string,
-  ) => Promise<TArchitect>
+  ) => Promise<void>
   updateAllToUnranked: () => Promise<void>
   updateSeasonTier: (minecraft_id: string, curSeason: number, tier: DetailedTier) => Promise<void>
-  updatePlacementTestLink: (minecraft_id: string, placementTest_link: string) => Promise<void>
+  updateWakzooLink: (minecraft_id: string, wakzoo_link: string) => Promise<void>
 }
 
 architectSchema.statics.create = function (payload: Exclude<keyof TArchitect, 'portfolio'>) {
@@ -339,86 +329,25 @@ architectSchema.statics.pushPlacementTestToPortfolio = function (
   )
 }
 
-architectSchema.statics.updatePlacementTestLink = function (minecraft_id: string, placementTest_link: string) {
+architectSchema.statics.updateWakzooLink = function (minecraft_id: string, wakzoo_link: string) {
   return this.findOneAndUpdate(
     { minecraft_id },
     {
-      $set: { wakzoo_link: placementTest_link },
+      $set: { wakzoo_link: wakzoo_link },
     },
   )
 }
 
-architectSchema.statics.updateNoobProHackerYoutubeURL = function (
+architectSchema.statics.updateContentYoutubeUrl = function (
   minecraft_id: string,
   episode: number,
+  contentName: keyof TArchitect['portfolio'],
   youtube_url: string,
 ) {
   return this.findOneAndUpdate(
     { minecraft_id },
     {
-      $set: { 'portfolio.noobprohacker.$[elem].youtube_url': youtube_url },
-    },
-    {
-      arrayFilters: [
-        {
-          'elem.episode': episode,
-        },
-      ],
-    },
-  )
-}
-
-architectSchema.statics.updateArchitectureNoobProHackerYoutubeURL = function (
-  minecraft_id: string,
-  episode: number,
-  youtube_url: string,
-) {
-  return this.findOneAndUpdate(
-    { minecraft_id },
-    {
-      $set: {
-        'portfolio.architectureNoobProHacker.$[elem].youtube_url': youtube_url,
-      },
-    },
-    {
-      arrayFilters: [
-        {
-          'elem.episode': episode,
-        },
-      ],
-    },
-  )
-}
-
-architectSchema.statics.updateEventNoobProHackerYoutubeURL = function (
-  minecraft_id: string,
-  episode: number,
-  youtube_url: string,
-) {
-  return this.findOneAndUpdate(
-    { minecraft_id },
-    {
-      $set: { 'portfolio.eventNoobProHacker.$[elem].youtube_url': youtube_url },
-    },
-    {
-      arrayFilters: [
-        {
-          'elem.episode': episode,
-        },
-      ],
-    },
-  )
-}
-
-architectSchema.statics.updateArchitectureContestYoutubeURL = function (
-  minecraft_id: string,
-  episode: number,
-  youtube_url: string,
-) {
-  return this.findOneAndUpdate(
-    { minecraft_id },
-    {
-      $set: { 'portfolio.architectureContest.$[elem].youtube_url': youtube_url },
+      $set: { [`portfolio.${contentName}.$[elem].youtube_url`]: youtube_url },
     },
     {
       arrayFilters: [

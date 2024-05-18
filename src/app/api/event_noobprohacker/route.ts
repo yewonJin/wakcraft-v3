@@ -113,9 +113,10 @@ export async function PUT(req: NextRequest) {
     const architects = convertToArchitectPortfolio(body)
 
     architects.forEach(async (architect) => {
-      await Architect.updateEventNoobProHackerYoutubeURL(
+      await Architect.updateContentYoutubeUrl(
         architect.minecraft_id,
         architect.portfolio.episode,
+        'eventNoobProHacker',
         architect.portfolio.youtube_url,
       )
     })
