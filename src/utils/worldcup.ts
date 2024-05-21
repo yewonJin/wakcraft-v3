@@ -1,10 +1,24 @@
 import { Architect } from '@/types/architect'
 import { Worldcup } from '@/types/worldcup'
 
-export const getWinRatio = (item: Worldcup) => {
+export const getWinRate = (item: Worldcup) => {
   const { numberOfWin, numberOfParticipation } = item
 
   return numberOfParticipation === 0 ? '??%' : ((numberOfWin * 100) / numberOfParticipation).toFixed(2) + '%'
+}
+
+export const getRankingTableData = (data: Worldcup[]) => {
+  const sortedByWinRate = data.sort(
+    (a, b) =>
+      Math.floor((b.numberOfWin / b.numberOfParticipation) * 10000) -
+      Math.floor((a.numberOfWin / a.numberOfParticipation) * 10000),
+  )
+
+  const moveNoParticipationToEnd = sortedByWinRate
+    .filter((item) => item.numberOfParticipation !== 0)
+    .concat(data.filter((item) => item.numberOfParticipation === 0))
+
+  return moveNoParticipationToEnd
 }
 
 export const createWorldcup = (architect: {
