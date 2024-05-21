@@ -1,8 +1,8 @@
-import HomeCarousel from '@/components/organisms/HomeCarousel'
-import HomeCalendar from '@/components/organisms/HomeCalendar'
-import HomeDescription from '@/components/organisms/HomeDescription'
-import HomeRecentWinner from '@/components/organisms/HomeRecentWinner'
-import HomeSweepLine from '@/components/organisms/HomeSweepLine'
+import HomeCarousel from '@/components/organisms/Home/HomeCarousel'
+import HomeCalendar from '@/components/organisms/Home/HomeCalendar'
+import HomeDescription from '@/components/organisms/Home/HomeDescription'
+import HomeRecentWinner from '@/components/organisms/Home/HomeRecentWinner'
+import HomeSweepLine from '@/components/organisms/Home/HomeSweepLine'
 
 import { getAllArchitects } from '@/apis/server/architect'
 import {

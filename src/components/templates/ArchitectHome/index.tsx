@@ -1,7 +1,7 @@
 'use client'
 
-import ArchitectCategory from '@/components/organisms/ArchitectCategory'
-import ArchitectList from '@/components/organisms/ArchitectList'
+import ArchitectCategory from '@/components/organisms/Architect/ArchitectCategory'
+import ArchitectList from '@/components/organisms/Architect/ArchitectList'
 import PageTitle from '@/components/organisms/Common/PageTitle'
 import useFilteringByTier from '@/hooks/useFilteringByTier'
 import useSearch from '@/hooks/useSearch'

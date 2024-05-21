@@ -1,8 +1,8 @@
 'use client'
 
 import ArchitectInfo from '@/components/molecules/ArchitectInfo'
-import ArchitectPortfolioCategory from '@/components/organisms/ArchitectPortfolioCategory'
-import ArchitectPortfolioList from '@/components/organisms/ArchitectPortfolioList'
+import ArchitectPortfolioCategory from '@/components/organisms/Architect/ArchitectPortfolioCategory'
+import ArchitectPortfolioList from '@/components/organisms/Architect/ArchitectPortfolioList'
 
 import { Architect } from '@/types/architect'
 import { useQueryString } from '@/hooks/useQueryString'
