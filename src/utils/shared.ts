@@ -33,3 +33,7 @@ export const shuffle = (array: any[]) => {
 
   return array
 }
+
+export const sortByRecentDate = (arr: any[]) => {
+  return arr.sort((a, b) => new Date(b.contentInfo.date).getTime() - new Date(a.contentInfo.date).getTime())
+}
