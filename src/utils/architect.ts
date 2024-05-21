@@ -2,6 +2,7 @@ import { TIER_LIST } from '@/constants/architect'
 import { INFINITE_TIME_ARCHITECTURE_CONTEST, INFINITE_TIME_EVENT_NOOBPROHACKER } from '@/constants/content'
 import { Architect, Tier } from '@/types/architect'
 
+/** 영어 티어 이름을 한국 티어 이름으로 변역하는 함수 */
 export const getKORTierName = (tier: 'hacker' | 'gukbap' | 'pro' | 'gyeruik' | 'noob' | 'unranked'): Tier => {
   switch (tier) {
     case 'hacker':
@@ -19,6 +20,7 @@ export const getKORTierName = (tier: 'hacker' | 'gukbap' | 'pro' | 'gyeruik' | '
   }
 }
 
+/** 한국 티어 이름을 영어 티어 이름으로 변역하는 함수 */
 export const getENGTierName = (tier: '해커' | '국밥' | '프로' | '계륵' | '눕' | '언랭') => {
   switch (tier) {
     case '해커':
@@ -36,6 +38,7 @@ export const getENGTierName = (tier: '해커' | '국밥' | '프로' | '계륵' |
   }
 }
 
+/** 티어별 건축가 수를 반환하는 함수 */
 export const getNumberOfArchitectsByTier = (architects: Architect[]) => {
   return {
     hacker: architects.filter((item) => TIER_LIST['해커'].includes(item.curTier)).length,
@@ -47,6 +50,7 @@ export const getNumberOfArchitectsByTier = (architects: Architect[]) => {
   }
 }
 
+/** 이벤트 눕프핵에서 몇명이서 건축했는지를 반환하는 함수 */
 export const getNumberOfArchitectsInContent = (item: Architect['portfolio']['eventNoobProHacker'][0]) => {
   if (item.episode === 3 && item.line === '프로') return 2
 
