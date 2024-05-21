@@ -1,9 +1,9 @@
 'use client'
 
 import useLogin from '@/hooks/Admin/useLogin'
-import { medium } from '../layout'
 import Input from '@/components/atoms/Input'
 import Button from '@/components/atoms/Button'
+import { medium } from '@/providers/FontProvider'
 
 export default function Page() {
   const { input, handleButtonClick, handleInputChange } = useLogin()

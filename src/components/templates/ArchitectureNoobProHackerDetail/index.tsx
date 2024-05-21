@@ -2,11 +2,11 @@ import { Fragment } from 'react'
 import Link from 'next/link'
 import { headers } from 'next/headers'
 
-import { medium } from '@/app/layout'
 import ContentCarousel from '@/components/molecules/ContentCarousel'
 import { isMobile } from '@/utils/shared'
 import Icon from '@/components/atoms/Icon'
 import { NoobProHacker } from '@/types/content'
+import { medium } from '@/providers/FontProvider'
 
 type Props = {
   architectureNoobProHacker: NoobProHacker

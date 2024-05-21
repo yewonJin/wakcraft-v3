@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { ListObjectsCommand } from '@aws-sdk/client-s3'
 
-import { AwsContent, hideFolder, hideWebp, listObjectsBucketParams, s3 } from '@/utils/aws'
+import { AWSContent, hideFolder, hideWebp, listObjectsBucketParams, s3 } from '@/utils/aws'
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
@@ -18,7 +18,7 @@ export async function GET(req: NextRequest) {
 
   try {
     const data = await s3.send(
-      new ListObjectsCommand(listObjectsBucketParams(content as AwsContent, episode as string)),
+      new ListObjectsCommand(listObjectsBucketParams(content as AWSContent, episode as string)),
     )
 
     if (!data.Contents) {
