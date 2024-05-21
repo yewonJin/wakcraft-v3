@@ -2,7 +2,7 @@
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-import { handleMutationError, handleMutationSuccess } from '@/utils/reactQuery'
+import { handleMutationError, handleMutationSuccess } from '@/utils/mutationHandlers'
 
 export const defaultQueryClient = new QueryClient({
   defaultOptions: {

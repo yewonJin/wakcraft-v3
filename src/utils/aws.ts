@@ -5,7 +5,7 @@ const awsSecretKey = process.env.MY_AWS_SECRET_KEY as string
 const awsS3Bucket = process.env.MY_AWS_S3_BUCKET as string
 const awsS3BucketRegion = process.env.MY_AWS_S3_BUCKET_REGION as string
 
-export type Content =
+export type AWSContent =
   | 'noobProHacker'
   | 'architectureNoobProHacker'
   | 'placementTest'
@@ -24,7 +24,7 @@ export const s3 = new S3Client({
 })
 
 /** 입력받은 눕프핵 에피소드를 반환하는 옵션  */
-export const listObjectsBucketParams = (content: Content, episode?: string) => {
+export const listObjectsBucketParams = (content: AWSContent, episode?: string) => {
   if (!episode) {
     return {
       Bucket: awsS3Bucket,
@@ -40,7 +40,7 @@ export const listObjectsBucketParams = (content: Content, episode?: string) => {
 }
 
 /** 컨텐츠 다음 회차 폴더 만들기 */
-export async function createFolder(content: Content, fileName: string) {
+export async function createFolder(content: AWSContent, fileName: string) {
   const params = {
     Bucket: awsS3Bucket,
     Key: `${content}/${content === 'placementTest' ? 'season' : 'episode'} ` + fileName + '/',
