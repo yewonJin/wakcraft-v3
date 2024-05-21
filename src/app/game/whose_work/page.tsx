@@ -1,6 +1,8 @@
-import { getAllArchitects } from '@/apis/server/architect'
-import GameWhoseWork from '@/components/templates/GameWhoseWork'
 import { Fragment } from 'react'
+
+import GameWhoseWork from '@/components/templates/GameWhoseWork'
+
+import { getAllArchitects } from '@/apis/server/architect'
 
 export default async function Page() {
   const architects = await getAllArchitects()

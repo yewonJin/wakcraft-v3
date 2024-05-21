@@ -12,8 +12,6 @@ export default function Page() {
   const { isEdit, schedule, schedules, handleInputChange, handleSelectChange, handleEditClick, handleSubmit } =
     useSchedule()
 
-  console.log(schedule)
-
   return (
     <div>
       <h2 className={`text-3xl text-text-primary`}>스케쥴</h2>

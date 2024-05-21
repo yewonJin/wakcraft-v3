@@ -1,5 +1,6 @@
-import GameWorldCupRanking from '@/components/templates/GameWorldCupRanking'
 import { Fragment } from 'react'
+
+import GameWorldCupRanking from '@/components/templates/GameWorldCupRanking'
 
 export default function Page() {
   return (
