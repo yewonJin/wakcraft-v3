@@ -13,6 +13,9 @@
 /.next/
 /out/
 
+/src/app/api/test
+/src/app/test
+
 # production
 /build
 
