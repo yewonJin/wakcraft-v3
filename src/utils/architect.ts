@@ -1,52 +1,16 @@
 import { TIER_LIST } from '@/constants/architect'
 import { INFINITE_TIME_ARCHITECTURE_CONTEST, INFINITE_TIME_EVENT_NOOBPROHACKER } from '@/constants/content'
-import { Architect, Tier } from '@/types/architect'
-
-/** 영어 티어 이름을 한국 티어 이름으로 변역하는 함수 */
-export const getKORTierName = (tier: 'hacker' | 'gukbap' | 'pro' | 'gyeruik' | 'noob' | 'unranked'): Tier => {
-  switch (tier) {
-    case 'hacker':
-      return '해커'
-    case 'gukbap':
-      return '국밥'
-    case 'pro':
-      return '프로'
-    case 'gyeruik':
-      return '계륵'
-    case 'noob':
-      return '눕'
-    case 'unranked':
-      return '언랭'
-  }
-}
-
-/** 한국 티어 이름을 영어 티어 이름으로 변역하는 함수 */
-export const getENGTierName = (tier: '해커' | '국밥' | '프로' | '계륵' | '눕' | '언랭') => {
-  switch (tier) {
-    case '해커':
-      return 'hacker'
-    case '국밥':
-      return 'gukbap'
-    case '프로':
-      return 'pro'
-    case '계륵':
-      return 'gyeruik'
-    case '눕':
-      return 'noob'
-    case '언랭':
-      return 'unranked'
-  }
-}
+import { Architect } from '@/types/architect'
 
 /** 티어별 건축가 수를 반환하는 함수 */
 export const getNumberOfArchitectsByTier = (architects: Architect[]) => {
   return {
-    hacker: architects.filter((item) => TIER_LIST['해커'].includes(item.curTier)).length,
-    gukbap: architects.filter((item) => TIER_LIST['국밥'].includes(item.curTier)).length,
-    pro: architects.filter((item) => TIER_LIST['프로'].includes(item.curTier)).length,
-    gyeruik: architects.filter((item) => TIER_LIST['계륵'].includes(item.curTier)).length,
-    noob: architects.filter((item) => TIER_LIST['눕'].includes(item.curTier)).length,
-    unranked: architects.filter((item) => TIER_LIST['언랭'].includes(item.curTier)).length,
+    해커: architects.filter((item) => TIER_LIST['해커'].includes(item.curTier)).length,
+    국밥: architects.filter((item) => TIER_LIST['국밥'].includes(item.curTier)).length,
+    프로: architects.filter((item) => TIER_LIST['프로'].includes(item.curTier)).length,
+    계륵: architects.filter((item) => TIER_LIST['계륵'].includes(item.curTier)).length,
+    눕: architects.filter((item) => TIER_LIST['눕'].includes(item.curTier)).length,
+    언랭: architects.filter((item) => TIER_LIST['언랭'].includes(item.curTier)).length,
   }
 }
 

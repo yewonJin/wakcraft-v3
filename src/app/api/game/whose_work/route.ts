@@ -18,7 +18,7 @@ export async function GET(req: NextRequest) {
     }
 
     if (difficulty === 'LOW') {
-      const res = [...(await Architect.findByTier('hacker')), ...(await Architect.findByTier('gukbap'))]
+      const res = [...(await Architect.findByTier('해커')), ...(await Architect.findByTier('국밥'))]
 
       return NextResponse.json(
         {
@@ -30,9 +30,9 @@ export async function GET(req: NextRequest) {
       )
     } else if (difficulty === 'MEDIUM') {
       const res = [
-        ...(await Architect.findByTier('gukbap')),
-        ...(await Architect.findByTier('pro')),
-        ...(await Architect.findByTier('gyeruik')),
+        ...(await Architect.findByTier('국밥')),
+        ...(await Architect.findByTier('프로')),
+        ...(await Architect.findByTier('계륵')),
       ]
 
       return NextResponse.json(

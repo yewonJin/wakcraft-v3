@@ -2,7 +2,6 @@ import { Schema, Model, model, models } from 'mongoose'
 
 import { TIER_LIST } from '@/constants/architect'
 import { DetailedTier, Architect as TArchitect } from '@/types/architect'
-import { getKORTierName } from '@/utils/architect'
 
 const architectSchema = new Schema<TArchitect>({
   minecraft_id: {
@@ -82,7 +81,7 @@ const architectSchema = new Schema<TArchitect>({
 interface ArchitectModel extends Model<TArchitect> {
   findAll: () => Promise<TArchitect[]>
   findByMinecraftId: (minecraft_id: string) => Promise<TArchitect>
-  findByTier: (tier: 'hacker' | 'gukbap' | 'pro' | 'gyeruik' | 'noob') => Promise<TArchitect[]>
+  findByTier: (tier: '해커' | '국밥' | '프로' | '계륵' | '눕') => Promise<TArchitect[]>
   updateMinecraftId: (beforeId: string, afterId: string) => Promise<TArchitect>
   updateWakzooId: (minecraft_id: string, wakzoo_id: string) => Promise<TArchitect>
   updateCurTier: (minecraft_id: string, curTier: DetailedTier) => Promise<TArchitect>
@@ -126,8 +125,8 @@ architectSchema.statics.findAll = function () {
   return this.find({})
 }
 
-architectSchema.statics.findByTier = function (tier: 'hacker' | 'gukbap' | 'pro' | 'gyeruik' | 'noob') {
-  return this.find({ curTier: { $in: TIER_LIST[getKORTierName(tier)] } })
+architectSchema.statics.findByTier = function (tier: '해커' | '국밥' | '프로' | '계륵' | '눕') {
+  return this.find({ curTier: { $in: TIER_LIST[tier] } })
 }
 
 architectSchema.statics.findByMinecraftId = function (minecraft_id: string) {

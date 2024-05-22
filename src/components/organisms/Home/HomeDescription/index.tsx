@@ -4,7 +4,6 @@ import TierBox from '@/components/atoms/TierBox'
 
 import { DESCRIPTION_TIER, TIER_LIST } from '@/constants/architect'
 import { Tier } from '@/types/architect'
-import { getENGTierName } from '@/utils/architect'
 
 type Props = {
   numberOfArchitectsByTier: {
@@ -38,7 +37,7 @@ export default function HomeDescription(props: Props) {
               >
                 {tier}
                 <span className="rounded-md bg-background-secondary p-1 px-2 text-base text-text-secondary md:text-lg">
-                  {numberOfArchitectsByTier[getENGTierName(tier as Tier)]}명
+                  {numberOfArchitectsByTier[tier]}명
                 </span>
               </div>
               {TIER_LIST[tier as Tier].map((tier) => (

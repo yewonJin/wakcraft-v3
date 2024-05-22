@@ -7,7 +7,6 @@ import Link from 'next/link'
 import Icon from '@/components/atoms/Icon'
 
 import { SweepLine } from '@/types/content'
-import { getKORTierName } from '@/utils/architect'
 import { renameToWebp } from '@/utils/shared'
 
 type Props = {
@@ -114,7 +113,7 @@ const SweepLineItem = ({ type, sweepLine }: SweepLineItemProps) => {
               {sweepLine.line_details[getIndex()].minecraft_id}
             </p>
           </Link>
-          <p>{getKORTierName(type)}</p>
+          <p>{type}</p>
         </div>
       </div>
     </div>

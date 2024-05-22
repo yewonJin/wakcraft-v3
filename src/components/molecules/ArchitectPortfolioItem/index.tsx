@@ -35,15 +35,8 @@ export default function ArchitectPortfolioItem({
     return (isUnlimitedTime && '무제한급') || (architectNumber && architectNumber > 1 && architectNumber + '명 작품')
   }, [isUnlimitedTime, architectNumber])
 
-  const getTierName = (tier: string) => {
-    if (tier === 'hacker') return '해커'
-    else if (tier === 'pro') return '프로'
-    else if (tier === 'noob') return '눕'
-    return tier
-  }
-
   const getBackgroundColor = useMemo(() => {
-    switch (getTierName(tier as string)) {
+    switch (tier) {
       case '해커':
         return 'bg-[#881337]'
 
@@ -87,7 +80,7 @@ export default function ArchitectPortfolioItem({
           <div
             className={`flex min-w-[85px] items-center justify-center rounded-lg ${getBackgroundColor} text-[white]`}
           >
-            {getTierName(tier)}
+            {tier}
           </div>
         )}
         <div className="flex flex-col gap-1 items-center">
