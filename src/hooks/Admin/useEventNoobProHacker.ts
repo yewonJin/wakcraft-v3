@@ -249,6 +249,7 @@ const initialEventNoobProHacker: EventNoobProHacker = {
     subject: '',
     date: new Date().toISOString(),
     youtube_url: 'null',
+    isContributedContent: false,
   },
   lineInfo: Array.from({ length: 5 }, () => ({
     subject: '',

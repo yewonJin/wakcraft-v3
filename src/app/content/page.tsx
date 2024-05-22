@@ -30,6 +30,7 @@ export default async function Page() {
         date={new Date(eventNoobProHacker.contentInfo.date)}
         youtube_url={eventNoobProHacker.contentInfo.youtube_url}
         linesSubject={eventNoobProHacker.lineInfo.map((line) => line.subject)}
+        isContributedContent={eventNoobProHacker.contentInfo.isContributedContent}
       />,
     )
   })
@@ -43,6 +44,7 @@ export default async function Page() {
         subject={matchYourTier.contentInfo.subject}
         date={new Date(matchYourTier.contentInfo.date)}
         youtube_url={matchYourTier.contentInfo.youtube_url}
+        isContributedContent={matchYourTier.contentInfo.isContributedContent}
       />,
     )
   })
@@ -56,6 +58,7 @@ export default async function Page() {
         subject={architectureContest.contentInfo.subject}
         date={new Date(architectureContest.contentInfo.date)}
         youtube_url={architectureContest.contentInfo.youtube_url}
+        isContributedContent={architectureContest.contentInfo.isContributedContent}
       />,
     )
   })
@@ -82,6 +85,7 @@ export default async function Page() {
         subject={guessTime.contentInfo.subject}
         date={new Date(guessTime.contentInfo.date)}
         youtube_url={guessTime.contentInfo.youtube_url}
+        isContributedContent={guessTime.contentInfo.isContributedContent}
       />,
     )
   })

@@ -14,6 +14,7 @@ const matchYourTierSchema = new Schema<TMatchYourTier>({
     episode: { type: Number },
     date: { type: Date, default: Date.now },
     youtube_url: { type: String },
+    isContributedContent: { type: Boolean },
   },
   participants: [
     {

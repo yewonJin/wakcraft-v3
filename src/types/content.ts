@@ -16,6 +16,10 @@ export type ContentInfo = {
   youtube_url: string
 }
 
+export interface ExtendedContentInfo extends ContentInfo {
+  isContributedContent: boolean
+}
+
 export type LineInfo = {
   subject: string
   line_ranking: number
@@ -41,7 +45,7 @@ export type SweepLine = {
 }
 
 export type ArchitectureContest = {
-  contentInfo: ContentInfo
+  contentInfo: ExtendedContentInfo
   lineInfo: {
     line: string
     line_details: {
@@ -56,7 +60,7 @@ export type ArchitectureContest = {
 }
 
 export type EventNoobProHacker = {
-  contentInfo: ContentInfo
+  contentInfo: ExtendedContentInfo
   lineInfo: {
     subject: string
     line_ranking: number
@@ -71,7 +75,7 @@ export type EventNoobProHacker = {
 }
 
 export type GuessTime = {
-  contentInfo: ContentInfo
+  contentInfo: ExtendedContentInfo
   participants: {
     order: number
     expectedTime: 2 | 4 | 6 | 8 | 10
@@ -83,7 +87,7 @@ export type GuessTime = {
 }
 
 export type MatchYourTier = {
-  contentInfo: ContentInfo
+  contentInfo: ExtendedContentInfo
   participants: {
     order: number
     expectedTier: DetailedTier

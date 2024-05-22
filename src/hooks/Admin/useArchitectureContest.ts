@@ -161,6 +161,7 @@ const initialArchitectureContest: ArchitectureContest = {
     subject: '자유',
     date: new Date().toISOString(),
     youtube_url: 'null',
+    isContributedContent: false,
   },
   lineInfo: Array.from({ length: 7 }, () => ({
     subject: '',
