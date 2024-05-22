@@ -101,7 +101,7 @@ export default function CardViewItem({
 
     if (type === '건축 콘테스트') {
       return (
-        <span className=" bg-amber-900 text-[#ddd] text-sm px-2 py-1 rounded-md top-2 left-2 absolute">
+        <span className=" bg-sky-900 text-[#ddd] text-sm px-2 py-1 rounded-md top-2 left-2 absolute">
           건축 콘테스트
         </span>
       )
