@@ -17,12 +17,11 @@ export default function GameWorldCupSetting({ roundOfNumber, setRoundOfNumber, s
       <h1 className={`text-3xl text-text-primary`}>눕프핵 해커 월드컵</h1>
       <div className="mt-6 flex items-end gap-4">
         <SelectBox
-          width="80px"
-          height="40px"
           value={roundOfNumber}
           options={[128, 64, 32, 16]}
           optionSuffix="강"
           handleSelectChange={(e) => setRoundOfNumber(parseInt(e.target.value) as RoundOfNumber)}
+          style={{ width: '80px', height: '40px' }}
         />
         <Button handleButtonClick={() => startGame()} text="시작" />
         <Link href={'/game/worldcup/ranking'}>

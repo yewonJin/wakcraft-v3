@@ -106,7 +106,7 @@ const EditArchitect = () => {
                 value={input.tier}
                 options={All_TIER_LIST}
                 handleSelectChange={handleSelectChange}
-                height="40px"
+                style={{ height: '40px' }}
               ></SelectBox>
             </div>
             <Button handleButtonClick={handleButtonClick} text="변경" />

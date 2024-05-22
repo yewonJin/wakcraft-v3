@@ -19,7 +19,7 @@ export default function HomeRecentWinner(props: Props) {
 
   return (
     <div className="">
-      <Typography variants="h2" fontSize="30px" lineHeight="40px">
+      <Typography variants="h2" style={{ fontSize: '30px', lineHeight: '40px' }}>
         최근 우승 작품
       </Typography>
       <div className={`relative mt-10 flex flex-wrap gap-5 gap-y-8 md:[&>div:nth-child(2)]:flex-row-reverse`}>
@@ -29,7 +29,7 @@ export default function HomeRecentWinner(props: Props) {
             <RecentWinnerItem type="pro" noobprohacker={noobprohacker} getWinnerLine={getProWinnerLine} />
           </div>
         ))}
-      </div>{' '}
+      </div>
     </div>
   )
 }

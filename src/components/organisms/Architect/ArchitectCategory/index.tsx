@@ -80,6 +80,7 @@ export default function ArchitectCategory({
               color={TIER_BACKGROUND_COLOR[tier]}
               handleButtonClick={() => handleCategoryClick(tier)}
               isClicked={curCategory === tier}
+              style={{ padding: '8px 14px' }}
             />
           ))}
         </div>

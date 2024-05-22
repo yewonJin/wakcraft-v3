@@ -107,7 +107,7 @@ const NoobProHackerImageSetting = ({
   return (
     <Fragment>
       <div className="mt-16 flex items-center gap-8">
-        <Typography variants="h2" color="primary" fontSize="28px" lineHeight="32px">
+        <Typography variants="h2" color="primary" style={{ fontSize: '28px', lineHeight: '32px' }}>
           이미지 추가
         </Typography>
         <Button text="제출" handleButtonClick={handleImageSubmit} />
@@ -164,7 +164,7 @@ const EventNoobProHackerImageSetting = ({
   return (
     <Fragment>
       <div className="mt-16 flex items-center gap-8">
-        <Typography variants="h2" color="primary" fontSize="28px" lineHeight="32px">
+        <Typography variants="h2" color="primary" style={{ fontSize: '28px', lineHeight: '32px' }}>
           이미지 추가
         </Typography>
         <Button text="제출" handleButtonClick={handleImageSubmit} />
@@ -206,7 +206,7 @@ const ArchitectureContestImageSetting = ({
   return (
     <Fragment>
       <div className="mt-16 flex items-center gap-8">
-        <Typography variants="h2" color="primary" fontSize="28px" lineHeight="32px">
+        <Typography variants="h2" color="primary" style={{ fontSize: '28px', lineHeight: '32px' }}>
           이미지 추가
         </Typography>
         <Button text="제출" handleButtonClick={handleImageSubmit} />

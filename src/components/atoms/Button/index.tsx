@@ -1,7 +1,6 @@
 import { useMemo } from 'react'
 
-type Props = {
-  name?: string
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text: string
   isClicked?: boolean
   color?: TierColor

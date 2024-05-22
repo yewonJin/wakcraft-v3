@@ -28,7 +28,7 @@ export default function HomeCarousel({ noobprohacker }: Props) {
         }}
       ></div>
       <div className="flex flex-col gap-4 [&>h1]:text-4xl [&>h1]:text-text-primary md:[&>h1]:text-[white] md:[&>h1]:text-5xl">
-        <Typography variants="h2" fontSize="28px" lineHeight="40px" color="tertiary">
+        <Typography variants="h2" color="tertiary" style={{ fontSize: '28px', lineHeight: '40px' }}>
           제 {noobprohacker.contentInfo.episode}회
         </Typography>
         <Typography variants="h1" color="primary">{`눕프로해커 : ${noobprohacker.contentInfo.subject}편`}</Typography>

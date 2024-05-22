@@ -81,7 +81,7 @@ export default function CardViewItem({ type, episode, subject, youtube_url, line
         </div>
         <div className="px-4 pb-4 pt-6 [&>p]:text-end flex flex-col gap-4">
           <div className="flex items-center gap-3 ">
-            <Typography variants="h2" fontSize="20px" lineHeight="24px">
+            <Typography variants="h2" style={{ fontSize: '20px', lineHeight: '24px' }}>
               {getContentTitle(type, subject, episode)}
             </Typography>
             {youtube_url !== 'null' && (
@@ -110,7 +110,7 @@ export default function CardViewItem({ type, episode, subject, youtube_url, line
               ))}
             </div>
           )}
-          <Typography variants="p" fontSize="14px" color="tertiary">
+          <Typography variants="p" color="tertiary" style={{ fontSize: '14px' }}>
             {getDateString(date)}
           </Typography>
         </div>

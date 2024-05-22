@@ -65,12 +65,11 @@ export default function Page() {
                 컨텐츠
               </Typography>
               <SelectBox
-                width="160px"
-                height="40px"
                 value={schedule.content}
                 name="content"
                 handleSelectChange={handleSelectChange}
                 options={SCHEDULES_CONTENT}
+                style={{ width: '160px', height: '40px' }}
               />
             </div>
             <InputForm

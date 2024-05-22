@@ -31,7 +31,7 @@ export default function ArchitectInfo(props: Props) {
           <Highlighting architect={props.architect} input={props.input} />
         ) : (
           <div className="flex flex-col gap-3 md:gap-1">
-            <Typography variants="p" color="primary" fontSize="20px">
+            <Typography variants="p" color="primary" style={{ fontSize: '20px' }}>
               {architect.minecraft_id}
             </Typography>
             <Typography variants="p" color="secondary">

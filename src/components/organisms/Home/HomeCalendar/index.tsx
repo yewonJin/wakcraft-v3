@@ -16,6 +16,7 @@ import {
   isEventNoobProHacker,
   isPostedContent,
 } from '@/utils/schedule'
+import Typography from '@/components/atoms/Typography'
 
 type Props = {
   schedules: Schedule[]
@@ -43,13 +44,17 @@ export default function HomeCalendar({ schedules }: Props) {
           <CalendarChangeMonth type="prev" curMonth={curMonth} curYear={curYear} changeMonth={decMonth} />
           <CalendarChangeMonth type="next" curMonth={curMonth} curYear={curYear} changeMonth={incMonth} />
           <div className="ml-2 flex items-end gap-2">
-            <p className={`text-center text-2xl text-text-primary `}>{curYear + '년'}</p>
-            <p className={`text-center text-2xl text-text-primary `}>{curMonth + '월'}</p>
+            <Typography variants="p" color="primary" style={{ fontSize: '24px', lineHeight: '32px' }}>
+              {curYear + '년'}
+            </Typography>
+            <Typography variants="p" color="primary" style={{ fontSize: '24px', lineHeight: '32px' }}>
+              {curMonth + '월'}
+            </Typography>
           </div>
         </div>
         <div className="flex gap-2 [&>button]:text-sm">
-          <Button text="오늘" handleButtonClick={setToday} />
-          <Button text="처음" handleButtonClick={setDateToStart} />
+          <Button text="오늘" handleButtonClick={setToday} style={{ padding: '8px 14px' }} />
+          <Button text="처음" handleButtonClick={setDateToStart} style={{ padding: '8px 14px' }} />
         </div>
       </div>
       <CalendarTableHead />

@@ -5,7 +5,7 @@ import Typography from '@/components/atoms/Typography'
 export default function ArchitectNotFound() {
   return (
     <div className="flex flex-col gap-6">
-      <Typography variants="h1" color="primary" fontSize="28px" lineHeight="36px">
+      <Typography variants="h1" color="primary" style={{ fontSize: '28px', lineHeight: '36px' }}>
         등록되어 있지 않은 건축가입니다.
       </Typography>
       <div className="flex flex-col gap-4">
