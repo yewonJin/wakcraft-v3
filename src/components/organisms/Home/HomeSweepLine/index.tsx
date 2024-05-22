@@ -36,9 +36,9 @@ export default function HomeSweepLine({ sweepLines }: Props) {
           >
             {sweepLines.map((sweepLine) => (
               <div key={sweepLine.subject} className="mt-8 flex w-full flex-col gap-8 md:flex-row">
-                <SweepLineItem type="noob" sweepLine={sweepLine} />
-                <SweepLineItem type="pro" sweepLine={sweepLine} />
-                <SweepLineItem type="hacker" sweepLine={sweepLine} />
+                <SweepLineItem type="눕" sweepLine={sweepLine} />
+                <SweepLineItem type="프로" sweepLine={sweepLine} />
+                <SweepLineItem type="해커" sweepLine={sweepLine} />
               </div>
             ))}
           </div>
@@ -74,20 +74,20 @@ const SweepLinePageButton = ({ type, sweepLines, page, setPage }: SweepLinePageB
 }
 
 type SweepLineItemProps = {
-  type: 'noob' | 'pro' | 'hacker'
+  type: '눕' | '프로' | '해커'
   sweepLine: SweepLine
 }
 
 const SweepLineItem = ({ type, sweepLine }: SweepLineItemProps) => {
   const getIndex = () => {
     switch (type) {
-      case 'noob':
+      case '눕':
         return 0
 
-      case 'pro':
+      case '프로':
         return 1
 
-      case 'hacker':
+      case '해커':
         return 2
     }
   }
