@@ -1,5 +1,8 @@
 import { useMemo } from 'react'
 
+import { TIER_COLOR_VARIENTS } from '@/constants/architect'
+import { TierColor } from '@/types/architect'
+
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text: string
   isClicked?: boolean
@@ -18,7 +21,7 @@ export default function Button({ handleButtonClick, isClicked, name, text, color
     }
 
     if (color && isClicked) {
-      return colorVariants[color] + ' text-[white]'
+      return TIER_COLOR_VARIENTS[color] + ' text-[white]'
     }
 
     return 'bg-background-primary  text-text-primary'
@@ -34,15 +37,4 @@ export default function Button({ handleButtonClick, isClicked, name, text, color
       {text}
     </button>
   )
-}
-
-export type TierColor = 'pink' | 'violet' | 'cyan' | 'amber' | 'slate' | 'yellow'
-
-const colorVariants: { [key in TierColor]: string } = {
-  pink: 'bg-pink-500',
-  violet: 'bg-violet-500',
-  cyan: 'bg-cyan-500',
-  amber: 'bg-amber-500',
-  slate: 'bg-slate-500',
-  yellow: 'bg-yellow-700',
 }

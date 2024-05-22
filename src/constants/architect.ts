@@ -1,5 +1,4 @@
-import { TierColor } from '@/components/atoms/Button'
-import { DetailedTier, Tier } from '@/types/architect'
+import { DetailedTier, Tier, TierColor } from '@/types/architect'
 
 export const TIER_LIST: {
   [key in Tier]: DetailedTier[]
@@ -42,4 +41,13 @@ export const TIER_BACKGROUND_COLOR: { [key in DetailedTier]: TierColor } = {
   '가짜 눕': 'yellow',
   '퓨어 눕': 'yellow',
   언랭: 'yellow',
+}
+
+export const TIER_COLOR_VARIENTS: { [key in TierColor]: string } = {
+  pink: 'bg-pink-500',
+  violet: 'bg-violet-500',
+  cyan: 'bg-cyan-500',
+  amber: 'bg-amber-500',
+  slate: 'bg-slate-500',
+  yellow: 'bg-yellow-700',
 }

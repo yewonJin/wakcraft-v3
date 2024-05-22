@@ -41,6 +41,8 @@ export interface EventNoobProHackerPortfolioItem extends NoobProHackerPortfolioI
   contentName: string
 }
 
+export type TierColor = 'pink' | 'violet' | 'cyan' | 'amber' | 'slate' | 'yellow'
+
 export type Tier = '해커' | '국밥' | '프로' | '계륵' | '눕' | '언랭'
 
 export type DetailedTier =
