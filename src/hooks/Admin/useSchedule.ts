@@ -11,7 +11,7 @@ const initialSchedule: Schedule = {
   status: 'before_announcement',
   isTributeContent: false,
   date: getDateString(new Date()),
-  content: '',
+  content: '눕프로해커',
   title: '',
   episode: 0,
   participants: [],
@@ -54,6 +54,7 @@ export const useSchedule = () => {
         },
       })
       setIsEdit(false)
+
       return
     }
 
@@ -88,7 +89,6 @@ export const useSchedule = () => {
     isEdit,
     schedule,
     schedules,
-
     handleInputChange,
     handleSelectChange,
     handleEditClick,
