@@ -4,6 +4,13 @@ import PageTitle from '@/components/organisms/Common/PageTitle'
 import Button from '@/components/atoms/Button'
 import Typography from '@/components/atoms/Typography'
 
+import {
+  revalidateArchitectPage,
+  revalidateContentPage,
+  revalidateHomePage,
+  revalidateNoobProHackerPage,
+} from '@/apis/server/revalidate'
+
 export default function Page() {
   return (
     <div>
@@ -67,6 +74,25 @@ export default function Page() {
           <Link href={'/admin/schedule'}>
             <Button text="캘린더" />
           </Link>
+        </div>
+      </div>
+      <div className="flex flex-col gap-4 mt-16">
+        <Typography variants="h2" color="secondary">
+          페이지 재검증
+        </Typography>
+        <div className="flex flex-wrap gap-6 text-lg text-text-secondary">
+          <form action={revalidateHomePage}>
+            <Button text="홈" />
+          </form>
+          <form action={revalidateArchitectPage}>
+            <Button text="건축가" />
+          </form>
+          <form action={revalidateNoobProHackerPage}>
+            <Button text="눕프핵" />
+          </form>
+          <form action={revalidateContentPage}>
+            <Button text="컨텐츠" />
+          </form>
         </div>
       </div>
     </div>

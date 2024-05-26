@@ -1,5 +1,3 @@
-import { revalidatePath } from 'next/cache'
-
 import Architect from '@/models/architect'
 import connectMongo from '@/utils/connectMongo'
 
@@ -19,10 +17,4 @@ export const getArchitect = async (id: string) => {
   const result = await Architect.findByMinecraftId(id)
 
   return result
-}
-
-export const revalidateArchitects = async () => {
-  'use server'
-
-  revalidatePath('/architect', 'page')
 }
