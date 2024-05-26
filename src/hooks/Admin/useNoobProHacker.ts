@@ -98,9 +98,7 @@ export const useNoobProHacker = () => {
   }
 
   const handleImageSelectClick = (e: React.ChangeEvent<HTMLSelectElement>, index: number) => {
-    const BaseURL = `https://wakcraft.s3.ap-northeast-2.amazonaws.com/noobProHacker/episode ${
-      noobprohacker.contentInfo.episode - 1
-    }/`
+    const BaseURL = `https://wakcraft.s3.ap-northeast-2.amazonaws.com/noobProHacker/episode ${noobprohacker.contentInfo.episode}/`
 
     setNoobProHacker(
       produce((draft) => {
