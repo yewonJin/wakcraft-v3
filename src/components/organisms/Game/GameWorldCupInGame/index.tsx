@@ -13,7 +13,7 @@ type Props = {
 }
 
 export default function GameWorldCupInGame({ roundOfNumber, endGame }: Props) {
-  const { isMounted, index, selectedPos, onQustionClick, curRoundQuestions, player, togglePlayer } = useWorldCupGame(
+  const { isMounted, index, selectedPos, onQuestionClick, curRoundQuestions, player, togglePlayer } = useWorldCupGame(
     roundOfNumber,
     endGame,
   )
@@ -34,7 +34,7 @@ export default function GameWorldCupInGame({ roundOfNumber, endGame }: Props) {
             selectedPos !== '' ? 'duration-500' : '[&>img]:hover:scale-105'
           }
                 }`}
-          onClick={() => onQustionClick('left', curRoundQuestions[index])}
+          onClick={() => onQuestionClick('left', curRoundQuestions[index])}
         >
           <Image
             alt="왼쪽 월드컵 이미지"

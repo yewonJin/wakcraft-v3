@@ -38,7 +38,7 @@ const useWorldCupGame = (roundOfNumber: RoundOfNumber, endGame: () => void) => {
     setCurRoundQuestions(arr)
   }, [data])
 
-  const onQustionClick = (selectedPos: 'left' | 'right', question: Worldcup) => {
+  const onQuestionClick = (selectedPos: 'left' | 'right', question: Worldcup) => {
     if (!isClickable) return
 
     if (isFinalRound) {
@@ -68,8 +68,7 @@ const useWorldCupGame = (roundOfNumber: RoundOfNumber, endGame: () => void) => {
       setIsClickable(true)
     }, 2000)
   }
-  const isLastRound = index >= curRoundQuestions.length - 2
-  const isFinalRound = curRoundQuestions.length === 2
+
   const setNextRound = (question: Worldcup, selectedPos: 'left' | 'right') => {
     setSelectedPos(selectedPos)
     setIsClickable(false)
@@ -87,6 +86,7 @@ const useWorldCupGame = (roundOfNumber: RoundOfNumber, endGame: () => void) => {
       setIsClickable(true)
     }, 2000)
   }
+
   const stopAllPlayer = () => {
     setPlayer({ left: false, right: false })
   }
@@ -95,11 +95,14 @@ const useWorldCupGame = (roundOfNumber: RoundOfNumber, endGame: () => void) => {
     setPlayer((prev) => ({ ...prev, [pos]: !prev[pos] }))
   }
 
+  const isLastRound = index >= curRoundQuestions.length - 2
+  const isFinalRound = curRoundQuestions.length === 2
+
   return {
     isMounted,
     index,
     selectedPos,
-    onQustionClick,
+    onQuestionClick,
     player,
     togglePlayer,
     curRoundQuestions,

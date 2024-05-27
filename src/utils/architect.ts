@@ -14,7 +14,7 @@ export const getNumberOfArchitectsByTier = (architects: Architect[]) => {
   }
 }
 
-/** 이벤트 눕프핵에서 몇명이서 건축했는지를 반환하는 함수 */
+/** 몇명이서 건축했는지를 반환하는 함수 */
 export const getNumberOfArchitectsInContent = (item: Architect['portfolio']['eventNoobProHacker'][0]) => {
   if (item.episode === 3 && item.line === '프로') return 2
 

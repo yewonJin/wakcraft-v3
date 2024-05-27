@@ -10,6 +10,7 @@ export const renameTo1080Webp = (imageUrl: string) => {
   return `${splitName.slice(0, splitName.length - 1).join('.')}.1080p.webp`
 }
 
+/** YYYY-MM-DD 포맷의 문자열 반환 */
 export const getDateString = (date: Date) => {
   return date.toISOString().split('T')[0]
 }

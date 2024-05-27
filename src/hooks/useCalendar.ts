@@ -12,7 +12,7 @@ export const useCalendar = (schedules: any[]) => {
 
   const ref = useRef<HTMLDivElement>(null)
 
-  // "오늘" 표시하기
+  // 오늘에 해당하는 블록 테두리 표시
   useEffect(() => {
     if (!ref.current) return
 
@@ -32,6 +32,7 @@ export const useCalendar = (schedules: any[]) => {
       .filter((item) => parseInt(item.date.split('-')[0]) === curYear)
       .filter((item) => parseInt(item.date.split('-')[1]) === curMonth) || []
 
+  /** 컨텐츠가 처음 시작된 날짜로 변경 */
   const setDateToStart = () => {
     setCurYear(2020)
     setCurMonth(8)
@@ -62,10 +63,12 @@ export const useCalendar = (schedules: any[]) => {
     setCurYear(new Date().getFullYear())
   }
 
+  /** 해당 년, 월의 첫 날의 요일을 반환  */
   const getStartDate = () => {
     return (BASE_START_DATE + getYearAcc(BASE_YEAR, curYear) + getMonthAcc(curYear, curMonth)) % 7
   }
 
+  /** 해당 년, 월의 마지막 날의 요일을 반환  */
   const getEndDate = () => {
     let result = getStartDate() + DAYS_PER_MONTH[curMonth - 1]
 
