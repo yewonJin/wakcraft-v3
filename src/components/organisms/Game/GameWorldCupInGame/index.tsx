@@ -93,7 +93,7 @@ export default function GameWorldCupInGame({ roundOfNumber, endGame }: Props) {
           style={{
             aspectRatio: selectedPos !== 'right' ? '1/1' : '16/9',
           }}
-          onClick={() => onQustionClick('right', curRoundQuestions[index + 1])}
+          onClick={() => onQuestionClick('right', curRoundQuestions[index + 1])}
         >
           <Image
             alt="오른쪽 월드컵 이미지"
