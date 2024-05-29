@@ -1,4 +1,5 @@
 import { Fragment } from 'react'
+import Link from 'next/link'
 
 import TierBox from '@/components/atoms/TierBox'
 
@@ -18,7 +19,7 @@ export default function HomeDescription(props: Props) {
     <div className="mx-auto max-w-[1200px]">
       <Fragment>
         <h2 className={`text-3xl text-text-primary sm:text-4xl`}>눕프로해커</h2>
-        <p className="mt-8  text-base text-text-secondary sm:text-lg">
+        <p className="mt-8 text-base text-text-secondary sm:text-lg">
           유튜버 우왁굳의 마인크래프트 치즐 모드 컨텐츠이다.
         </p>
         <p className="mt-3 text-base text-text-secondary sm:text-lg">
@@ -43,9 +44,11 @@ export default function HomeDescription(props: Props) {
               {TIER_LIST[tier as Tier].map((tier) => (
                 <div
                   key={tier}
-                  className="group relative hidden sm:block [&>span]:h-[78px] [&>span]:w-[70px]  [&>span]:select-none [&>span]:duration-100 [&>span]:hover:scale-105 md:[&>span]:h-[94px] md:[&>span]:w-[85px] [&>div:first-of-type]:hover:scale-105"
+                  className="group relative hidden sm:block [&>a>div]:duration-150 [&>a>div]:hover:scale-105"
                 >
-                  <TierBox tier={tier} />
+                  <Link href={`/architect?tier=${tier}`}>
+                    <TierBox tier={tier} />
+                  </Link>
                   <div className="-bottom-18 absolute z-10 hidden w-max max-w-[300px] animate-fadeIn rounded-lg bg-background-secondary px-4 py-3 text-text-secondary duration-300 md:group-hover:block">
                     {DESCRIPTION_TIER[tier]}
                   </div>
