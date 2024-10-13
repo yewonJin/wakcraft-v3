@@ -113,7 +113,7 @@ const NoobProHackerImageSetting = ({
         <Button text="제출" handleButtonClick={handleImageSubmit} />
       </div>
       <div className="mt-10 grid grid-cols-5 gap-8">
-        {new Array(5).fill(0).map((_, lineIndex) => (
+        {new Array(6).fill(0).map((_, lineIndex) => (
           <div className="" key={lineIndex + 1 + '라인'}>
             <Typography variants="h3" color="primary">
               {lineIndex + 1}라인
@@ -133,7 +133,7 @@ const NoobProHackerImageSetting = ({
                 ))}
               </select>
             </div>
-            {new Array(5).fill(0).map((_, lineDetailIndex) => (
+            {new Array(6).fill(0).map((_, lineDetailIndex) => (
               <div key={lineIndex + lineDetailIndex} className="mt-8 flex flex-col gap-2 text-base text-text-secondary">
                 <Typography variants="p" color="tertiary">
                   {LINE_TIER[3][lineDetailIndex]}

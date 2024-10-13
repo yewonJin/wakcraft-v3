@@ -34,7 +34,7 @@ placementTestSchema.statics.findAll = function () {
 }
 
 placementTestSchema.statics.findLastestOne = function () {
-  return this.findOne().sort({ 'contentInfo.episode': -1 })
+  return this.findOne().sort({ season: -1 })
 }
 
 placementTestSchema.statics.findBySeason = function (season: number) {

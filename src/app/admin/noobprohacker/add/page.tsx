@@ -49,7 +49,7 @@ export default function Page() {
           architects={architects}
           handleMinecraftIdChange={handleMinecraftIdChange}
           handleArchitectIdSettingSubmit={handleArchitectIdSettingSubmit}
-          numberOfLines={5}
+          numberOfLines={6}
           numberOfarchitectsPerLine={3}
         />
       )

@@ -10,7 +10,7 @@ export const useHomeCarousel = (noobprohacker: NoobProHacker) => {
 
   const autoScroll = () => {
     setCurLine((prev) => {
-      if (prev === 4) {
+      if (prev === 5) {
         return 0
       }
       return prev + 1

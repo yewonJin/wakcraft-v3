@@ -138,16 +138,6 @@ export const useEventNoobProHacker = () => {
   }
 
   const handleArchitectIdSettingSubmit = () => {
-    if (!validateInput(eventNoobProHacker.lineInfo)) {
-      toast.error('비어있는 입력창이 있습니다.')
-      return
-    }
-
-    if (!validateDuplicate(eventNoobProHacker.lineInfo)) {
-      toast.error('아이디가 중복되어 있습니다.')
-      return
-    }
-
     moveToNextPage()
   }
 
@@ -160,11 +150,6 @@ export const useEventNoobProHacker = () => {
   }
 
   const handleImageSubmit = () => {
-    if (!validateImage(eventNoobProHacker.lineInfo)) {
-      toast.error('이미지를 모두 채워주세요')
-      return
-    }
-
     moveToNextPage()
   }
 
@@ -285,14 +270,6 @@ const validateInput = (lineInfo: EventNoobProHacker['lineInfo']) => {
     .map((line) => line.line_details.map((architecture) => architecture.minecraft_id.join('') !== ''))
     .flat(2)
     .every((item) => item)
-}
-
-const validateDuplicate = (lineInfo: EventNoobProHacker['lineInfo']) => {
-  return (
-    Array.from(
-      new Set(lineInfo.map((line) => line.line_details.map((architecture) => architecture.minecraft_id)).flat()),
-    ).length === 15
-  )
 }
 
 const validateImage = (lineInfo: EventNoobProHacker['lineInfo']) => {

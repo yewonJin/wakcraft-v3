@@ -166,10 +166,6 @@ export const useNoobProHacker = () => {
       return
     }
 
-    if (!validateLineRanking(noobprohacker.lineInfo)) {
-      toast.error('라인 랭킹을 모두 입력해주세요')
-      return
-    }
 
     if (!validateRanking(noobprohacker.lineInfo)) {
       toast.error('랭킹 값을 모두 입력해주세요')
@@ -185,10 +181,7 @@ export const useNoobProHacker = () => {
       return
     }
 
-    if (!validateLineRanking(noobprohacker.lineInfo)) {
-      toast.error('라인 랭킹을 모두 입력해주세요')
-      return
-    }
+
 
     if (!validateRanking(noobprohacker.lineInfo)) {
       toast.error('랭킹 값을 모두 입력해주세요')
@@ -223,7 +216,7 @@ const initialNoobProHacker: NoobProHacker = {
     date: new Date().toISOString(),
     youtube_url: 'null',
   },
-  lineInfo: Array.from({ length: 5 }, () => ({
+  lineInfo: Array.from({ length: 6 }, () => ({
     subject: '',
     line_ranking: 0,
     line_details: [
@@ -267,7 +260,7 @@ const validateDuplicate = (lineInfo: NoobProHacker['lineInfo']) => {
   return (
     Array.from(
       new Set(lineInfo.map((line) => line.line_details.map((architecture) => architecture.minecraft_id)).flat()),
-    ).length === 15
+    ).length === 18
   )
 }
 

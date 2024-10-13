@@ -21,9 +21,9 @@ export default function ArchitectInfo(props: Props) {
 
   return (
     <div
-      className={`flex justify-between rounded-lg ${
+      className={`flex justify-between rounded-lg items-center ${
         type === 'home' && 'bg-background-secondary hover:bg-background-tertiary hover:cursor-pointer px-4 py-4'
-      }   items-center`}
+      }`}
     >
       <div className={`flex items-center ${type === 'home' ? 'gap-5 sm:gap-8' : 'gap-6'} md:[&>span:first-child]:flex`}>
         <TierBox tier={architect.curTier} />
