@@ -4,7 +4,7 @@ import { NoobProHacker } from '@/types/content'
 import { getWinnerLine } from '@/utils/noobprohacker'
 
 export const useHomeCarousel = (noobprohacker: NoobProHacker) => {
-  const [curLine, setCurLine] = useState(getWinnerLine(noobprohacker) && 0)
+  const [curLine, setCurLine] = useState(getWinnerLine(noobprohacker))
 
   const intervalRef = useRef<any>(null)
 

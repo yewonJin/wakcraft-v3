@@ -10,7 +10,8 @@ export const getProWinnerLine = (noobprohacker: NoobProHacker) => {
 }
 
 export const getWinnerLine = (noobprohacker: NoobProHacker) => {
-  return noobprohacker.lineInfo.findIndex((line) => line.line_ranking === 1)
+  const lineIndex = noobprohacker.lineInfo.findIndex((line) => line.line_ranking === 1)
+  return lineIndex === -1 ? 0 : lineIndex
 }
 
 /** 눕프핵 정보를 싹슬이 라인 정보로 변환하는 함수 */
