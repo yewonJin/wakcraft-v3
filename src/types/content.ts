@@ -59,7 +59,10 @@ export type ArchitectureContest = {
   }[]
 }
 
-export type EventNoobProHacker = {
+export type EventNoobProHacker = LineEventNoobProHacker | GridEventNoobProHacker
+
+export type LineEventNoobProHacker = {
+  type: 'line'
   contentInfo: ExtendedContentInfo
   lineInfo: {
     subject: string
@@ -71,6 +74,20 @@ export type EventNoobProHacker = {
       youtube_url: string
       ranking: number
     }[]
+  }[]
+}
+
+export type GridEventNoobProHacker = {
+  type: 'grid'
+  contentInfo: ExtendedContentInfo
+  participants: {
+    order: number
+    topText: string
+    bottomText: string
+    minecraft_id: string
+    image_url: string
+    youtube_url: string
+    ranking: number
   }[]
 }
 

@@ -29,7 +29,7 @@ export default async function Page() {
         subject={eventNoobProHacker.contentInfo.subject}
         date={new Date(eventNoobProHacker.contentInfo.date)}
         youtube_url={eventNoobProHacker.contentInfo.youtube_url}
-        linesSubject={eventNoobProHacker.lineInfo.map((line) => line.subject)}
+        linesSubject={eventNoobProHacker.type === 'line' ? eventNoobProHacker.lineInfo.map((line) => line.subject) : []}
         isContributedContent={eventNoobProHacker.contentInfo.isContributedContent}
       />,
     )

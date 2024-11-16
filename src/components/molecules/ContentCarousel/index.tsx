@@ -9,11 +9,11 @@ import Icon from '@/components/atoms/Icon'
 
 import { useSlider } from '@/hooks/useSlider'
 import { renameTo1080Webp } from '@/utils/shared'
-import { ArchitectureContest, EventNoobProHacker, NoobProHacker } from '@/types/content'
+import { ArchitectureContest, EventNoobProHacker, LineEventNoobProHacker, NoobProHacker } from '@/types/content'
 
 type Props = {
   type: '눕프로해커' | '건축 콘테스트' | '이벤트 눕프핵'
-  content: NoobProHacker | ArchitectureContest | EventNoobProHacker
+  content: NoobProHacker | ArchitectureContest | LineEventNoobProHacker
   isMobile: boolean
 }
 
@@ -37,7 +37,7 @@ export default function ContentCarousel({ type, content, isMobile }: Props) {
           subject = content.line
           line_ranking = null
         } else {
-          const content = item as EventNoobProHacker['lineInfo'][0]
+          const content = item as LineEventNoobProHacker['lineInfo'][0]
           subject = content.subject
           line_ranking = content.line_ranking
         }
@@ -102,7 +102,7 @@ export default function ContentCarousel({ type, content, isMobile }: Props) {
                       )
 
                     case '이벤트 눕프핵':
-                      const eventNoobProHacker = line as EventNoobProHacker['lineInfo'][0]['line_details'][0]
+                      const eventNoobProHacker = line as LineEventNoobProHacker['lineInfo'][0]['line_details'][0]
 
                       return (
                         <div
@@ -162,7 +162,7 @@ export default function ContentCarousel({ type, content, isMobile }: Props) {
                       )
 
                     case '이벤트 눕프핵':
-                      const eventNoobProHacker = line as EventNoobProHacker['lineInfo'][0]['line_details'][0]
+                      const eventNoobProHacker = line as LineEventNoobProHacker['lineInfo'][0]['line_details'][0]
 
                       return (
                         <ContentCarouselItem

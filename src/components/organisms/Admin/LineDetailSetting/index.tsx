@@ -5,7 +5,7 @@ import { InputForm } from '@/components/molecules/Form'
 import Button from '@/components/atoms/Button'
 import Typography from '@/components/atoms/Typography'
 
-import { ArchitectureContest, EventNoobProHacker, LineInfo } from '@/types/content'
+import { ArchitectureContest, LineEventNoobProHacker, LineInfo } from '@/types/content'
 import { renameToWebp } from '@/utils/shared'
 
 type Props = NoobProHackerProps | EventNoobProHackerProps | ArchitectureContestProps
@@ -22,7 +22,7 @@ type NoobProHackerProps = {
 type EventNoobProHackerProps = {
   type: '이벤트 눕프핵'
   isEdit?: boolean
-  lineInfo: EventNoobProHacker['lineInfo']
+  lineInfo: LineEventNoobProHacker['lineInfo']
   handleSubmit: () => void
   handleLineInfoChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void
   handleLineDetailChange: (e: React.ChangeEvent<HTMLInputElement>, index: number, tier: number) => void
@@ -152,7 +152,7 @@ type EventNoobProHackerLineDetailProps = {
   type: '이벤트 눕프핵'
   lineIndex: number
   lineDetailIndex: number
-  lineInfo: EventNoobProHacker['lineInfo']
+  lineInfo: LineEventNoobProHacker['lineInfo']
   handleLineDetailChange: (e: React.ChangeEvent<HTMLInputElement>, lineIndex: number, lineDetailIndex: number) => void
 }
 

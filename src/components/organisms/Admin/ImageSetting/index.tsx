@@ -6,7 +6,7 @@ import Typography from '@/components/atoms/Typography'
 import { InputForm } from '@/components/molecules/Form'
 
 import { useGetImages } from '@/hooks/Admin/useGetImages'
-import { ArchitectureContest, EventNoobProHacker, LineInfo } from '@/types/content'
+import { ArchitectureContest, LineEventNoobProHacker, LineInfo } from '@/types/content'
 import { renameToWebp } from '@/utils/shared'
 
 type Props = NoobProHackerProps | EventNoobProHackerProps | ArchitectureContestProps
@@ -14,7 +14,7 @@ type Props = NoobProHackerProps | EventNoobProHackerProps | ArchitectureContestP
 type EventNoobProHackerProps = {
   type: '이벤트 눕프핵'
   moveToNextPage: () => void
-  lineInfo: EventNoobProHacker['lineInfo']
+  lineInfo: LineEventNoobProHacker['lineInfo']
   handleImageChange: (e: React.ChangeEvent<HTMLInputElement>, lineIndex: number, lineDetailIndex: number) => void
   handleImageSubmit: () => void
   episode: number
@@ -71,7 +71,7 @@ export default function ImageSetting(props: Props) {
         <EventNoobProHackerImageSetting
           type="이벤트 눕프핵"
           moveToNextPage={moveToNextPage}
-          lineInfo={lineInfo as EventNoobProHacker['lineInfo']}
+          lineInfo={lineInfo as LineEventNoobProHacker['lineInfo']}
           handleImageChange={props.handleImageChange}
           handleImageSubmit={handleImageSubmit}
           episode={episode}

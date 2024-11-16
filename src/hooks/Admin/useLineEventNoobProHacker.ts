@@ -9,12 +9,12 @@ import {
   editEventNoobProHacker,
   getLastestEventNoobProHacker,
 } from '@/apis/client/eventNoobProHacker'
-import { EventNoobProHacker } from '@/types/content'
+import { LineEventNoobProHacker } from '@/types/content'
 import { Architect } from '@/types/architect'
 
-export const useEventNoobProHacker = () => {
+export const useLineEventNoobProHacker = () => {
   const [page, setPage] = useState(0)
-  const [eventNoobProHacker, setEventNoobProHacker] = useState<EventNoobProHacker>(initialEventNoobProHacker)
+  const [eventNoobProHacker, setEventNoobProHacker] = useState<LineEventNoobProHacker>(initialEventNoobProHacker)
 
   const { data: architects } = useQuery<Architect[]>({
     queryKey: ['getAllArchitects'],
@@ -100,9 +100,10 @@ export const useEventNoobProHacker = () => {
     setPage((prev) => prev + 1)
   }
 
-  const setEventNoobProhackerByFetchData = (eventNoobProHacker: EventNoobProHacker) => {
+  const setEventNoobProhackerByFetchData = (eventNoobProHacker: LineEventNoobProHacker) => {
     setEventNoobProHacker(
       produce((draft) => {
+        draft['type'] = 'line'
         draft['contentInfo'] = eventNoobProHacker['contentInfo']
         draft['lineInfo'] = eventNoobProHacker['lineInfo']
       }),
@@ -228,7 +229,8 @@ export const useEventNoobProHacker = () => {
   }
 }
 
-const initialEventNoobProHacker: EventNoobProHacker = {
+const initialEventNoobProHacker: LineEventNoobProHacker = {
+  type: 'line',
   contentInfo: {
     episode: 0,
     subject: '',
@@ -265,21 +267,21 @@ const initialEventNoobProHacker: EventNoobProHacker = {
   })),
 }
 
-const validateInput = (lineInfo: EventNoobProHacker['lineInfo']) => {
+const validateInput = (lineInfo: LineEventNoobProHacker['lineInfo']) => {
   return lineInfo
     .map((line) => line.line_details.map((architecture) => architecture.minecraft_id.join('') !== ''))
     .flat(2)
     .every((item) => item)
 }
 
-const validateImage = (lineInfo: EventNoobProHacker['lineInfo']) => {
+const validateImage = (lineInfo: LineEventNoobProHacker['lineInfo']) => {
   return lineInfo
     .map((line) => line.line_details.map((tier) => tier.image_url !== ''))
     .flat()
     .every((item) => item)
 }
 
-const validateSubject = (lineInfo: EventNoobProHacker['lineInfo']) => {
+const validateSubject = (lineInfo: LineEventNoobProHacker['lineInfo']) => {
   return lineInfo
     .map((line) => line.subject !== '')
     .flat()

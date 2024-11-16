@@ -12,6 +12,7 @@ interface EventNoobProHackerModel extends Model<TEventNoobProHacker> {
 }
 
 const eventNoobProHackerSchema = new Schema<TEventNoobProHacker>({
+  type: { type: String },
   contentInfo: {
     subject: { type: String, required: true },
     episode: { type: Number },
@@ -32,6 +33,17 @@ const eventNoobProHackerSchema = new Schema<TEventNoobProHacker>({
           ranking: { type: Number },
         },
       ],
+    },
+  ],
+  participants: [
+    {
+      order: { type: Number },
+      topText: { type: String },
+      bottomText: { type: String },
+      minecraft_id: { type: [String] },
+      image_url: { type: String },
+      youtube_url: { type: String },
+      ranking: { type: Number },
     },
   ],
 })
@@ -109,17 +121,33 @@ eventNoobProHackerSchema.statics.pushArchitectId = function (
 }
 
 eventNoobProHackerSchema.statics.updateEventNoobProHacker = function (payload: TEventNoobProHacker) {
-  return this.updateOne(
-    {
-      'contentInfo.episode': payload.contentInfo.episode,
-    },
-    {
-      $set: {
-        contentInfo: payload.contentInfo,
-        lineInfo: payload.lineInfo,
+  if (payload.type === 'grid') {
+    return this.updateOne(
+      {
+        'contentInfo.episode': payload.contentInfo.episode,
       },
-    },
-  )
+      {
+        $set: {
+          type: 'grid',
+          contentInfo: payload.contentInfo,
+          participants: payload.participants,
+        },
+      },
+    )
+  } else {
+    return this.updateOne(
+      {
+        'contentInfo.episode': payload.contentInfo.episode,
+      },
+      {
+        $set: {
+          type: 'list',
+          contentInfo: payload.contentInfo,
+          lineInfo: payload.lineInfo,
+        },
+      },
+    )
+  }
 }
 
 const EventNoobProHacker =

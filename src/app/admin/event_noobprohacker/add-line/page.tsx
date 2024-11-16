@@ -6,7 +6,7 @@ import ImageSetting from '@/components/organisms/Admin/ImageSetting'
 import LineDetailSetting from '@/components/organisms/Admin/LineDetailSetting'
 import Typography from '@/components/atoms/Typography'
 
-import { useEventNoobProHacker } from '@/hooks/Admin/useEventNoobProHacker'
+import { useLineEventNoobProHacker } from '@/hooks/Admin/useLineEventNoobProHacker'
 import Button from '@/components/atoms/Button'
 
 export default function Page() {
@@ -25,7 +25,7 @@ export default function Page() {
     handleLineInfoChange,
     handleLineDetailChange,
     addSubmit,
-  } = useEventNoobProHacker()
+  } = useLineEventNoobProHacker()
 
   if (!architects)
     return (

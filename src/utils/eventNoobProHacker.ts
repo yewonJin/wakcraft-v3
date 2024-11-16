@@ -7,31 +7,55 @@ type ArchitectsInfo = {
 }
 
 export const convertToArchitectPortfolio = (eventNoobProHacker: EventNoobProHacker) => {
-  const { contentInfo, lineInfo } = eventNoobProHacker
+  const { contentInfo, type } = eventNoobProHacker
 
   const architectsInfo: ArchitectsInfo[] = []
 
-  lineInfo.forEach((line, index) => {
-    line.line_details.forEach((item) => {
-      const portfolioInfo: Architect['portfolio']['eventNoobProHacker'][0] = {
-        contentName: contentInfo.subject,
-        episode: contentInfo.episode,
-        subject: lineInfo[index].subject,
-        line: item.line,
-        image_url: item.image_url,
-        youtube_url: item.youtube_url,
-        ranking: item.ranking,
-        date: new Date(contentInfo.date),
-      }
+  if (type === 'line') {
+    const { lineInfo } = eventNoobProHacker
 
-      item.minecraft_id.forEach((id) => {
-        architectsInfo.push({
-          minecraft_id: id,
-          portfolio: portfolioInfo,
+    lineInfo.forEach((line, index) => {
+      line.line_details.forEach((item) => {
+        const portfolioInfo: Architect['portfolio']['eventNoobProHacker'][0] = {
+          contentName: contentInfo.subject,
+          episode: contentInfo.episode,
+          subject: lineInfo[index].subject,
+          line: item.line,
+          image_url: item.image_url,
+          youtube_url: item.youtube_url,
+          ranking: item.ranking,
+          date: new Date(contentInfo.date),
+        }
+
+        item.minecraft_id.forEach((id) => {
+          architectsInfo.push({
+            minecraft_id: id,
+            portfolio: portfolioInfo,
+          })
         })
       })
     })
-  })
+  } else {
+    const { participants } = eventNoobProHacker
+
+    participants.forEach((participant, index) => {
+      const portfolioInfo: Architect['portfolio']['eventNoobProHacker'][0] = {
+        contentName: contentInfo.subject,
+        episode: contentInfo.episode,
+        subject: participant.topText,
+        line: '',
+        image_url: participant.image_url,
+        youtube_url: participant.youtube_url,
+        ranking: participant.ranking,
+        date: new Date(contentInfo.date),
+      }
+
+      architectsInfo.push({
+        minecraft_id: participant.minecraft_id,
+        portfolio: portfolioInfo,
+      })
+    })
+  }
 
   return architectsInfo
 }

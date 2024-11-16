@@ -6,7 +6,7 @@ import ContentSetting from '@/components/organisms/Admin/ContentSetting'
 import LineDetailSetting from '@/components/organisms/Admin/LineDetailSetting'
 import SelectEpisode from '@/components/organisms/Admin/SelectEpisode'
 
-import { useEventNoobProHacker } from '@/hooks/Admin/useEventNoobProHacker'
+import { useLineEventNoobProHacker } from '@/hooks/Admin/useLineEventNoobProHacker'
 import { getAllEventNoobProHackers } from '@/apis/client/eventNoobProHacker'
 
 export default function Page() {
@@ -19,7 +19,7 @@ export default function Page() {
     handleLineDetailChange,
     setEventNoobProhackerByFetchData,
     editSubmit,
-  } = useEventNoobProHacker()
+  } = useLineEventNoobProHacker()
 
   const { data: eventNoobProHackers } = useQuery({
     queryKey: ['getAllEventNoobProHackers'],
@@ -31,12 +31,13 @@ export default function Page() {
   switch (page) {
     case 0:
       return (
-        <SelectEpisode
+        <div></div>
+        /*         <SelectEpisode
           type="이벤트 눕프핵"
           content={eventNoobProHacker}
           fetchedContent={eventNoobProHackers.filter((item) => item.contentInfo.youtube_url === 'null')}
           setContentByFetchData={setEventNoobProhackerByFetchData}
-        />
+        /> */
       )
 
     case 1:
