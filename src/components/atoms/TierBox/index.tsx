@@ -8,7 +8,7 @@ type Props = {
 export default function TierBox({ tier }: Props) {
   return (
     <div
-      className="flex items-center justify-center bg-cover h-[94px] w-[85px] text-lg relative bg-no-repeat text-center text-[white] hover:cursor-pointer"
+      className="flex items-center justify-center bg-cover h-[95px] w-[85px] text-lg relative bg-no-repeat text-center text-[white] hover:cursor-pointer"
       style={{
         textShadow: '1px 1px 1px black',
         backgroundImage: getTierImage(tier),
@@ -20,12 +20,15 @@ export default function TierBox({ tier }: Props) {
 }
 
 const getTierImage = (tier: DetailedTier) => {
-  if (All_TIER_LIST.slice(0, 2).includes(tier)) return "url('/assets/images/tier/hacker2.webp')"
-  else if (All_TIER_LIST.slice(2, 3).includes(tier)) return "url('/assets/images/tier/hacker.webp')"
-  else if (All_TIER_LIST.slice(3, 5).includes(tier)) return "url('/assets/images/tier/gukbap2.webp')"
-  else if (All_TIER_LIST.slice(5, 6).includes(tier)) return "url('/assets/images/tier/gukbap.webp')"
-  else if (All_TIER_LIST.slice(6, 7).includes(tier)) return "url('/assets/images/tier/pro.webp')"
-  else if (All_TIER_LIST.slice(7, 8).includes(tier)) return "url('/assets/images/tier/gyeruik2.webp')"
-  else if (All_TIER_LIST.slice(8, 9).includes(tier)) return "url('/assets/images/tier/gyeruik.webp')"
-  else return "url('/assets/images/tier/noob.webp')"
+  if (All_TIER_LIST[0] === tier) return "url('/assets/images/tier/makage.webp')"
+  if (All_TIER_LIST[1] === tier) return "url('/assets/images/tier/omakase.webp')"
+  if (All_TIER_LIST[2] === tier) return "url('/assets/images/tier/hacker.webp')"
+  if (All_TIER_LIST[3] === tier) return "url('/assets/images/tier/haejangguk.webp')"
+  if (All_TIER_LIST[4] === tier) return "url('/assets/images/tier/gukbap.webp')"
+  if (All_TIER_LIST[5] === tier) return "url('/assets/images/tier/miguk.webp')"
+  if (All_TIER_LIST[6] === tier) return "url('/assets/images/tier/pro.webp')"
+  if (All_TIER_LIST[7] === tier) return "url('/assets/images/tier/gyechu.webp')"
+  if (All_TIER_LIST[8] === tier) return "url('/assets/images/tier/gyeruik.webp')"
+  if (All_TIER_LIST[9] === tier) return "url('/assets/images/tier/noob.webp')"
+  return "url('/assets/images/tier/purenoob.webp')"
 }
