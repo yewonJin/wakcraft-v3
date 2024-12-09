@@ -231,8 +231,6 @@ const backgroundColorVariants: { [key: string]: string } = {
   '배틀 건축 콘테스트': 'bg-blue-200 dark:bg-blue-800',
   배치고사: 'bg-yellow-200 dark:bg-yellow-800',
   '이벤트 눕프핵': 'bg-rose-200 dark:bg-rose-800',
-  '시간 맞추기': 'bg-rose-200 dark:bg-rose-800',
-  '티어 맞추기': 'bg-rose-200 dark:bg-rose-800',
   '진짜 눕프핵 마을': 'bg-neutral-300 dark:bg-neutral-700',
   '눕프핵 마을': 'bg-neutral-300 dark:bg-neutral-700',
   '고멤 마을': 'bg-neutral-300 dark:bg-neutral-700',

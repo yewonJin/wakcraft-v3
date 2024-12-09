@@ -18,12 +18,6 @@ export const getURL = (schedule: Schedule) => {
     case '이벤트 눕프핵':
       return `/content/event_noobprohacker/${schedule.episode}`
 
-    case '시간 맞추기':
-      return `/content/guess_time/8`
-
-    case '티어 맞추기':
-      return `/content/match_your_tier/7`
-
     default:
       return ''
   }
@@ -72,8 +66,6 @@ export const getContentTitle = (schedule: Schedule) => {
 
 export const getEpisode = (schedule: Schedule) => {
   if (
-    schedule.content === '시간 맞추기' ||
-    schedule.content === '티어 맞추기' ||
     schedule.content === '조공 컨텐츠' ||
     schedule.content === '이벤트 눕프핵' ||
     schedule.content === '건축 콘테스트' ||

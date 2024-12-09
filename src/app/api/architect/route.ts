@@ -6,8 +6,6 @@ import Architect from '@/models/architect'
 import PlacementTest from '@/models/placementTest'
 import NoobProHacker from '@/models/noobprohacker'
 import ArchitectureContest from '@/models/architectureContest'
-import GuessTime from '@/models/guessTime'
-import MatchYourTier from '@/models/matchYourTier'
 import EventNoobProHacker from '@/models/eventNoobProHacker'
 import Worldcup from '@/models/worldCup'
 import ArchitectureNoobProHacker from '@/models/architectureNoobProHacker'
@@ -118,15 +116,8 @@ export async function PATCH(req: NextRequest) {
 
       // 이벤트 눕프핵에서 마인크래프트 아이디 업데이트하기
       architect.portfolio.eventNoobProHacker.forEach(async (item) => {
-        if (item.contentName === '시간 맞추기') {
-          await GuessTime.updateArchitectId(item.episode, beforeId, afterId)
-        } else if (item.contentName === '티어 맞추기') {
-          await MatchYourTier.updateArchitectId(item.episode, beforeId, afterId)
-        }
-        {
-          await EventNoobProHacker.pullArchitectId(item.episode, item.subject, item.line, beforeId)
-          await EventNoobProHacker.pushArchitectId(item.episode, item.subject, item.line, afterId)
-        }
+        await EventNoobProHacker.pullArchitectId(item.episode, item.subject, item.line, beforeId)
+        await EventNoobProHacker.pushArchitectId(item.episode, item.subject, item.line, afterId)
       })
 
       await Worldcup.updateMinecraftId(beforeId, afterId)

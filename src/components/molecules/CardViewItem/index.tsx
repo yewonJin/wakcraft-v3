@@ -48,14 +48,8 @@ export default function CardViewItem({
       case '배치고사':
         return `/content/placement_test/${episode}`
 
-      case '티어 맞추기':
-        return `/content/match_your_tier/${episode}`
-
       case '건축 콘테스트':
         return `/content/architecture_contest/${episode}`
-
-      case '시간 맞추기':
-        return `/content/guess_time/${episode}`
     }
   }
 

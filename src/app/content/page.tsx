@@ -1,21 +1,13 @@
 import ContentHome from '@/components/templates/ContentHome'
 import CardViewItem from '@/components/molecules/CardViewItem'
 
-import {
-  getAllArchitectureContest,
-  getAllEventNoobProHacker,
-  getAllGuessTimes,
-  getAllMatchYourTier,
-  getAllPlacementTest,
-} from '@/apis/server/content'
+import { getAllArchitectureContest, getAllEventNoobProHacker, getAllPlacementTest } from '@/apis/server/content'
 
 export default async function Page() {
-  const [eventNoobProHackers, matchYourTiers, architectureContests, placementTests, guessTimes] = await Promise.all([
+  const [eventNoobProHackers, architectureContests, placementTests] = await Promise.all([
     getAllEventNoobProHacker(),
-    getAllMatchYourTier(),
     getAllArchitectureContest(),
     getAllPlacementTest(),
-    getAllGuessTimes(),
   ])
 
   const cardList: JSX.Element[] = []
@@ -31,20 +23,6 @@ export default async function Page() {
         youtube_url={eventNoobProHacker.contentInfo.youtube_url}
         linesSubject={eventNoobProHacker.type === 'line' ? eventNoobProHacker.lineInfo.map((line) => line.subject) : []}
         isContributedContent={eventNoobProHacker.contentInfo.isContributedContent}
-      />,
-    )
-  })
-
-  matchYourTiers.forEach((matchYourTier) => {
-    cardList.push(
-      <CardViewItem
-        key={matchYourTier.contentInfo.date}
-        type="티어 맞추기"
-        episode={matchYourTier.contentInfo.episode}
-        subject={matchYourTier.contentInfo.subject}
-        date={new Date(matchYourTier.contentInfo.date)}
-        youtube_url={matchYourTier.contentInfo.youtube_url}
-        isContributedContent={matchYourTier.contentInfo.isContributedContent}
       />,
     )
   })
@@ -72,20 +50,6 @@ export default async function Page() {
         subject="배치고사"
         date={new Date(placementTest.date)}
         youtube_url={placementTest.youtube_url}
-      />,
-    )
-  })
-
-  guessTimes.forEach((guessTime) => {
-    cardList.push(
-      <CardViewItem
-        key={guessTime.contentInfo.date}
-        type="시간 맞추기"
-        episode={guessTime.contentInfo.episode}
-        subject={guessTime.contentInfo.subject}
-        date={new Date(guessTime.contentInfo.date)}
-        youtube_url={guessTime.contentInfo.youtube_url}
-        isContributedContent={guessTime.contentInfo.isContributedContent}
       />,
     )
   })

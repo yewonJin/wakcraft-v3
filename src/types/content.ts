@@ -1,13 +1,6 @@
 import { DetailedTier } from './architect'
 
-export type Content =
-  | '눕프로해커'
-  | '건축 눕프핵'
-  | '이벤트 눕프핵'
-  | '배치고사'
-  | '티어 맞추기'
-  | '시간 맞추기'
-  | '건축 콘테스트'
+export type Content = '눕프로해커' | '건축 눕프핵' | '이벤트 눕프핵' | '배치고사' | '건축 콘테스트'
 
 export type ContentInfo = {
   episode: number
@@ -84,31 +77,6 @@ export type GridEventNoobProHacker = {
     order: number
     topText: string
     bottomText: string
-    minecraft_id: string
-    image_url: string
-    youtube_url: string
-    ranking: number
-  }[]
-}
-
-export type GuessTime = {
-  contentInfo: ExtendedContentInfo
-  participants: {
-    order: number
-    expectedTime: 2 | 4 | 6 | 8 | 10
-    time: 2 | 4 | 6 | 8 | 10
-    minecraft_id: string
-    image_url: string
-    youtube_url: string
-  }[]
-}
-
-export type MatchYourTier = {
-  contentInfo: ExtendedContentInfo
-  participants: {
-    order: number
-    expectedTier: DetailedTier
-    currentTier: DetailedTier
     minecraft_id: string
     image_url: string
     youtube_url: string

@@ -11,8 +11,6 @@ export type AWSContent =
   | 'placementTest'
   | 'eventNoobProHacker'
   | 'architectureContest'
-  | 'matchYourTier'
-  | 'guessTime'
 
 // s3 클라이언트 연결
 export const s3 = new S3Client({
