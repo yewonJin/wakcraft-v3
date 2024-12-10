@@ -17,6 +17,7 @@ export const convertToArchitectPortfolio = (eventNoobProHacker: EventNoobProHack
     lineInfo.forEach((line, index) => {
       line.line_details.forEach((item) => {
         const portfolioInfo: Architect['portfolio']['eventNoobProHacker'][0] = {
+          type: 'line',
           contentName: contentInfo.subject,
           episode: contentInfo.episode,
           subject: lineInfo[index].subject,
@@ -40,6 +41,7 @@ export const convertToArchitectPortfolio = (eventNoobProHacker: EventNoobProHack
 
     participants.forEach((participant, index) => {
       const portfolioInfo: Architect['portfolio']['eventNoobProHacker'][0] = {
+        type: 'grid',
         contentName: contentInfo.subject,
         episode: contentInfo.episode,
         subject: participant.topText,

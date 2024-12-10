@@ -116,8 +116,15 @@ export async function PATCH(req: NextRequest) {
 
       // 이벤트 눕프핵에서 마인크래프트 아이디 업데이트하기
       architect.portfolio.eventNoobProHacker.forEach(async (item) => {
-        await EventNoobProHacker.pullArchitectId(item.episode, item.subject, item.line, beforeId)
-        await EventNoobProHacker.pushArchitectId(item.episode, item.subject, item.line, afterId)
+        console.log(item)
+
+        if (item.type === 'grid') {
+          await EventNoobProHacker.pullArchitectIdByGrid(item.episode, item.image_url, beforeId)
+          await EventNoobProHacker.pushArchitectIdByGrid(item.episode, item.image_url, afterId)
+        } else {
+          await EventNoobProHacker.pullArchitectIdByLine(item.episode, item.image_url, beforeId)
+          await EventNoobProHacker.pushArchitectIdByLine(item.episode, item.image_url, afterId)
+        }
       })
 
       await Worldcup.updateMinecraftId(beforeId, afterId)

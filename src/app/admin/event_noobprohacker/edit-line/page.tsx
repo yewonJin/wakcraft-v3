@@ -8,6 +8,7 @@ import SelectEpisode from '@/components/organisms/Admin/SelectEpisode'
 
 import { useLineEventNoobProHacker } from '@/hooks/Admin/useLineEventNoobProHacker'
 import { getAllEventNoobProHackers } from '@/apis/client/eventNoobProHacker'
+import { LineEventNoobProHacker } from '@/types/content'
 
 export default function Page() {
   const {
@@ -28,16 +29,17 @@ export default function Page() {
 
   if (!eventNoobProHackers) return <div>loading...</div>
 
+  const lineEventNoobProHackers = eventNoobProHackers.filter((item) => item.type === 'line') as LineEventNoobProHacker[]
+
   switch (page) {
     case 0:
       return (
-        <div></div>
-        /*         <SelectEpisode
-          type="이벤트 눕프핵"
+        <SelectEpisode
+          type="이벤트 눕프핵 - 라인"
           content={eventNoobProHacker}
-          fetchedContent={eventNoobProHackers.filter((item) => item.contentInfo.youtube_url === 'null')}
+          fetchedContent={lineEventNoobProHackers.filter((item) => item.contentInfo.youtube_url === 'null')}
           setContentByFetchData={setEventNoobProhackerByFetchData}
-        /> */
+        />
       )
 
     case 1:

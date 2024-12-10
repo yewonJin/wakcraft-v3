@@ -112,6 +112,18 @@ export const useGridEventNoobProHacker = () => {
     }
   }
 
+  const setEventNoobProhackerByFetchData = (eventNoobProHacker: GridEventNoobProHacker) => {
+    setEventNoobProHacker(
+      produce((draft) => {
+        draft['type'] = 'grid'
+        draft['contentInfo'] = eventNoobProHacker['contentInfo']
+        draft['participants'] = eventNoobProHacker['participants']
+      }),
+    )
+
+    moveToNextPage()
+  }
+
   const moveToNextPage = () => {
     setPage((prev) => prev + 1)
   }
@@ -141,6 +153,7 @@ export const useGridEventNoobProHacker = () => {
     eventNoobProHacker,
     handleContentInfoChange,
     handleParticipantInputChange,
+    setEventNoobProhackerByFetchData,
     architects,
     addSubmit,
     editSubmit,

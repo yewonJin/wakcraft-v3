@@ -15,7 +15,7 @@ export type Architect = {
     architectureNoobProHacker: NoobProHackerPortfolioItem[]
     placementTest: PlacementTestPortfolioItem[]
     eventNoobProHacker: EventNoobProHackerPortfolioItem[]
-    architectureContest: EventNoobProHackerPortfolioItem[]
+    architectureContest: ArchitectPortfolioItem[]
   }
 }
 
@@ -37,8 +37,13 @@ export type PlacementTestPortfolioItem = {
   ranking: number
 }
 
+export interface ArchitectPortfolioItem extends NoobProHackerPortfolioItem {
+  contentName: string
+}
+
 export interface EventNoobProHackerPortfolioItem extends NoobProHackerPortfolioItem {
   contentName: string
+  type: 'line' | 'grid'
 }
 
 export type TierColor = 'pink' | 'violet' | 'cyan' | 'amber' | 'slate' | 'yellow'

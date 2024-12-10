@@ -6,8 +6,10 @@ interface EventNoobProHackerModel extends Model<TEventNoobProHacker> {
   findAll: () => Promise<TEventNoobProHacker[]>
   findByEpisode: (episode: number) => Promise<TEventNoobProHacker>
   findLastestOne: () => Promise<TEventNoobProHacker>
-  pullArchitectId: (episode: number, subject: string, line: string, beforeId: string) => Promise<void>
-  pushArchitectId: (episode: number, subject: string, line: string, afterId: string) => Promise<void>
+  pullArchitectIdByLine: (episode: number, imageUrl: string, beforeId: string) => Promise<void>
+  pushArchitectIdByLine: (episode: number, imageUrl: string, afterId: string) => Promise<void>
+  pullArchitectIdByGrid: (episode: number, imageUrl: string, beforeId: string) => Promise<void>
+  pushArchitectIdByGrid: (episode: number, imageUrl: string, afterId: string) => Promise<void>
   updateEventNoobProHacker: (payload: TEventNoobProHacker) => Promise<TEventNoobProHacker>
 }
 
@@ -64,10 +66,9 @@ eventNoobProHackerSchema.statics.findByEpisode = function (episode: number) {
 eventNoobProHackerSchema.statics.findLastestOne = function () {
   return this.findOne().sort({ 'contentInfo.episode': -1 })
 }
-eventNoobProHackerSchema.statics.pullArchitectId = function (
+eventNoobProHackerSchema.statics.pullArchitectIdByLine = function (
   episode: number,
-  subject: string,
-  line: string,
+  imageUrl: string,
   beforeId: string,
 ) {
   return this.updateOne(
@@ -76,44 +77,79 @@ eventNoobProHackerSchema.statics.pullArchitectId = function (
     },
     {
       $pull: {
-        'lineInfo.$[element].line_details.$[detail].minecraft_id': beforeId,
+        'lineInfo.$[].line_details.$[detail].minecraft_id': beforeId,
       },
     },
     {
       arrayFilters: [
         {
-          'element.subject': subject,
-        },
-        {
-          'detail.line': line,
+          'detail.image_url': imageUrl,
         },
       ],
     },
   )
 }
 
-eventNoobProHackerSchema.statics.pushArchitectId = function (
+eventNoobProHackerSchema.statics.pullArchitectIdByGrid = function (
   episode: number,
-  subject: string,
-  line: string,
-  afterId: string,
+  imageUrl: string,
+  beforeId: string,
 ) {
+  return this.updateOne(
+    {
+      'contentInfo.episode': episode,
+      type: 'grid',
+    },
+    {
+      $pull: {
+        'participants.$[element].minecraft_id': beforeId,
+      },
+    },
+    {
+      arrayFilters: [
+        {
+          'element.image_url': imageUrl,
+        },
+      ],
+    },
+  )
+}
+
+eventNoobProHackerSchema.statics.pushArchitectIdByGrid = function (episode: number, imageUrl: string, afterId: string) {
+  return this.updateOne(
+    {
+      'contentInfo.episode': episode,
+      type: 'grid',
+    },
+    {
+      $push: {
+        'participants.$[element].minecraft_id': afterId,
+      },
+    },
+    {
+      arrayFilters: [
+        {
+          'element.image_url': imageUrl,
+        },
+      ],
+    },
+  )
+}
+
+eventNoobProHackerSchema.statics.pushArchitectIdByLine = function (episode: number, imageUrl: string, afterId: string) {
   return this.updateOne(
     {
       'contentInfo.episode': episode,
     },
     {
       $push: {
-        'lineInfo.$[element].line_details.$[detail].minecraft_id': afterId,
+        'lineInfo.$[].line_details.$[detail].minecraft_id': afterId,
       },
     },
     {
       arrayFilters: [
         {
-          'element.subject': subject,
-        },
-        {
-          'detail.line': line,
+          'detail.image_url': imageUrl,
         },
       ],
     },

@@ -53,6 +53,7 @@ const architectSchema = new Schema<TArchitect>({
     ],
     eventNoobProHacker: [
       {
+        type: { type: String, required: true },
         contentName: { type: String, required: true },
         episode: { type: Number, required: true },
         subject: { type: String, required: true },
