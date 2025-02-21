@@ -1,3 +1,5 @@
+import { Fragment, useEffect, useRef, useState } from 'react'
+
 import TierBox from '@/components/atoms/TierBox'
 import Typography from '@/components/atoms/Typography'
 import { Architect, SearchedArchitect } from '@/types/architect'
@@ -6,7 +8,8 @@ type Home = {
   type: 'home'
   architect: SearchedArchitect
   input: string
-  debouncedSearchText: string
+  deferredInput: string
+  order: number
 }
 
 type Detail = {
@@ -16,34 +19,78 @@ type Detail = {
 
 type Props = Home | Detail
 
+const shouldShowImmediately = (props: Props) => {
+  if (props.type === 'detail') {
+    return true
+  }
+
+  if (props.type === 'home' && props.order <= 10) {
+    return true
+  }
+
+  return false
+}
+
 export default function ArchitectInfo(props: Props) {
   const { architect, type } = props
 
+  const [isIntersecting, setIsIntersecting] = useState(shouldShowImmediately(props))
+  const observerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const element = observerRef.current
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setIsIntersecting(true)
+        }
+      },
+      { threshold: 0.01 },
+    )
+
+    if (element) {
+      observer.observe(element)
+    }
+
+    return () => {
+      if (element) {
+        observer.unobserve(element)
+      }
+    }
+  }, [])
+
   return (
     <div
+      ref={observerRef}
       className={`flex justify-between rounded-lg items-center ${
         type === 'home' && 'bg-background-secondary hover:bg-background-tertiary hover:cursor-pointer px-4 py-4'
       }`}
     >
-      <div className={`flex items-center ${type === 'home' ? 'gap-5 sm:gap-8' : 'gap-6'} md:[&>span:first-child]:flex`}>
-        <TierBox tier={architect.curTier} />
-        {type === 'home' ? (
-          <Highlighting architect={props.architect} input={props.input} />
-        ) : (
-          <div className="flex flex-col gap-3 md:gap-1">
-            <Typography variants="p" color="primary" style={{ fontSize: '20px' }}>
-              {architect.minecraft_id}
-            </Typography>
-            <Typography variants="p" color="secondary">
-              {architect.wakzoo_id}
-            </Typography>
+      {isIntersecting ? (
+        <Fragment>
+          <div
+            className={`flex items-center ${type === 'home' ? 'gap-5 sm:gap-8' : 'gap-6'} md:[&>span:first-child]:flex`}
+          >
+            <TierBox tier={architect.curTier} />
+            {type === 'home' ? (
+              <Highlighting architect={props.architect} input={props.input} />
+            ) : (
+              <div className="flex flex-col gap-3 md:gap-1">
+                <Typography variants="p" color="primary" style={{ fontSize: '20px' }}>
+                  {architect.minecraft_id}
+                </Typography>
+                <Typography variants="p" color="secondary">
+                  {architect.wakzoo_id}
+                </Typography>
+              </div>
+            )}
           </div>
-        )}
-      </div>
-      {type === 'home' && props.input === props.debouncedSearchText && (
-        <Statistics noobprohackerInfo={architect.statistics} />
+          {type === 'home' && <Statistics noobprohackerInfo={architect.statistics} />}
+          {type === 'detail' && <Statistics noobprohackerInfo={architect.statistics} />}
+        </Fragment>
+      ) : (
+        <div className="h-[95px]"></div>
       )}
-      {type === 'detail' && <Statistics noobprohackerInfo={architect.statistics} />}
     </div>
   )
 }
