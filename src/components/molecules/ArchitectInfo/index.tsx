@@ -8,7 +8,6 @@ type Home = {
   type: 'home'
   architect: SearchedArchitect
   input: string
-  deferredInput: string
   order: number
 }
 
