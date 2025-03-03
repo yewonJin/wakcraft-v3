@@ -26,6 +26,7 @@ export const convertToArchitectPortfolio = (eventNoobProHacker: EventNoobProHack
           youtube_url: item.youtube_url,
           ranking: item.ranking,
           date: new Date(contentInfo.date),
+          constructionTime: item.constructionTime,
         }
 
         item.minecraft_id.forEach((id) => {
@@ -50,6 +51,7 @@ export const convertToArchitectPortfolio = (eventNoobProHacker: EventNoobProHack
         youtube_url: participant.youtube_url,
         ranking: participant.ranking,
         date: new Date(contentInfo.date),
+        constructionTime: participant.constructionTime,
       }
 
       architectsInfo.push({

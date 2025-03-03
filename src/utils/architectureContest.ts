@@ -22,6 +22,7 @@ export const convertToArchitectPortfolio = (architectureContest: ArchitectureCon
         youtube_url: item.youtube_url,
         ranking: item.ranking,
         date: new Date(contentInfo.date),
+        constructionTime: item.constructionTime,
       }
 
       architectsInfo.push({
