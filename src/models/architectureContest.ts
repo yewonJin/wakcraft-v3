@@ -30,6 +30,7 @@ const architectureContestSchema = new Schema<TArchitectureContest>({
           image_url: { type: String },
           youtube_url: { type: String },
           ranking: { type: Number },
+          constructionTime: { type: Number },
         },
       ],
     },

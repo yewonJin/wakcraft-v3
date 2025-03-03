@@ -48,6 +48,7 @@ export type ArchitectureContest = {
       image_url: string
       youtube_url: string
       ranking: number
+      constructionTime: number
     }[]
   }[]
 }
@@ -66,6 +67,7 @@ export type LineEventNoobProHacker = {
       image_url: string
       youtube_url: string
       ranking: number
+      constructionTime: number
     }[]
   }[]
 }
@@ -81,6 +83,7 @@ export type GridEventNoobProHacker = {
     image_url: string
     youtube_url: string
     ranking: number
+    constructionTime: number
   }[]
 }
 

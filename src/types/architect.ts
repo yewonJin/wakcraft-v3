@@ -15,7 +15,7 @@ export type Architect = {
     architectureNoobProHacker: NoobProHackerPortfolioItem[]
     placementTest: PlacementTestPortfolioItem[]
     eventNoobProHacker: EventNoobProHackerPortfolioItem[]
-    architectureContest: ArchitectPortfolioItem[]
+    architectureContest: ArchitecturePortfolioItem[]
   }
 }
 
@@ -37,12 +37,14 @@ export type PlacementTestPortfolioItem = {
   ranking: number
 }
 
-export interface ArchitectPortfolioItem extends NoobProHackerPortfolioItem {
+export interface ArchitecturePortfolioItem extends NoobProHackerPortfolioItem {
   contentName: string
+  constructionTime: number
 }
 
 export interface EventNoobProHackerPortfolioItem extends NoobProHackerPortfolioItem {
   contentName: string
+  constructionTime: number
   type: 'line' | 'grid'
 }
 

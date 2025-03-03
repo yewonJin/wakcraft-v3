@@ -33,6 +33,7 @@ const eventNoobProHackerSchema = new Schema<TEventNoobProHacker>({
           image_url: { type: String },
           youtube_url: { type: String },
           ranking: { type: Number },
+          constructionTime: { type: Number },
         },
       ],
     },

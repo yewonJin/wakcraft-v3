@@ -62,6 +62,7 @@ const architectSchema = new Schema<TArchitect>({
         youtube_url: { type: String, required: true },
         ranking: { type: Number, default: 0 },
         date: { type: Date },
+        constructionTime: { type: Number, default: 0 },
       },
     ],
     architectureContest: [
@@ -74,6 +75,7 @@ const architectSchema = new Schema<TArchitect>({
         youtube_url: { type: String, required: true },
         ranking: { type: Number, default: 0 },
         date: { type: Date },
+        constructionTime: { type: Number, default: 0 },
       },
     ],
   },
