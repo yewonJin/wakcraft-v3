@@ -56,6 +56,13 @@ export default function GridSetting({ eventNoobProHacker, handleParticipantInput
               value={participant.ranking}
               handleInputChange={(e) => handleParticipantInputChange(e, index)}
             />
+            <InputForm
+              label="작업시간"
+              name="constructionTime"
+              type="number"
+              value={participant.constructionTime}
+              handleInputChange={(e) => handleParticipantInputChange(e, index)}
+            />
           </div>
         </div>
       ))}

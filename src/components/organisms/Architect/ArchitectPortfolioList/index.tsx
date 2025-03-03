@@ -125,7 +125,6 @@ export default function ArchitectPortfolioList({ portfolio, category }: Props) {
                           subject={content.subject}
                           ranking={content.ranking}
                           imageUrl={content.image_url}
-                          isUnlimitedTime={isInfiniteTimeContent('건축 콘테스트', content.episode)}
                           youtubeUrl={content.youtube_url === 'null' ? undefined : content.youtube_url}
                         />
                       )
@@ -142,8 +141,8 @@ export default function ArchitectPortfolioList({ portfolio, category }: Props) {
                         ranking={content.ranking}
                         imageUrl={content.image_url}
                         architectNumber={getNumberOfArchitectsInContent(content)}
-                        isUnlimitedTime={isInfiniteTimeContent('이벤트 눕프핵', content.episode)}
                         youtubeUrl={content.youtube_url === 'null' ? undefined : content.youtube_url}
+                        constructionTime={content.constructionTime}
                       />
                     )
                   })}

@@ -175,13 +175,22 @@ const LineDetail = ({ type, lineIndex, lineDetailIndex, lineInfo, handleLineDeta
       </div>
       <div className="mt-4 flex gap-4">
         {type === '이벤트 눕프핵' && (
-          <InputForm
-            label="라인명"
-            name="line"
-            type="text"
-            value={lineInfo[lineIndex].line_details[lineDetailIndex].line}
-            handleInputChange={(e) => handleLineDetailChange(e, lineIndex, lineDetailIndex)}
-          />
+          <Fragment>
+            <InputForm
+              label="라인명"
+              name="line"
+              type="text"
+              value={lineInfo[lineIndex].line_details[lineDetailIndex].line}
+              handleInputChange={(e) => handleLineDetailChange(e, lineIndex, lineDetailIndex)}
+            />
+            <InputForm
+              label="작업시간"
+              name="constructionTime"
+              type="number"
+              value={lineInfo[lineIndex].line_details[lineDetailIndex].constructionTime}
+              handleInputChange={(e) => handleLineDetailChange(e, lineIndex, lineDetailIndex)}
+            />
+          </Fragment>
         )}
         <InputForm
           label="순위"
@@ -211,6 +220,13 @@ const LineDetail = ({ type, lineIndex, lineDetailIndex, lineInfo, handleLineDeta
               name="bottomText"
               type="text"
               value={lineInfo[lineIndex].line_details[lineDetailIndex].bottomText}
+              handleInputChange={(e) => handleLineDetailChange(e, lineIndex, lineDetailIndex)}
+            />
+            <InputForm
+              label="작업시간"
+              name="constructionTime"
+              type="number"
+              value={lineInfo[lineIndex].line_details[lineDetailIndex].constructionTime}
               handleInputChange={(e) => handleLineDetailChange(e, lineIndex, lineDetailIndex)}
             />
           </Fragment>
