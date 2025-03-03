@@ -47,6 +47,7 @@ export const useGridEventNoobProHacker = () => {
       ranking: 0,
       topText: '',
       bottomText: '',
+      constructionTime: 0,
     }))
 
     setEventNoobProHacker(
@@ -95,7 +96,7 @@ export const useGridEventNoobProHacker = () => {
   }
 
   const handleParticipantInputChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    if (e.target.name === 'order' || e.target.name === 'ranking') {
+    if (e.target.name === 'order' || e.target.name === 'ranking' || e.target.name === 'constructionTime') {
       setEventNoobProHacker(
         produce((draft) => {
           draft['participants'][index][e.target.name as 'order' | 'ranking'] = parseInt(e.target.value)
@@ -105,7 +106,10 @@ export const useGridEventNoobProHacker = () => {
       setEventNoobProHacker(
         produce((draft) => {
           draft['participants'][index][
-            e.target.name as Exclude<keyof GridEventNoobProHacker['participants'][number], 'order' | 'ranking'>
+            e.target.name as Exclude<
+              keyof GridEventNoobProHacker['participants'][number],
+              'order' | 'ranking' | 'constructionTime'
+            >
           ] = e.target.value
         }),
       )

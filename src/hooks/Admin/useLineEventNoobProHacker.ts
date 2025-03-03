@@ -59,6 +59,7 @@ export const useLineEventNoobProHacker = () => {
               youtube_url: 'null',
               image_url: '',
               ranking: 0,
+              constructionTime: 0,
             },
             {
               line: '',
@@ -66,6 +67,7 @@ export const useLineEventNoobProHacker = () => {
               youtube_url: 'null',
               image_url: '',
               ranking: 0,
+              constructionTime: 0,
             },
             {
               line: '',
@@ -73,6 +75,7 @@ export const useLineEventNoobProHacker = () => {
               youtube_url: 'null',
               image_url: '',
               ranking: 0,
+              constructionTime: 0,
             },
           ],
         })
@@ -90,6 +93,7 @@ export const useLineEventNoobProHacker = () => {
             youtube_url: 'null',
             image_url: '',
             ranking: 0,
+            constructionTime: 0,
           }),
         )
       }),
@@ -248,6 +252,7 @@ const initialEventNoobProHacker: LineEventNoobProHacker = {
         youtube_url: 'null',
         image_url: '',
         ranking: 0,
+        constructionTime: 0,
       },
       {
         line: '',
@@ -255,6 +260,7 @@ const initialEventNoobProHacker: LineEventNoobProHacker = {
         youtube_url: 'null',
         image_url: '',
         ranking: 0,
+        constructionTime: 0,
       },
       {
         line: '',
@@ -262,6 +268,7 @@ const initialEventNoobProHacker: LineEventNoobProHacker = {
         youtube_url: 'null',
         image_url: '',
         ranking: 0,
+        constructionTime: 0,
       },
     ],
   })),

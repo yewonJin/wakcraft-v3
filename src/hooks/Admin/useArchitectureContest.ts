@@ -174,6 +174,7 @@ const initialArchitectureContest: ArchitectureContest = {
       youtube_url: 'null',
       image_url: '',
       ranking: 0,
+      constructionTime: 0,
     })),
   })),
 }
