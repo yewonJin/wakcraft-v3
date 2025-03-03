@@ -10,30 +10,37 @@ type Props = {
   imageUrl: string
   youtubeUrl?: string
   architectNumber?: number
-  isUnlimitedTime?: boolean
   contentName: string
   subject: string
   tier?: string
   ranking?: number
+  constructionTime?: number
 }
 
 export default function ArchitectPortfolioItem({
   imageUrl,
   youtubeUrl,
-  isUnlimitedTime,
   architectNumber,
   contentName,
   subject,
   tier,
   ranking,
+  constructionTime,
 }: Props) {
   const getSummary = useMemo(() => {
-    if (isUnlimitedTime && architectNumber && architectNumber > 1) {
-      return `무제한급 + ${architectNumber}명 작품`
+    const time =
+      !constructionTime || constructionTime === 0
+        ? ''
+        : constructionTime === -1
+        ? '무제한급'
+        : constructionTime + '시간'
+
+    if (time && architectNumber && architectNumber > 1) {
+      return `${time} + ${architectNumber}명 작품`
     }
 
-    return (isUnlimitedTime && '무제한급') || (architectNumber && architectNumber > 1 && architectNumber + '명 작품')
-  }, [isUnlimitedTime, architectNumber])
+    return time || (architectNumber && architectNumber > 1 && architectNumber + '명 작품')
+  }, [constructionTime, architectNumber])
 
   const getBackgroundColor = useMemo(() => {
     switch (tier) {
@@ -68,7 +75,7 @@ export default function ArchitectPortfolioItem({
             </p>
           </div>
         )}
-        {(isUnlimitedTime === true || (architectNumber && architectNumber > 1)) && (
+        {((constructionTime !== undefined && constructionTime !== 0) || (architectNumber && architectNumber > 1)) && (
           <div className="absolute left-[6px] top-[6px] rounded-lg bg-[#121212] px-[10px] py-1 text-sm text-[white] group-hover/image:visible peer-hover:invisible">
             {getSummary}
           </div>

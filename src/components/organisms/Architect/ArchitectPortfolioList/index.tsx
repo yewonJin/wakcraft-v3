@@ -3,7 +3,7 @@ import { useCallback, useMemo } from 'react'
 import ArchitectPortfolioItem from '@/components/molecules/ArchitectPortfolioItem'
 
 import { Architect } from '@/types/architect'
-import { getNumberOfArchitectsInContent, isInfiniteTimeContent } from '@/utils/architect'
+import { getNumberOfArchitectsInContent } from '@/utils/architect'
 
 type Props = {
   portfolio: Architect['portfolio']
@@ -126,6 +126,7 @@ export default function ArchitectPortfolioList({ portfolio, category }: Props) {
                           ranking={content.ranking}
                           imageUrl={content.image_url}
                           youtubeUrl={content.youtube_url === 'null' ? undefined : content.youtube_url}
+                          constructionTime={content.constructionTime}
                         />
                       )
                     }
