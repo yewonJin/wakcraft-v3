@@ -1,7 +1,9 @@
 import { Fragment, useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 
 import TierBox from '@/components/atoms/TierBox'
 import Typography from '@/components/atoms/Typography'
+import NaverCafe from '../../../../public/assets/icons/naver_cafe.png'
 import { Architect, SearchedArchitect } from '@/types/architect'
 
 type Home = {
@@ -68,8 +70,15 @@ export default function ArchitectInfo(props: Props) {
       {isIntersecting ? (
         <Fragment>
           <div
-            className={`flex items-center ${type === 'home' ? 'gap-5 sm:gap-8' : 'gap-6'} md:[&>span:first-child]:flex`}
+            className={`flex relative items-center ${
+              type === 'home' ? 'gap-5 sm:gap-8' : 'gap-6'
+            } md:[&>span:first-child]:flex`}
           >
+            <div className="absolute z-10 top-0 rounded-md">
+              {props.architect.wakzoo_link && type === 'home' && (
+                <Image src={NaverCafe} width={24} alt="네이버 카페 로고 이미지" />
+              )}
+            </div>
             <TierBox tier={architect.curTier} />
             {type === 'home' ? (
               <Highlighting architect={props.architect} input={props.input} />

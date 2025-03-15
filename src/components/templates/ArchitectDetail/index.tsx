@@ -7,6 +7,7 @@ import ArchitectPortfolioCategory from '@/components/organisms/Architect/Archite
 import ArchitectPortfolioList from '@/components/organisms/Architect/ArchitectPortfolioList'
 
 import { Architect } from '@/types/architect'
+import ArchitectCafeLink from '@/components/molecules/ArchitectCafeLink'
 
 type Props = {
   architect: Architect
@@ -25,6 +26,7 @@ export default function ArchitectDetail({ architect }: Props) {
     <main className="flex min-h-screen flex-col gap-8">
       <title>{'왁크래프트 | ' + architect.wakzoo_id}</title>
       <ArchitectInfo type="detail" architect={architect} />
+      {architect.wakzoo_link !== '' && <ArchitectCafeLink link={architect.wakzoo_link} />}
       <ArchitectPortfolioCategory category={category} handleCategoryClick={handleCategoryClick} />
       <ArchitectPortfolioList portfolio={architect.portfolio} category={category} />
     </main>
